@@ -6,25 +6,29 @@
     <div class="_right">
       <i class="iconfont icon-daohang" @click="showMenu"></i>
     </div>
+    <menu-board :on="on"></menu-board>
   </div>
+
 </template>
 
 <script>
   import SearchInput from './units/search-input'
+  import MenuBoard from './units/menu-board'
+  import store from '../status/store'
+
   export default {
     methods: {
       showMenu () {
-        this.$emit('menuToggle', true)
+        store.commit('unfold')
       }
     },
-    props: ['on', 'go'],
+    props: ['go'],
     components: {
-      SearchInput
+      SearchInput, MenuBoard
     },
     computed: {
-      closed () {
-        // console.log(this.on)
-        return true
+      on () {
+        return store.state.on
       }
     }
   }
