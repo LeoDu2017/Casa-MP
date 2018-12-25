@@ -1,12 +1,15 @@
 <template>
-  <div class="searchBox" :class="on ? 'reverse' : ''">
-    <div class="_left" v-show="!on">
+  <div class="searchBox">
+    <!--v-show="!on"-->
+    <!--:class="on ? 'reverse' : ''"-->
+    <div class="_left">
       <search-input :go='1' type="home"></search-input>
     </div>
     <div class="_right">
       <i class="iconfont icon-daohang" @click="showMenu"></i>
     </div>
-    <menu-board :on="on"></menu-board>
+    <!--:on="on"-->
+    <menu-board></menu-board>
   </div>
 
 </template>
@@ -25,11 +28,6 @@
     props: ['go'],
     components: {
       SearchInput, MenuBoard
-    },
-    computed: {
-      on () {
-        return store.state.on
-      }
     }
   }
 </script>

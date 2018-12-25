@@ -30,7 +30,6 @@
   import SearchInput from './search-input'
   import store from '@/status/store'
   export default {
-    props: ['on'],
     methods: {
       hideMenu () {
         store.commit('fold')
@@ -38,6 +37,11 @@
     },
     components: {
       SearchInput
+    },
+    computed: {
+      on () {
+        return store.state.on
+      }
     }
   }
 </script>
