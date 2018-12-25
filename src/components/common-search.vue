@@ -14,7 +14,7 @@
 <script>
   import SearchInput from './units/search-input'
   import MenuBoard from './units/menu-board'
-  import store from '../status/store'
+  import store from '@/status/store'
 
   export default {
     methods: {

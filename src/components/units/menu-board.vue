@@ -28,7 +28,7 @@
 
 <script>
   import SearchInput from './search-input'
-  import store from '../../status/store'
+  import store from '@/status/store'
   export default {
     props: ['on'],
     methods: {
