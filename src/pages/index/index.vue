@@ -1,26 +1,27 @@
 <template>
   <div class="container">
-    <home-search @menuToggle="menuToggle" :on="on"></home-search>
+    <common-search @menuToggle="menuToggle" :on="on"></common-search>
+
   </div>
 </template>
 
 <script>
-import HomeSearch from "@/components/home-search";
+
+import CommonSearch from '@/components/common-search'
+
 export default {
   data () {
     return {
-      on:false
+      on: false
     }
   },
 
   components: {
-    HomeSearch,
-    card
+    CommonSearch
   },
 
   methods: {
-    menuToggle(toggle) {
-      console.log(toggle)
+    menuToggle (toggle) {
       this.on = toggle
     }
   },
@@ -31,41 +32,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 150px;
-}
-
-.form-control {
-  display: block;
-  padding: 0 12px;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
-}
-
-.counter {
-  display: inline-block;
-  margin: 10px auto;
-  padding: 5px 10px;
-  color: blue;
-  border: 1px solid blue;
-}
-</style>
