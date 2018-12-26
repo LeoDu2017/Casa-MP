@@ -19,22 +19,20 @@
               <image class="_img" :src="item.image_path" mode="aspectFill"></image>
             </a>
             <div class="_bottom">
-              <div class="_left">
-                <div class="_row">
+              <div class="_row">
+                <div class="_l">
                   <span class="_current">￥{{item.act_price}}</span>
                   <span class="_price">￥{{item.price}}</span>
                 </div>
-                <div class="_row">
-                  <count-down :start="item.start_time" :end="item.end_time"></count-down>
-                </div>
-              </div>
-              <div class="_right">
                 <span class="_join">
                   {{item.notice_num}}人关注
                 </span>
-                <a class="_btn" href="">
+              </div>
+              <div class="_row">
+                <counter-down :start="item.start_time" :end="item.end_time"></counter-down>
+                <div class="_btn" @click="onFollow(item.prod_id,item.home_id)">
                   团购提醒
-                </a>
+                </div>
               </div>
             </div>
           </swiper-item>
@@ -50,9 +48,10 @@
   </div>
 </template>
 <script>
-  // count-down
+  import store from '@/status/store'
   import CommonTitle from './units/c-title.vue'
-  import CountDown from './units/count-down.vue'
+  import CounterDown from './units/count-down.vue'
+
   export default {
     data () {
       return {
@@ -66,12 +65,51 @@
     props: ['promotion'],
     components: {
       CommonTitle,
-      CountDown
+      CounterDown
     },
     methods: {
       change (e) {
         let current = e.mp.detail.current
         this.active = current
+      },
+      onFollow (id, home) {
+        wx.getStorage({
+          key: 'token',
+          success (_res) {
+            wx.request({
+              url: `${store.state.url}/wxapi/index/follow`,
+              method: 'POST',
+              data: {
+                prod_id: id,
+                home_id: home,
+                token: _res.data
+              },
+              header: {
+                'Accept': 'application/json'
+              },
+              success: (res) => {
+                if (res.data.status === 1) {
+                  wx.showToast({
+                    title: res.data.msg,
+                    icon: 'none',
+                    duration: 2000
+                  })
+                } else {
+                  wx.showToast({
+                    title: res.data.msg,
+                    icon: 'none',
+                    duration: 2000
+                  })
+                }
+              }
+            })
+          },
+          fail: () => {
+            wx.navigateTo({
+              url: '/pages/login/in/in'
+            })
+          }
+        })
       }
     }
   }
@@ -91,6 +129,10 @@
           display:flex;
           flex-direction: column;
           justify-content: flex-start;
+          ._l{
+            display:flex;
+            align-items: baseline;
+          }
           ._img{
             width: 100%;
             transform: scale(0.95,0.9);
@@ -101,61 +143,57 @@
             height:62pt;
             background:#F5F5F5;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: space-around;
             box-sizing:border-box;
             width: 82.4vw;
             margin-left: 15rpx;
             margin-top: -30rpx;
-            ._left{
-              display:flex;
-              flex-direction: column;
+            padding: 25rpx;
+
+            ._row{
+              display: flex;
+              align-items: baseline;
               justify-content: space-between;
-              padding:15pt 10pt;
-              ._row{
-                display: flex;
+
+              ._l{
+                display:flex;
                 align-items: baseline;
-                ._current{
-                  font-size: 14pt;
-                  color:#333;
-                  display: inline-block;
-                  margin-right:7pt;
-                }
-                ._price{
-                  font-size: 10pt;
-                  color:#ccc;
-                  text-decoration:line-through;
-                  text-overflow: ellipsis;
-                  display: -webkit-box;
-                  -webkit-line-clamp: 1;
-                  -webkit-box-orient: vertical;
-                  word-break: break-all;
-                }
-                ._pre{
-                  font-size:10pt;
-                  color:#999;
-                  text-overflow: ellipsis;
-                  display: -webkit-box;
-                  -webkit-line-clamp: 1;
-                  -webkit-box-orient: vertical;
-                  word-break: break-all;
-                }
-                ._time{
-                  font-size:10pt;
-                  color:#333;
-                  text-overflow: ellipsis;
-                  display: -webkit-box;
-                  -webkit-line-clamp: 1;
-                  -webkit-box-orient: vertical;
-                  word-break: break-all;
-                }
               }
-            }
-            ._right{
-              flex-direction: column;
-              justify-content: space-between;
-              align-items: flex-end;
-              padding:10pt;
-              text-align: right;
+              ._current{
+                font-size: 14pt;
+                color:#333;
+                display: inline-block;
+                margin-right:7pt;
+              }
+              ._price{
+                font-size: 10pt;
+                color:#ccc;
+                text-decoration:line-through;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                word-break: break-all;
+              }
+              ._pre{
+                font-size:10pt;
+                color:#999;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                word-break: break-all;
+              }
+              ._time{
+                font-size:10pt;
+                color:#333;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                word-break: break-all;
+              }
               ._join{
                 color:#999;
                 font-size:10pt;
@@ -171,6 +209,22 @@
                 text-align:center;
                 line-height:20pt;
               }
+            }
+
+            ._left{
+              display:flex;
+              flex-direction: column;
+              justify-content: space-between;
+              padding:15pt 10pt;
+
+            }
+            ._right{
+              flex-direction: column;
+              justify-content: space-between;
+              align-items: flex-end;
+              padding:10pt;
+              text-align: right;
+
             }
           }
           &.active{
