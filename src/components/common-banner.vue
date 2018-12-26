@@ -11,7 +11,9 @@
       :style="{height:form === 'pointer' ? '145pt' : '66.666666vw'}">
       <block v-for="(item, index) in banner" :index="index" :key="index">
         <swiper-item class="_item">
-          <image v-if="form === 'pointer'" :src="item.image_path" class="_img" mode="aspectFill"></image>
+          <a :href="'/pages/web/main?url='+item.image_url">
+            <image v-if="form === 'pointer'" :src="item.image_path" class="_img" mode="aspectFill"></image>
+          </a>
           <image v-if="form === 'number'" :src="item.img_url" class="_img_01" mode="aspectFill"></image>
         </swiper-item>
       </block>

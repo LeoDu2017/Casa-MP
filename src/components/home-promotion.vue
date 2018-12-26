@@ -25,8 +25,7 @@
                   <span class="_price">￥{{item.price}}</span>
                 </div>
                 <div class="_row">
-                  <span class="_pre">距结束还有：</span>
-                  <span class="_time">2天23时37分</span>
+                  <count-down :start="item.start_time" :end="item.end_time"></count-down>
                 </div>
               </div>
               <div class="_right">
@@ -51,7 +50,9 @@
   </div>
 </template>
 <script>
+  // count-down
   import CommonTitle from './units/c-title.vue'
+  import CountDown from './units/count-down.vue'
   export default {
     data () {
       return {
@@ -64,7 +65,8 @@
     },
     props: ['promotion'],
     components: {
-      CommonTitle
+      CommonTitle,
+      CountDown
     },
     methods: {
       change (e) {
