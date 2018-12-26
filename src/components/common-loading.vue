@@ -1,23 +1,36 @@
 <template>
-  <div class="wrap">
+  <div class="wrap" :class="hide ? 'hide' : ''">
     <div class="loading wave">
       买进口家具，找有荣-意大利之家
     </div>
   </div>
 </template>
 <script>
+  import store from '@/status/store'
   export default {
-
+    computed: {
+      hide () {
+        return store.state.hide
+      }
+    }
   }
 </script>
-<style scoped>
+<style scoped lang="less">
   .wrap{
     position: fixed;
     top:0;
+    left: 0;
     height: 100vh;
     width: 100vw;
     background: #212224;
     z-index: 100000000;
+    opacity: 1;
+    &.hide{
+      opacity: 0;
+      z-index: -100000;
+    }
+    transition:opacity 3s;
+
   }
   .loading {
     text-transform: uppercase;

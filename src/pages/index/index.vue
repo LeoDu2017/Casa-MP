@@ -1,26 +1,35 @@
 <template>
   <div class="container">
-    <common-loading v-if="show"></common-loading>
+    <common-loading></common-loading>
     <common-search></common-search>
-
+    <common-banner :banner="banner" form="pointer"></common-banner>
+    <home-slogan title="买进口家具 找有荣-意大利之家"></home-slogan>
+    <home-promotion :promotion="promotion"></home-promotion>
   </div>
 </template>
 
 <script>
-
+import store from '@/status/store'
 import CommonSearch from '@/components/common-search'
 import CommonLoading from '@/components/common-loading'
+import CommonBanner from '@/components/common-banner'
+import HomeSlogan from '@/components/home-slogan'
+import HomePromotion from '@/components/home-promotion'
 
 export default {
   data () {
     return {
-      show: true
+      show: true,
+      banner: []
     }
   },
 
   components: {
     CommonSearch,
-    CommonLoading
+    CommonLoading,
+    CommonBanner,
+    HomeSlogan,
+    HomePromotion
   },
 
   methods: {
@@ -35,18 +44,20 @@ export default {
   },
 
   onLoad () {
+    store.commit('showLoading')
     wx.request({
-      url: 'https://www.italyclassico.com/wxapi/index/index',
+      url: `${store.state.url}/wxapi/index/index`,
       method: 'GET',
       data: {},
       header: {
         'Accept': 'application/json'
       },
       success: (res) => {
-        setTimeout(() => { this.show = false }, 4500)
-
-        console.log(this.show)
-        // const {spaces, banner, purchase, recommend, like, prodlist, brand} = res.data.data
+        setTimeout(() => { store.commit('hideLoading') }, 4500)
+        const {spaces, banner, purchase, recommend, like, prodlist, brand} = res.data.data
+        this.banner = banner
+        console.log(spaces, banner, purchase, recommend, like, prodlist, brand)
+        //
         // self.spaces = spaces;
         // self.banner = banner;
         // self.promotion.goods = purchase;
@@ -63,3 +74,8 @@ export default {
   }
 }
 </script>
+<!--<style scoped lang="less">-->
+<!--.container{-->
+  <!--min-width: 100vh;-->
+<!--}-->
+<!--</style>-->

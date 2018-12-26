@@ -7,7 +7,9 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    on: false
+    on: false,
+    url: 'https://www.italyclassico.com',
+    hide: false
   },
   mutations: {
     unfold: (state) => {
@@ -15,6 +17,12 @@ const store = new Vuex.Store({
     },
     fold: (state) => {
       state.on = false
+    },
+    hideLoading: (state) => {
+      state.hide = true
+    },
+    showLoading: (state) => {
+      state.hide = false
     }
   }
 })
