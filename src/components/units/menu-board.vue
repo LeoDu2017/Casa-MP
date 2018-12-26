@@ -75,6 +75,10 @@
           .iconfont{
             font-size: 18pt;
           }
+          a{
+            display: flex;
+            align-items: center;
+          }
           span{
             font-size: 10pt;
             display: inline-block;
