@@ -20,7 +20,11 @@ export default {
   data () {
     return {
       show: true,
-      banner: []
+      banner: [],
+      promotion: {
+        title: '双十一活动精选',
+        goods: []
+      }
     }
   },
 
@@ -56,6 +60,7 @@ export default {
         setTimeout(() => { store.commit('hideLoading') }, 4500)
         const {spaces, banner, purchase, recommend, like, prodlist, brand} = res.data.data
         this.banner = banner
+        this.promotion.goods = purchase
         console.log(spaces, banner, purchase, recommend, like, prodlist, brand)
         //
         // self.spaces = spaces;

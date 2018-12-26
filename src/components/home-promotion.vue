@@ -79,7 +79,7 @@
     background: #fff;
     padding: 15pt 0;
     .goodsWrap{
-      width: 100%;
+      width: 100vw;
       height: 263pt;
       overflow: hidden;margin-top: 16pt;
       .swiper{
@@ -171,14 +171,8 @@
               }
             }
           }
-          /*& + li{*/
-          /*margin-left:10pt;*/
-          /*}*/
           &.active{
             width: 80vw;
-            /*.img_wrap{*/
-            /*height: 481rpx;*/
-            /*}*/
             ._bottom{
               width: 100%;
               margin-left:0;
