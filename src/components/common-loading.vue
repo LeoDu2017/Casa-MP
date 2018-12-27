@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap" :class="hide ? 'hide' : ''">
+  <div class="wrap" :class="{'hide' : hide}">
     <div class="loading wave">
       买进口家具，找有荣-意大利之家
     </div>
@@ -30,13 +30,11 @@
       z-index: -100000;
     }
     transition:opacity 3s;
-
   }
   .loading {
     text-transform: uppercase;
     font-family: '微软雅黑', sans-serif;
-    /*font-weight: bold;*/
-    font-size: 16pt;
+    font-size: 42rpx;
     text-align: center;
     height: 20px;
     line-height: 20px;
@@ -44,13 +42,11 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 50%;
+    top: 46%;
     display: inline-block;
-    transform: translateY(-30%);
   }
 
   .wave {
-    /*background-color: #fff;*/
     background-image: url("../imgs/wave.png");
     -moz-background-clip: text;
     -o-background-clip: text;
@@ -59,7 +55,6 @@
     color: transparent;
     text-shadow: 0px 0px rgba(255, 255, 255, 0.06);
     animation: wave-animation 1s infinite linear, loading-animation 10s infinite linear alternate;
-    /*background-size: 200px 40px;*/
     background-repeat: repeat-x;
     opacity: 1;
   }
