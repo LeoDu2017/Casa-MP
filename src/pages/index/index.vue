@@ -16,6 +16,8 @@
     <home-showcase title="猜你喜欢" :products="like" :more="like"></home-showcase>
     <common-division height="15"></common-division>
     <home-dash :dash="dash"></home-dash>
+    <common-division height="64"></common-division>
+    <tab-bar selected="1"></tab-bar>
   </div>
 </template>
 
@@ -32,6 +34,8 @@ import HomeShowcase from '@/components/home-showcase'
 import HomeCategory from '@/components/home-category.vue'
 import HomeBrands from '@/components/home-brands.vue'
 import HomeDash from '@/components/home-dash.vue'
+import TabBar from '@/components/common-tabBar.vue'
+
 export default {
   data () {
     return {
@@ -61,7 +65,8 @@ export default {
     HomeShowcase,
     HomeCategory,
     HomeBrands,
-    HomeDash
+    HomeDash,
+    TabBar
   },
 
   methods: {
@@ -86,7 +91,7 @@ export default {
       },
       success: (res) => {
         setTimeout(() => { store.commit('hideLoading') }, 4500)
-        const {spaces, banner, purchase, recommend, like, prodlist, brand, resource} = res.data.data
+        const {spaces, banner, purchase, recommend, like, prodlist, brand, resource: {a, b, c, d}} = res.data.data
         this.banner = banner
         this.spaces = spaces
         this.recommend = recommend
@@ -97,19 +102,19 @@ export default {
         this.dash = [
           {
             title: '合作厂商',
-            data: resource.a.about_company
+            data: a.about_company
           },
           {
             title: '在售产品',
-            data: resource.b.about_company
+            data: b.about_company
           },
           {
             title: '全国案例',
-            data: resource.c.about_company
+            data: c.about_company
           },
           {
             title: '全球员工',
-            data: resource.d.about_company
+            data: d.about_company
           }
         ]
         // console.log(spaces, banner, purchase, recommend, like, prodlist, brand)
