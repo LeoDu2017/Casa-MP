@@ -3,6 +3,7 @@
     <common-loading></common-loading>
     <common-banner :banner="gallery"  form="number"></common-banner>
     <product-info
+      :id="id"
       :is_spot="is_spot"
       :activity="activity"
       :is_activity="is_activity"

@@ -6,6 +6,7 @@ import ProductInfo from '@/components/product-info.vue'
 export default {
   data () {
     return {
+      id: null,
       gallery: [],
       attr: [],
       act_attr: [],
@@ -33,6 +34,8 @@ export default {
   onLoad (options) {
     store.commit('showLoading')
     const {id} = options
+    this.id = id ? id : 25758
+
     wx.request({
       url: `${store.state.url}/wxapi/product/prod_detail`,
       method: 'GET',

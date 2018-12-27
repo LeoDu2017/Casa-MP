@@ -52,11 +52,11 @@
       </p>
       <div class="more-detail" :class="on ? 'on' : ''">
         <ul class="_list">
-          <li class="_item">
+          <li class="_item" @click="is_wish ? deleteWish() :addWishList()">
             <i class="iconfont" :class="is_wish?'icon-xin_02':'icon-love'"></i>
             <span class="_title">加入心愿单</span>
           </li>
-          <li class="_item">
+          <li class="_item" @click="is_collect ? deleteCollect() : addToCollection()">
             <i class="iconfont" :class="is_collect ? 'icon-shoucang0' :'icon-shoucang'"></i>
             <span class="_title">添加收藏</span>
           </li>
@@ -74,6 +74,7 @@
   </div>
 </template>
 <script>
+  import store from '@/status/store'
   import Division from './common-division.vue'
   import CounterDown from './units/count-down.vue'
   export default {
@@ -84,6 +85,7 @@
       }
     },
     props: [
+      'id',
       'subtitle',
       'attr',
       'act_attr',
@@ -101,6 +103,197 @@
       },
       toggleFolder () {
         this.folder = !this.folder
+      },
+      addWishList () {
+        wx.getStorage({
+          key: 'token',
+          success: (_res) => {
+            wx.request({
+              url: `${store.state.url}/wxapi/product/addProdToWish`,
+              method: 'GET',
+              data: {
+                prod_id: this.id,
+                'token': _res.data
+              },
+              header: {
+                'Accept': 'application/json'
+              },
+              success: (res) => {
+                // 提示登录
+                if (res.data.status === -14) {
+                  wx.navigateTo({
+                    url: `/pages/login/in/in?productId=${this.id}`
+                  })
+                } else if (res.data.status === 1) {
+                  wx.showToast({
+                    title: res.data.info,
+                    icon: 'none',
+                    duration: 2000
+                  })
+                  this.is_wish = true
+                } else {
+                  wx.showToast({
+                    title: res.data.info,
+                    icon: 'none',
+                    duration: 2000
+                  })
+                }
+              },
+              fail: () => {
+                wx.showToast({
+                  title: '数据请求失败，请检查网络链接',
+                  icon: 'none'
+                })
+              }
+            })
+          },
+          fail: () => {
+            wx.navigateTo({
+              url: `/pages/login/in/in?productId=${this.id}`
+            })
+          }
+        })
+      },
+      deleteWish () {
+        wx.getStorage({
+          key: 'token',
+          success: (_res) => {
+            wx.request({
+              url: `${store.state.url}/wxapi/user/delWith`,
+              method: 'GET',
+              data: {
+                prod_id: this.id,
+                'token': _res.data
+              },
+              header: {
+                'Accept': 'application/json'
+              },
+              success: (res) => {
+                if (res.data.status === 1) {
+                  wx.showToast({
+                    title: res.data.msg,
+                    icon: 'none',
+                    duration: 2000
+                  })
+                  this.is_wish = false
+                } else {
+                  wx.showToast({
+                    title: res.data.msg,
+                    icon: 'none',
+                    duration: 2000
+                  })
+                }
+              },
+              fail: () => {
+                wx.showToast({
+                  title: '数据请求失败，请检查网络链接',
+                  icon: 'none'
+                })
+              }
+            })
+          },
+          fail: () => {
+            wx.navigateTo({
+              url: `/pages/login/in/in?productId=${this.id}`
+            })
+          }
+        })
+      },
+      addToCollection () {
+        wx.getStorage({
+          key: 'token',
+          success: (_res) => {
+            wx.request({
+              url: `${store.state.url}/wxapi/product/collectProdById`,
+              method: 'GET',
+              data: {
+                prod_id: this.id,
+                'token': _res.data
+              },
+              header: {
+                'Accept': 'application/json'
+              },
+              success: (res) => {
+                // 提示登录
+                if (res.data.status === -14) {
+                  wx.navigateTo({
+                    url: `/pages/login/in/in?productId=${this.id}`
+                  })
+                } else if (res.data.status === 1) {
+                  wx.showToast({
+                    title: res.data.msg,
+                    icon: 'none',
+                    duration: 2000
+                  })
+                  this.is_collect = true
+                } else {
+                  wx.showToast({
+                    title: res.data.msg,
+                    icon: 'none',
+                    duration: 2000
+                  })
+                }
+              },
+              fail: () => {
+                wx.showToast({
+                  title: '数据请求失败，请检查网络链接',
+                  icon: 'none'
+                })
+              }
+            })
+          },
+          fail: () => {
+            wx.navigateTo({
+              url: `/pages/login/in/in?productId=${this.id}`
+            })
+          }
+        })
+      },
+      deleteCollect () {
+        wx.getStorage({
+          key: 'token',
+          success: (_res) => {
+            wx.request({
+              url: `${store.state.url}/wxapi/user/delProdCollect`,
+              method: 'GET',
+              data: {
+                prod_id: this.id,
+                'token': _res.data
+              },
+              header: {
+                'Accept': 'application/json'
+              },
+              success: (res) => {
+                // 提示登录
+                if (res.data.status === 1) {
+                  wx.showToast({
+                    title: res.data.msg,
+                    icon: 'none',
+                    duration: 2000
+                  })
+                  this.is_collect = false
+                } else {
+                  wx.showToast({
+                    title: res.data.msg,
+                    icon: 'none',
+                    duration: 2000
+                  })
+                }
+              },
+              fail: () => {
+                wx.showToast({
+                  title: '数据请求失败，请检查网络链接',
+                  icon: 'none'
+                })
+              }
+            })
+          },
+          fail: () => {
+            wx.navigateTo({
+              url: `/pages/login/in/in?productId=${this.id}`
+            })
+          }
+        })
       }
     },
     components: {
