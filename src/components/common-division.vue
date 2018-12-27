@@ -1,18 +1,17 @@
 <template>
-  <scroll-view class="scroll-view_x" scroll-x style="width: auto;overflow:hidden;">
-    <a class="item_list" v-for="(item,index) in spaces" :key="index" :href="'/pages/space/space?id='+item.space_url_name">
-      {{item.space_name}}
-    </a>
-  </scroll-view>
+  <div class="division" :style="{height:height + 'pt'}"></div>
 </template>
 
 <script>
   export default {
-    name: 'home-spaces',
-    props: ['spaces']
+    name: 'common-division',
+    props: ['height']
   }
 </script>
 
-<style scoped lang="less">
-
+<style scoped>
+  .division{
+    background: #F2F2F2;
+    width: 100vw;
+  }
 </style>

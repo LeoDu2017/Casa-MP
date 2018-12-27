@@ -6,6 +6,7 @@
     <common-banner :banner="banner" form="pointer"></common-banner>
     <home-slogan title="买进口家具 找有荣-意大利之家"></home-slogan>
     <home-promotion :promotion="promotion"></home-promotion>
+    <common-division height="15"></common-division>
 
   </div>
 </template>
@@ -15,6 +16,7 @@ import store from '@/status/store'
 import CommonSearch from '@/components/common-search'
 import CommonLoading from '@/components/common-loading'
 import CommonBanner from '@/components/common-banner'
+import CommonDivision from '@/components/common-division'
 import HomeSlogan from '@/components/home-slogan'
 import HomePromotion from '@/components/home-promotion'
 import HomeSpaces from '@/components/home-spaces'
@@ -38,7 +40,8 @@ export default {
     CommonBanner,
     HomeSlogan,
     HomePromotion,
-    HomeSpaces
+    HomeSpaces,
+    CommonDivision
   },
 
   methods: {

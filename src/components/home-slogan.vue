@@ -18,6 +18,7 @@
     line-height: 43pt;
     justify-content: center;
     align-items: center;
+    background: #F2F2F2;
     ._text{
       color: #212224;
       font-size: 42rpx;
