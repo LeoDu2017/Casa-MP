@@ -2,9 +2,11 @@
   <div class="container">
     <common-loading></common-loading>
     <common-search></common-search>
+    <home-spaces :spaces="spaces"></home-spaces>
     <common-banner :banner="banner" form="pointer"></common-banner>
     <home-slogan title="买进口家具 找有荣-意大利之家"></home-slogan>
     <home-promotion :promotion="promotion"></home-promotion>
+
   </div>
 </template>
 
@@ -15,12 +17,14 @@ import CommonLoading from '@/components/common-loading'
 import CommonBanner from '@/components/common-banner'
 import HomeSlogan from '@/components/home-slogan'
 import HomePromotion from '@/components/home-promotion'
+import HomeSpaces from '@/components/home-spaces'
 
 export default {
   data () {
     return {
       show: true,
       banner: [],
+      spaces: [],
       promotion: {
         title: '双十一活动精选',
         goods: []
@@ -33,7 +37,8 @@ export default {
     CommonLoading,
     CommonBanner,
     HomeSlogan,
-    HomePromotion
+    HomePromotion,
+    HomeSpaces
   },
 
   methods: {
@@ -60,6 +65,7 @@ export default {
         setTimeout(() => { store.commit('hideLoading') }, 4500)
         const {spaces, banner, purchase, recommend, like, prodlist, brand} = res.data.data
         this.banner = banner
+        this.spaces = spaces
         this.promotion.goods = purchase
         console.log(spaces, banner, purchase, recommend, like, prodlist, brand)
         //
