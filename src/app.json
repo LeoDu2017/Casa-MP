@@ -1,8 +1,9 @@
 {
   "pages": [
     "pages/index/main",
-    "pages/web/main",
+    "pages/product/detail/main",
     "pages/search/main",
+    "pages/web/main",
     "pages/logs/main",
     "pages/counter/main"
   ],

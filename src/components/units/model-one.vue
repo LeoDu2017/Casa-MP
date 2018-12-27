@@ -1,6 +1,6 @@
 <template>
   <li class="product">
-    <a :href="'/pages/product/main?id=' + product.prod_id" >
+    <a :href="'/pages/product/detail/main?id=' + product.prod_id" >
       <div class="img_wrap">
         <img :src="product.image_path" v-if="product.image_path"/>
         <img :src="product.prod_image" v-if="product.prod_image"/>

@@ -15,7 +15,7 @@
         @change="change">
         <block v-for="(item,index) in promotion.goods"  :key="item.id">
           <swiper-item class="_item" :class="{'active':active === index}">
-            <a :href="'/pages/product/main?id=' + item.prod_id" >
+            <a :href="'/pages/product/detail/main?id=' + item.prod_id" >
               <image class="_img" :src="item.image_path" mode="aspectFill"></image>
             </a>
             <div class="_bottom">
