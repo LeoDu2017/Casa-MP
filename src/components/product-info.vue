@@ -64,7 +64,7 @@
             <button class="iconfont icon-fenxiang share_btn" open-type='share'></button>
             <span class="_title">分享</span>
           </li>
-          <li class="_item">
+          <li class="_item" @click="toSeeReal">
             <i class="iconfont icon-zhaopian2"></i>
             <span class="_title">看实物</span>
           </li>
@@ -276,6 +276,53 @@
                   wx.showToast({
                     title: res.data.msg,
                     icon: 'none',
+                    duration: 2000
+                  })
+                }
+              },
+              fail: () => {
+                wx.showToast({
+                  title: '数据请求失败，请检查网络链接',
+                  icon: 'none'
+                })
+              }
+            })
+          },
+          fail: () => {
+            wx.navigateTo({
+              url: `/pages/login/in/in?productId=${this.id}`
+            })
+          }
+        })
+      },
+      toSeeReal () {
+        wx.getStorage({
+          key: 'token',
+          success: (_res) => {
+            wx.request({
+              url: `${store.state.url}/wxapi/product/mSeeRealProd`,
+              method: 'GET',
+              data: {
+                prod_id: this.id,
+                'token': _res.data
+              },
+              header: {
+                'Accept': 'application/json'
+              },
+              success: (res) => {
+                // 提示登录
+                if (res.data.status === -14) {
+                  wx.navigateTo({
+                    url: `/pages/login/in/in?productId=${this.id}`
+                  })
+                } else if (res.data.status === 1) {
+                  wx.navigateTo({
+                    url: `seeTheReal/seeTheReal?id=${this.id}&mobile=${res.data.data.user.csr_mobile}`
+                  })
+                } else {
+                  wx.showToast({
+                    title: res.data.info,
+                    icon: 'fails',
                     duration: 2000
                   })
                 }
