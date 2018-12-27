@@ -18,8 +18,6 @@
         searchValue: ''
       }
     },
-    // v-model="searchValue"
-    // @input="showSearchItem"
     watch: {
       searchValue (val) {
         this.$emit('searchCallBack', val)
@@ -32,14 +30,9 @@
           url: '/pages/search/main'
         })
       },
-      // showSearchItem (event) {
-      //   this.searchValue = event.target.value
-      //   this.$emit('searchCallBack', event.target.value)
-      // },
       clearInput () {
         this.searchValue = null
         this.$emit('searchCallBack', null)
-        // this.$refs.searchInput.value = null
       }
     }
   }
@@ -82,8 +75,6 @@
       box-sizing: border-box;
       position:absolute;
       right: 7pt;
-      /*text-align: center;*/
-      /*line-height: 20pt;*/
       align-items: center;
       justify-content: center;
     }
