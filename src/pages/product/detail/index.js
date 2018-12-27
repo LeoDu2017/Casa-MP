@@ -13,6 +13,8 @@ export default {
       prod_name: '',
       origin: '',
       style: '',
+      is_wish: false,
+      is_collect: false,
       comProd: null,
       cases: null,
       product_tag: null,
@@ -40,20 +42,7 @@ export default {
       },
       success: (res) => {
         setTimeout(() => { store.commit('hideLoading') }, 4500)
-        const {gallery, subtitle, origin, style, article, activity, attr} = res.data.data
-        this.prod_name = res.data.data.prod_name
-        this.product_tag = res.data.data.article_option_name
-        this.is_activity = res.data.data.is_activity
-        this.comProd = res.data.data.com_prod
-        this.act_attr = res.data.data.act_attr
-        this.gallery = gallery
-        this.subtitle = subtitle
-        this.origin = origin
-        this.style = style
-        this.cases = article
-        this.activity = activity
-        this.attr = attr
-
+        this.setData(res.data.data)
       },
       fail: () => { }
     })
@@ -62,5 +51,24 @@ export default {
     wx.setNavigationBarTitle({
       title: '商品详情'
     })
+  },
+  methods: {
+    setData (res) {
+      const {gallery, subtitle, origin, style, article, activity, attr} = res
+      this.prod_name = res.prod_name
+      this.product_tag = res.article_option_name
+      this.is_activity = res.is_activity
+      this.comProd = res.com_prod
+      this.act_attr = res.act_attr
+      this.is_wish = res.is_wish
+      this.is_collect = res.is_collect
+      this.gallery = gallery
+      this.subtitle = subtitle
+      this.origin = origin
+      this.style = style
+      this.cases = article
+      this.activity = activity
+      this.attr = attr
+    }
   }
 }

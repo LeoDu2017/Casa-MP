@@ -53,11 +53,11 @@
       <div class="more-detail" :class="on ? 'on' : ''">
         <ul class="_list">
           <li class="_item">
-            <i class="iconfont icon-love"></i>
+            <i class="iconfont" :class="is_wish?'icon-xin_02':'icon-love'"></i>
             <span class="_title">加入心愿单</span>
           </li>
           <li class="_item">
-            <i class="iconfont icon-shoucang"></i>
+            <i class="iconfont" :class="is_collect ? 'icon-shoucang0' :'icon-shoucang'"></i>
             <span class="_title">添加收藏</span>
           </li>
           <li class="_item">
@@ -67,10 +67,6 @@
           <li class="_item">
             <i class="iconfont icon-zhaopian2"></i>
             <span class="_title">看实物</span>
-          </li>
-          <li class="_item">
-            <i class="iconfont icon-fuzhi"></i>
-            <span class="_title">复制链接</span>
           </li>
         </ul>
       </div>
@@ -87,7 +83,18 @@
         folder: false
       }
     },
-    props: ['subtitle', 'attr', 'act_attr', 'prod_name', 'origin', 'pro_style', 'is_activity', 'activity', 'is_spot'],
+    props: [
+      'subtitle',
+      'attr',
+      'act_attr',
+      'prod_name',
+      'origin',
+      'pro_style',
+      'is_activity',
+      'is_wish',
+      'is_collect',
+      'activity',
+      'is_spot'],
     methods: {
       setMore () {
         this.on = !this.on
