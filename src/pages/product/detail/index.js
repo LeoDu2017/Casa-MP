@@ -73,5 +73,11 @@ export default {
       this.activity = activity
       this.attr = attr
     }
+  },
+  onShareAppMessage () {
+    return {
+      title: this.prod_name,
+      imageUrl: this.gallery[0].img_url
+    }
   }
 }

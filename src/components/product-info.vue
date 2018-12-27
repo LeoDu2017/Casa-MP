@@ -61,7 +61,7 @@
             <span class="_title">添加收藏</span>
           </li>
           <li class="_item">
-            <i class="iconfont icon-fenxiang"></i>
+            <button class="iconfont icon-fenxiang share_btn" open-type='share'></button>
             <span class="_title">分享</span>
           </li>
           <li class="_item">
@@ -479,5 +479,23 @@
         }
       }
     }
+  }
+  .share_btn{
+    border-radius:50%;
+    background:#fff;
+    height:80rpx;
+    width:80rpx;
+    border:1pt solid #fff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+
+    line-height:1 !important;
+
+    color:#212224;
+    font-size: 66rpx !important;
+
   }
 </style>
