@@ -30,7 +30,7 @@
         act_status: 0
       }
     },
-    props: ['start', 'end'],
+    props: ['start', 'end', 'color'],
     onLoad () {
       let interval = setInterval(() => {
         let now = Date.parse(new Date()) / 1000

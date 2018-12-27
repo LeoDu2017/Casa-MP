@@ -1,10 +1,14 @@
 import store from '@/status/store.js'
 import CommonBanner from '@/components/common-banner.vue'
 import CommonLoading from '@/components/common-loading.vue'
+import CommonDivision from '@/components/common-division.vue'
+import ProductInfo from '@/components/product-info.vue'
 export default {
   data () {
     return {
       gallery: [],
+      attr: [],
+      act_attr: [],
       subtitle: '',
       prod_name: '',
       origin: '',
@@ -13,12 +17,16 @@ export default {
       cases: null,
       product_tag: null,
       is_activity: null,
-      activity: null
+      activity: null,
+      start: null,
+      end: null
     }
   },
   components: {
     CommonBanner,
-    CommonLoading
+    CommonLoading,
+    ProductInfo,
+    CommonDivision
   },
   onLoad (options) {
     store.commit('showLoading')
@@ -26,33 +34,30 @@ export default {
     wx.request({
       url: `${store.state.url}/wxapi/product/prod_detail`,
       method: 'GET',
-      data: {id},
+      data: {id:25758},
       header: {
         'Accept': 'application/json'
       },
       success: (res) => {
         setTimeout(() => { store.commit('hideLoading') }, 4500)
-        /* jshint ignore:start */
-        const {gallery, subtitle, origin, style, article, activity} = res.data.data
-        /* jshint ignore:end */
+        const {gallery, subtitle, origin, style, article, activity, attr} = res.data.data
+        this.prod_name = res.data.data.prod_name
+        this.product_tag = res.data.data.article_option_name
+        this.is_activity = res.data.data.is_activity
+        this.comProd = res.data.data.com_prod
+        this.act_attr = res.data.data.act_attr
         this.gallery = gallery
-        // prod_name,com_prod, article_option_name,is_activity,
-        // this.subtitle = subtitle
-        // this.prod_name = prod_name
-        // this.origin = origin
-        // this.style = style
-        // this.comProd = com_prod
-        // this.cases = article
-        // this.product_tag = article_option_name
-        // this.is_activity = is_activity
-        // this.activity = activity
+        this.subtitle = subtitle
+        this.origin = origin
+        this.style = style
+        this.cases = article
+        this.activity = activity
+        this.attr = attr
 
-        console.log(subtitle, origin, style, article, activity)
       },
       fail: () => { }
     })
   },
-
   onShow () {
     wx.setNavigationBarTitle({
       title: '商品详情'
