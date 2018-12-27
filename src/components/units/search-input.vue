@@ -37,9 +37,9 @@
       //   this.$emit('searchCallBack', event.target.value)
       // },
       clearInput () {
-        this.searchValue = ''
-        this.$emit('searchCallBack', '')
-        this.$refs.searchInput.value = ''
+        this.searchValue = null
+        this.$emit('searchCallBack', null)
+        // this.$refs.searchInput.value = null
       }
     }
   }

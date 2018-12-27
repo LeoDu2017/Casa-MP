@@ -1,0 +1,76 @@
+<template>
+  <div class="warp">
+    <div class="header">
+      <div class="left">
+        <search-input :go='0' @searchCallBack="searchCallBack" type="home"></search-input>
+      </div>
+      <span class="_btn">搜索</span>
+    </div>
+    <ul class="searchList" v-show="searchData">
+      <li class="searchItem">在产品中搜索<span>“{{searchData}}”</span></li>
+      <li class="searchItem">在品牌中搜索<span>“{{searchData}}”</span></li>
+      <li class="searchItem">在案例/新闻中搜索<span>“{{searchData}}”</span></li>
+    </ul>
+  </div>
+</template>
+<script>
+  import SearchInput from '@/components/units/search-input.vue'
+  export default{
+    data () {
+      return {
+        searchData: null
+      }
+    },
+    components: {
+      SearchInput
+    },
+    methods: {
+      searchCallBack (searchData) {
+        console.log(searchData)
+        this.searchData = searchData
+      }
+    },
+    onShow () { // 小程序 hook
+      wx.setNavigationBarTitle({
+        title: '搜索'
+      })
+    }
+  }
+</script>
+
+
+<style scoped lang="less">
+  .warp {
+    min-height:100vh;
+    background:#fff;
+    .header{
+      padding: 10pt 15pt;
+      border-bottom: 1pt solid #E6E6E6;
+      display:flex;
+      justify-content: space-between;
+      .left{
+        flex:1;
+      }
+      ._btn{
+        color:#4d4d4d;
+        font-size:12pt;
+        flex:0 0 40pt;
+        text-align:right;
+      }
+      align-items:center;
+    }
+    .searchList{
+      .searchItem{
+        height: 41pt;
+        line-height:41pt;
+        color: #666;
+        font-size:12pt;
+        padding-left: 15pt;
+        span{
+          color:#212224
+        }
+        border-bottom:1pt solid #E6E6E6
+      }
+    }
+  }
+</style>

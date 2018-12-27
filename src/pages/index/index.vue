@@ -132,6 +132,12 @@ export default {
 
       }
     })
+  },
+
+  onShow () { // 小程序 hook
+    wx.setNavigationBarTitle({
+      title: '意大利之家'
+    })
   }
 }
 </script>

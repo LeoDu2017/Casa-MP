@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/main",
     "pages/web/main",
+    "pages/search/main",
     "pages/logs/main",
     "pages/counter/main"
   ],
