@@ -45,7 +45,8 @@
     <division v-if="is_activity" height="15"></division>
     <div class="common-block">
       <p class="dot-line" v-if="!is_activity"></p>
-      <span class="apply-btn">申请报价</span>
+      <span class="apply-btn" :class="{'disabled': now < activity.start_time || now > activity.end_time}" v-if="is_activity" @click="onPay">支付预定金</span>
+      <span class="apply-btn" v-else @click="offerOrder">申请报价</span>
       <p class="view-more" @click="setMore">
         <span class="text">更多</span>
         <i class="iconfont" :class="on ? 'icon-up' : 'icon-down'"></i>
@@ -97,6 +98,11 @@
       'is_collect',
       'activity',
       'is_spot'],
+    computed: {
+      now () {
+        return Date.parse(new Date()) / 1000
+      }
+    },
     methods: {
       setMore () {
         this.on = !this.on
@@ -341,6 +347,45 @@
             })
           }
         })
+      },
+      onPay () {
+        wx.getStorage({
+          key: 'token',
+          success: (_res) => {
+            wx.request({
+              url: `${store.state.url}/wxapi/login/is_login`,
+              method: 'GET',
+              data: {
+                'token': _res.data
+              },
+              header: {
+                'Accept': 'application/json'
+              },
+              success: (res) => {
+                if (res.data.status === 1) {
+                  wx.navigateTo({
+                    url: `quotation/quotation?id=${this.id}`
+                  })
+                } else {
+                  wx.navigateTo({
+                    url: `/pages/login/in/in?productId=${this.id}`
+                  })
+                }
+              },
+              fail: () => {
+                wx.showToast({
+                  title: '数据请求失败，请检查网络链接',
+                  icon: 'none'
+                })
+              }
+            })
+          },
+          fail: () => {
+            wx.navigateTo({
+              url: `/pages/login/in/in?productId=${this.id}`
+            })
+          }
+        })
       }
     },
     components: {
@@ -485,6 +530,10 @@
       line-height: 40pt;
       border-radius: 4pt;
       margin: 0 auto 25pt;
+      &.disabled {
+        background: #ccc;
+        pointer-events: none;
+      }
     }
     .view-more{
       text-align: center;
