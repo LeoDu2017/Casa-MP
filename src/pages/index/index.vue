@@ -12,6 +12,10 @@
     <home-category title="精选分类" :categories="prodlist" :more="prodlist"></home-category>
     <common-division height="15"></common-division>
     <home-brands title="精选品牌" :brands="brands" :more="brands"></home-brands>
+    <common-division height="15"></common-division>
+    <home-showcase title="猜你喜欢" :products="like" :more="like"></home-showcase>
+    <common-division height="15"></common-division>
+    <home-dash :dash="dash"></home-dash>
   </div>
 </template>
 
@@ -27,7 +31,7 @@ import HomeSpaces from '@/components/home-spaces'
 import HomeShowcase from '@/components/home-showcase'
 import HomeCategory from '@/components/home-category.vue'
 import HomeBrands from '@/components/home-brands.vue'
-
+import HomeDash from '@/components/home-dash.vue'
 export default {
   data () {
     return {
@@ -37,6 +41,8 @@ export default {
       recommend: [],
       prodlist: [],
       brands: [],
+      like: [],
+      dash: [],
       promotion: {
         title: '双十一活动精选',
         goods: []
@@ -54,7 +60,8 @@ export default {
     CommonDivision,
     HomeShowcase,
     HomeCategory,
-    HomeBrands
+    HomeBrands,
+    HomeDash
   },
 
   methods: {
@@ -79,14 +86,33 @@ export default {
       },
       success: (res) => {
         setTimeout(() => { store.commit('hideLoading') }, 4500)
-        const {spaces, banner, purchase, recommend, like, prodlist, brand} = res.data.data
+        const {spaces, banner, purchase, recommend, like, prodlist, brand, resource} = res.data.data
         this.banner = banner
         this.spaces = spaces
         this.recommend = recommend
         this.prodlist = prodlist
         this.brands = brand
+        this.like = like
         this.promotion.goods = purchase
-        console.log(spaces, banner, purchase, recommend, like, prodlist, brand)
+        this.dash = [
+          {
+            title: '合作厂商',
+            data: resource.a.about_company
+          },
+          {
+            title: '在售产品',
+            data: resource.b.about_company
+          },
+          {
+            title: '全国案例',
+            data: resource.c.about_company
+          },
+          {
+            title: '全球员工',
+            data: resource.d.about_company
+          }
+        ]
+        // console.log(spaces, banner, purchase, recommend, like, prodlist, brand)
         //
         // self.spaces = spaces;
         // self.banner = banner;
