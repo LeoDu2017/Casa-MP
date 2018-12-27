@@ -7,7 +7,10 @@
     <home-slogan title="买进口家具 找有荣-意大利之家"></home-slogan>
     <home-promotion :promotion="promotion"></home-promotion>
     <common-division height="15"></common-division>
-
+    <home-showcase title="精品推荐" :products="recommend"></home-showcase>
+    <common-division height="15"></common-division>
+    <home-category title="精选分类" :categories="prodlist" :more="prodlist"></home-category>
+    <common-division height="15"></common-division>
   </div>
 </template>
 
@@ -20,6 +23,8 @@ import CommonDivision from '@/components/common-division'
 import HomeSlogan from '@/components/home-slogan'
 import HomePromotion from '@/components/home-promotion'
 import HomeSpaces from '@/components/home-spaces'
+import HomeShowcase from '@/components/home-showcase'
+import HomeCategory from '@/components/home-category.vue'
 
 export default {
   data () {
@@ -27,6 +32,8 @@ export default {
       show: true,
       banner: [],
       spaces: [],
+      recommend: [],
+      prodlist: [],
       promotion: {
         title: '双十一活动精选',
         goods: []
@@ -41,7 +48,9 @@ export default {
     HomeSlogan,
     HomePromotion,
     HomeSpaces,
-    CommonDivision
+    CommonDivision,
+    HomeShowcase,
+    HomeCategory
   },
 
   methods: {
@@ -69,6 +78,8 @@ export default {
         const {spaces, banner, purchase, recommend, like, prodlist, brand} = res.data.data
         this.banner = banner
         this.spaces = spaces
+        this.recommend = recommend
+        this.prodlist = prodlist
         this.promotion.goods = purchase
         console.log(spaces, banner, purchase, recommend, like, prodlist, brand)
         //

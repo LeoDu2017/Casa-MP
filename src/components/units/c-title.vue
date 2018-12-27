@@ -24,6 +24,7 @@
     }
     .more{
       color: #666;
+      font-size: 24rpx;
       .iconfont{
         display: inline;
       }
