@@ -4,8 +4,8 @@
       <block v-for="(item,index) in modular" :key="index">
         <span
           class="item"
-          :class="{'active' : current_i === index}"
-          @click="scrollTab(index,`detail_${index}`)"
+          :class="{'active' : current === index}"
+          @click="clickTab(index,`detail_${index}`)"
           v-if="index < 3">
           {{item.mod_name}}
         </span>
@@ -17,8 +17,8 @@
       <div class="more" :class="{'show':show_more_detail}">
         <span
           class="item"
-          :class="{'active': current_i === index}"
-          @click="scrollTab(index,`detail_${index}`)"
+          :class="{'active': current === index}"
+          @click="clickTab(index,`detail_${index}`)"
 
           v-for="(item,index) in modular"
           :key="index"
@@ -26,22 +26,22 @@
           {{item.mod_name}}
         </span>
         <span class="item"
-              :class="{'active' : current_i === modular.length}"
-              @click="scrollTab(modular.length,`detail_${modular.length}`)"
+              :class="{'active' : current === modular.length}"
+              @click="clickTab(modular.length,`detail_${modular.length}`)"
               v-if="len">商品案例</span>
       </div>
     </div>
     <div class="tab" v-else>
       <block v-for="(item,index) in modular" :key="index">
         <span class="item"
-              :class="{'active': current_i === index}"
-              @click="scrollTab(index,`detail_${index}`)">{{item.mod_name}}</span>
+              :class="{'active': current === index}"
+              @click="clickTab(index,`detail_${index}`)">{{item.mod_name}}</span>
         <span class="division" v-if="index < 2"></span>
       </block>
 
       <div class="item"
-           :class="{'active' : current_i === modular.length}"
-           @click="scrollTab(modular.length,`detail_${modular.length}`)"
+           :class="{'active' : current === modular.length}"
+           @click="clickTab(modular.length,`detail_${modular.length}`)"
            v-if="len">商品案例</div>
     </div>
   </div>
@@ -53,11 +53,14 @@
         show_more_detail: false
       }
     },
-    props: ['modular', 'len'],
+    props: ['modular', 'len', 'current'],
     methods: {
       showMoreDetail () {
-        console.log(56, this.show_more_detail)
         this.show_more_detail = !this.show_more_detail
+      },
+      clickTab (index, tab) {
+        index < 3 && void (this.show_more_detail = false)
+        this.$emit('scrollTab', index, tab)
       }
     }
   }
@@ -107,6 +110,9 @@
           display: block;
           & + .item{
             border-top: 1px solid #e6e6e6;
+          }
+          &.active{
+            color:#333;
           }
         }
       }

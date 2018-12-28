@@ -23,7 +23,7 @@
     </product-recommend>
     <common-division v-if="comProd" height="15"></common-division>
     <product-details :modular="modular" :article="article"></product-details>
-    <common-division height="150"></common-division>
+    <!--<common-division height="15"></common-division>-->
   </div>
 </template>
 <script src="./index.js"></script>
