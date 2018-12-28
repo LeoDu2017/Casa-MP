@@ -3,6 +3,8 @@ import CommonBanner from '@/components/common-banner.vue'
 import CommonLoading from '@/components/common-loading.vue'
 import CommonDivision from '@/components/common-division.vue'
 import ProductInfo from '@/components/product-info.vue'
+import ProductRecommend from '@/components/product-recommend.vue'
+import ProductDetails from '@/components/product-details.vue'
 export default {
   data () {
     return {
@@ -10,6 +12,8 @@ export default {
       gallery: [],
       attr: [],
       act_attr: [],
+      modular: [],
+      article: [],
       subtitle: '',
       prod_name: '',
       origin: '',
@@ -17,7 +21,6 @@ export default {
       is_wish: false,
       is_collect: false,
       comProd: null,
-      cases: null,
       product_tag: null,
       is_activity: null,
       activity: null,
@@ -29,7 +32,9 @@ export default {
     CommonBanner,
     CommonLoading,
     ProductInfo,
-    CommonDivision
+    CommonDivision,
+    ProductRecommend,
+    ProductDetails
   },
   onLoad (options) {
     store.commit('showLoading')
@@ -57,7 +62,8 @@ export default {
   },
   methods: {
     setData (res) {
-      const {gallery, subtitle, origin, style, article, activity, attr} = res
+      const {gallery, subtitle, origin, style, article, activity, attr, modular} = res
+
       this.prod_name = res.prod_name
       this.product_tag = res.article_option_name
       this.is_activity = res.is_activity
@@ -69,9 +75,10 @@ export default {
       this.subtitle = subtitle
       this.origin = origin
       this.style = style
-      this.cases = article
+      this.article = article
       this.activity = activity
       this.attr = attr
+      this.modular = modular
     }
   },
   onShareAppMessage () {
