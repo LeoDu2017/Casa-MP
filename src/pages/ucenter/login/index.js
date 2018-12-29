@@ -5,7 +5,7 @@ import UInput from '@/components/units/u-input'
 export default {
   data () {
     return {
-      see: false,
+      hide: true,
       phoneNumber: null,
       password: null,
       productId: null
@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     onSee () {
-      this.see = !this.see
+      this.hide = !this.hide
     },
     setPhone (val) {
       this.phoneNumber = val
@@ -44,8 +44,8 @@ export default {
         url: `${store.state.url}/wxapi/login/ajaxLogin`,
         method: 'POST',
         data: {
-          csr_account: telValue,
-          csr_password: pwdValue
+          csr_account: this.phoneNumber,
+          csr_password: this.password
         },
         success: (res) => {
           const {status} = res.data;

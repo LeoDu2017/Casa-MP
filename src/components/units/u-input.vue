@@ -3,7 +3,7 @@
     <label class="label">
       <i class="iconfont" :class="icon"></i>
       <input
-        v-if="!see"
+        v-if="hide"
         type="password"
         v-model="input_value"
         :placeholder="placeholder"/>
@@ -23,7 +23,7 @@
         input_value: ''
       }
     },
-    props: ['icon', 'placeholder', 'see'],
+    props: ['icon', 'placeholder', 'hide'],
     watch: {
       input_value (val) {
         this.$emit('callBack', val)
