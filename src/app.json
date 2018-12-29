@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/product/detail/main",
+    "pages/ucenter/login/main",
     "pages/index/main",
+    "pages/product/detail/main",
     "pages/search/main",
     "pages/web/main",
     "pages/logs/main",
@@ -10,7 +11,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "意大利之家",
     "navigationBarTextStyle": "black"
   }
 }
