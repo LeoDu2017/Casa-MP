@@ -2,8 +2,14 @@
   <div id="Input">
     <label class="label">
       <i class="iconfont" :class="icon"></i>
-      <!--:type="type"-->
       <input
+        v-if="!see"
+        type="password"
+        v-model="input_value"
+        :placeholder="placeholder"/>
+      <input
+        v-else
+        type="text"
         v-model="input_value"
         :placeholder="placeholder"/>
     </label>
@@ -17,7 +23,7 @@
         input_value: ''
       }
     },
-    props: ['icon', 'placeholder', 'type'],
+    props: ['icon', 'placeholder', 'see'],
     watch: {
       input_value (val) {
         this.$emit('callBack', val)
