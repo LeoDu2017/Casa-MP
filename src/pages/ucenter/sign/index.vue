@@ -29,7 +29,7 @@
       <button class="btn" @click="onSubmit">注册</button>
       <div class="bottom">
         <span>已有账号,</span>
-        <a href="/pages/ucenter/login/main">登录</a>
+        <a href="/pages/ucenter/login/main">去登录</a>
       </div>
     </div>
   </div>
@@ -57,14 +57,12 @@
     }
     .bottom{
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       margin-top: 30rpx;
+      font-size: 28rpx ;
+      color: #666;
       a{
-        font-size: 28rpx ;
-        color: #666;
-        &:active,&hover{
-          color: #000
-        }
+        color: #000
       }
     }
     .verify_btn{
