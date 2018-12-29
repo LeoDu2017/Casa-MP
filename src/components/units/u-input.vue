@@ -1,12 +1,28 @@
 <template>
-  <label id="Input">
-    <i class="iconfont" :class="icon"></i>
-    <input :placeholder="placeholder" />
-  </label>
+  <div id="Input">
+    <label class="label">
+      <i class="iconfont" :class="icon"></i>
+      <!--:type="type"-->
+      <input
+        v-model="input_value"
+        :placeholder="placeholder"/>
+    </label>
+    <slot></slot>
+  </div>
 </template>
 <script>
   export default {
-    props: ['icon', 'placeholder']
+    data () {
+      return {
+        input_value: ''
+      }
+    },
+    props: ['icon', 'placeholder', 'type'],
+    watch: {
+      input_value (val) {
+        this.$emit('callBack', val)
+      }
+    }
   }
 </script>
 <style scoped lang="less">
@@ -16,9 +32,18 @@
     height:54px;
     line-height:54px;
     align-items: center;
+    justify-content: space-between;
     font-size: 28rpx;
+    .label{
+      display: flex;
+      align-items: center;
+    }
     .iconfont{
       margin-right: 12px;
+      font-size: 32rpx;
+    }
+    .icon-mima, .icon{
+      font-size: 40rpx !important;
     }
   }
 </style>
