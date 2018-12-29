@@ -7,6 +7,10 @@
         <i class="iconfont icon" :class="hide ? 'icon-biyan' : 'icon-yanjing'" @click="onSee"></i>
       </u-input>
       <button class="btn" @click="onSubmit">登录</button>
+      <p class="bottom">
+        <a href="/pages/ucenter/forget/main">忘记密码</a>
+        <a href="/pages/ucenter/sign/main">免费注册</a>
+      </p>
     </div>
   </div>
 </template>
@@ -30,6 +34,18 @@
       text-align: center;
       color: #fff;
       margin-top: 30rpx;
+    }
+    .bottom{
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30rpx;
+      a{
+        font-size: 28rpx ;
+        color: #666;
+        &:active,&hover{
+          color: #000
+        }
+      }
     }
   }
 </style>
