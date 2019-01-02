@@ -1,4 +1,4 @@
-function formatNumber (n) {
+export function formatNumber (n) {
   const str = n.toString()
   return str[1] ? str : `0${str}`
 }
@@ -20,7 +20,6 @@ export function formatTime (date) {
 
   return `${t1} ${t2}`
 }
-
 export default {
   formatNumber,
   formatTime,

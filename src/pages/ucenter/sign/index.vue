@@ -4,16 +4,17 @@
     <div class="form_box">
       <u-input icon="icon-zhanghu" placeholder="请输入您的手机号" @callBack="setPhone"></u-input>
       <u-input icon="icon-yanzhengma2" placeholder="请输入您的验证码" :hide="hide" @callBack="setPassword">
-        <span class="verify_btn" @click="onGain">
-           获取验证码
+        <span class="verify_btn" @click="getCode">
+           {{timeState}}
         </span>
       </u-input>
-      <u-input icon="icon-mima" placeholder="请输入您的密码" :hide="hide" @callBack="setPassword">
-        <i class="iconfont icon" :class="hide ? 'icon-biyan' : 'icon-yanjing'" @click="onSee"></i>
+      <u-input icon="icon-mima" placeholder="请输入您的密码" :hide="hide01" @callBack="setPassword">
+        <i class="iconfont icon" :class="hide01 ? 'icon-biyan' : 'icon-yanjing'" @click="onSee('hide01')"></i>
       </u-input>
-      <u-input icon="icon-mima" placeholder="确认密码" :hide="hide" @callBack="setPassword">
-        <i class="iconfont icon" :class="hide ? 'icon-biyan' : 'icon-yanjing'" @click="onSee"></i>
+      <u-input icon="icon-mima" placeholder="确认密码" :hide="hide02" @callBack="confirmPassword">
+        <i class="iconfont icon" :class="hide02 ? 'icon-biyan' : 'icon-yanjing'" @click="onSee('hide02')"></i>
       </u-input>
+
       <u-input icon="icon-youxiang" placeholder="请输入您的邮箱（选填）" @callBack="setEmail"></u-input>
       <radio-group class="radioSex mt40" @change="setSex">
         <label class="sex">
