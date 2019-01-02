@@ -164,6 +164,7 @@ export default {
         return false
       }
       if (!this.code) {
+        console.log(this.code)
         wx.showToast({
           title: '请输入您收到的验证码！',
           icon: 'none'

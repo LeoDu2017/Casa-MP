@@ -3,7 +3,7 @@
     <u-title en="Sign Up" cn="注册"></u-title>
     <div class="form_box">
       <u-input icon="icon-zhanghu" placeholder="请输入您的手机号" @callBack="setPhone"></u-input>
-      <u-input icon="icon-yanzhengma2" placeholder="请输入您的验证码" :hide="hide" @callBack="setPassword">
+      <u-input icon="icon-yanzhengma2" placeholder="请输入您的验证码" :hide="hide" @callBack="setCode">
         <span class="verify_btn" @click="getCode">
            {{timeState}}
         </span>
