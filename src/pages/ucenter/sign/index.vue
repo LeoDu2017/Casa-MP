@@ -4,7 +4,7 @@
     <div class="form_box">
       <u-input icon="icon-zhanghu" placeholder="请输入您的手机号" @callBack="setPhone"></u-input>
       <u-input icon="icon-yanzhengma2" placeholder="请输入您的验证码" :hide="hide" @callBack="setPassword">
-        <span class="verify_btn">
+        <span class="verify_btn" @click="onGain">
            获取验证码
         </span>
       </u-input>
@@ -14,16 +14,16 @@
       <u-input icon="icon-mima" placeholder="确认密码" :hide="hide" @callBack="setPassword">
         <i class="iconfont icon" :class="hide ? 'icon-biyan' : 'icon-yanjing'" @click="onSee"></i>
       </u-input>
-      <u-input icon="icon-youxiang" placeholder="请输入您的邮箱（选填）" @callBack="setPhone"></u-input>
-      <radio-group class="radioSex mt40" bindchange="sexChange">
+      <u-input icon="icon-youxiang" placeholder="请输入您的邮箱（选填）" @callBack="setEmail"></u-input>
+      <radio-group class="radioSex mt40" @change="setSex">
         <label class="sex">
-          <radio value="0" checked="ture">先生</radio>
+          <radio value="1" color="#333" checked="">先生</radio>
         </label>
         <label class="sex">
-          <radio value="1" checked="">女士</radio>
+          <radio value="2" color="#333" checked="">女士</radio>
         </label>
         <label class="sex">
-          <radio value="2" checked="">保密</radio>
+          <radio value="0" color="#333" checked="">保密</radio>
         </label>
       </radio-group>
       <button class="btn" @click="onSubmit">注册</button>

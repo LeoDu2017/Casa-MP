@@ -2,7 +2,10 @@ function formatNumber (n) {
   const str = n.toString()
   return str[1] ? str : `0${str}`
 }
-
+export function isPhoneNo (phone) {
+  var pattern = /^1[34578]\d{9}$/
+  return pattern.test(phone)
+}
 export function formatTime (date) {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -20,5 +23,6 @@ export function formatTime (date) {
 
 export default {
   formatNumber,
-  formatTime
+  formatTime,
+  isPhoneNo
 }

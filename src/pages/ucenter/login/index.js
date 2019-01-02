@@ -28,9 +28,10 @@ export default {
     onSubmit () {
       if (!this.phoneNumber) {
         wx.showToast({
-          title: '请输入您的手机或者用户名',
+          title: '请输入您的手机',
           icon: 'none'
         })
+        this.phoneNumber = null
         return
       }
       if (!this.setPassword) {
