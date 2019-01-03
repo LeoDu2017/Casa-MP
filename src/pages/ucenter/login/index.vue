@@ -3,8 +3,8 @@
     <u-title en="Login in" cn="登录"></u-title>
     <div class="form_box">
       <u-input icon="icon-zhanghu" placeholder="请输入您的手机号" @callBack="setPhone"></u-input>
-      <u-input icon="icon-mima" placeholder="请输入您的密码" :hide="hide" @callBack="setPassword">
-        <i class="iconfont icon" :class="hide ? 'icon-biyan' : 'icon-yanjing'" @click="onSee"></i>
+      <u-input icon="icon-mima" placeholder="请输入您的密码" :hide="hide01" @callBack="setPassword">
+        <i class="iconfont icon" :class="hide01 ? 'icon-biyan' : 'icon-yanjing'" @click="onSee"></i>
       </u-input>
       <button class="btn" @click="onSubmit">登录</button>
       <p class="bottom">
@@ -14,7 +14,7 @@
     </div>
   </div>
 </template>
-<script src="./index.js"></script>
+<script src="../index.js"></script>
 <style scoped lang="less">
   #Login {
     .form_box{

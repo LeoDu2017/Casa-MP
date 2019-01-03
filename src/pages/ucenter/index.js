@@ -17,6 +17,7 @@ export default {
       hide01: true,
       hide02: true,
       email: null,
+      productId: null
     }
   },
   components: {
@@ -89,67 +90,127 @@ export default {
     onSee (state) {
       this[state] = !this[state]
     },
-    onSubmit () {
+    onSubmit (type) {
+      const submit_parameters = {
+        sign: {
+          url: `${store.state.url}/wxapi/login/ajaxEnroll`,
+          data: {
+            'csr_mobile': this.phone,
+            'code': this.code,
+            'csr_password': this.password,
+            'csr_email': this.email,
+            'csr_sex': this.sex
+          },
+          success_hint: '注册成功',
+          fail_hint: '注册失败，请联系客服解决',
+          reLaunch: '/pages/ucenter/login/main'
+        },
+        login: {
+          url: `${store.state.url}/wxapi/login/ajaxLogin`,
+          data: {
+            csr_account: this.phoneNumber,
+            csr_password: this.password
+          },
+          success_hint: '登录成功',
+          fail_hint: '账号或密码错误',
+          reLaunch:''
+        },
+        forget: {
+          url: `${store.state.url}/wxapi/login/ajaxRetrievePassword`,
+          data: {
+            csr_mobile: this.phone,
+            code: this.code,
+            csr_password: this.password
+          },
+          success_hint: '密码修改成功',
+          fail_hint: res.data.msg,
+        }
+      }
       if (!this.verification()) {
         console.log('验证不通过');
         return
       }
       wx.request({
-        url: `${store.state.url}/wxapi/login/ajaxEnroll`,
+        url: submit_parameters[type].url,
         method: 'POST',
-        data: {
-          'csr_mobile': this.phone,
-          'code': this.code,
-          'csr_password': this.password,
-          'csr_email': this.email,
-          'csr_sex': this.sex
-        },
+        data: submit_parameters[type].data,
         header: {
           'Accept': 'application/json'
         },
         success: (res) => {
           if(res.data.status === 1){
             wx.showToast({
-              title: '注册成功',
+              title: submit_parameters[type].success_hint,
               icon: 'none'
             })
             wx.reLaunch({
-              url: '/pages/ucenter/login/main'
+              url: submit_parameters[type].reLaunch,
             })
-            return
+            if (type === 'login') {
+              wx.removeStorage({ key: 'token'});
+              wx.setStorage({
+                key: 'token',
+                data: res.data,
+              })
+              if (productId) {
+                wx.redirectTo({
+                  url: `/pages/product/detail/main?id=${this.productId}`
+                })
+              } else {
+                wx.reLaunch({
+                  url: '/pages/account/account'
+                })
+              }
+            }
+            if (type === 'forget') {
+              setTimeout(function () {
+                wx.navigateBack({
+                  delta: 1
+                })
+              })
+            }
           } else if (res.data.status === -3) {
             wx.showModal({
               title: '提示',
               content: '验证码错误',
               showCancel: false,
             })
-            return false;
           }else if (res.data.status === -4) {
             wx.showModal({
               title: '提示',
               content: '手机号已存在',
               showCancel: false,
             })
-            return false;
           }else if (res.data.status === -7) {
             wx.showModal({
               title: '提示',
               content: '手机号错误',
               showCancel: false,
             })
-            return false;
-          } else  {
+          } else if (status === 0) {
             wx.showModal({
               title: '提示',
-              content: '注册失败，请联系客服解决',
+              content: submit_parameters[type].fail_hint,
               showCancel: false
             })
-            return false;
+          } else if (res.data.status === -13) {
+            wx.showModal({
+              title: '提示',
+              content: '该账户不存在',
+              showCancel: false,
+            })
           }
+        },
+        fail: () => {
+          wx.showToast({
+            title: '网络链接失败，请检查网络链接',
+            icon: 'none'
+          })
         }
       });
     },
     verification () {
+
       if (!isPhoneNo(this.phone)) {
         wx.showToast({
           title: '请输入正确的手机号码！',

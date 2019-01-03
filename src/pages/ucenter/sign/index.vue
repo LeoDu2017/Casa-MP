@@ -35,7 +35,7 @@
     </div>
   </div>
 </template>
-<script src="./index.js"></script>
+<script src="../index.js"></script>
 <style scoped lang="less">
   #Sign {
     .form_box{
