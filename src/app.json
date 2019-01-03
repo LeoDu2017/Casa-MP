@@ -1,18 +1,20 @@
 {
   "pages": [
-    "pages/ucenter/sign/main",
+    "pages/ucenter/forget/main",
     "pages/index/main",
     "pages/product/detail/main",
     "pages/search/main",
     "pages/web/main",
+
     "pages/logs/main",
     "pages/counter/main",
-    "pages/ucenter/login/main"
+    "pages/ucenter/login/main",
+    "pages/ucenter/sign/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "意大利之家",
+    "navigationBarTitleText": "有容-意大利之家",
     "navigationBarTextStyle": "black"
   }
 }

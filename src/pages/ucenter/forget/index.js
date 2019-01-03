@@ -11,12 +11,9 @@ export default {
       password: null,
       password_02: null,
       isSend: false,
-      sex: 0,
-      picked: '',
       currentTime: 60,
       hide01: true,
-      hide02: true,
-      email: null,
+      hide02: true
     }
   },
   components: {
@@ -35,13 +32,6 @@ export default {
     },
     setCode (val) {
       this.code = val
-    },
-    setSex (e) {
-      const {target:{value}} = e
-      this.sex = value
-    },
-    setEmail (val) {
-      this.email = val
     },
     onGain () {
       const interval = setInterval(() => {
@@ -95,54 +85,58 @@ export default {
         return
       }
       wx.request({
-        url: `${store.state.url}/wxapi/login/ajaxEnroll`,
+        url: `${store.state.url}/wxapi/login/ajaxRetrievePassword`,
         method: 'POST',
         data: {
-          'csr_mobile': this.phone,
-          'code': this.code,
-          'csr_password': this.password,
-          'csr_email': this.email,
-          'csr_sex': this.sex
+          csr_mobile: this.phone,
+          code: this.code,
+          csr_password: this.password
         },
         header: {
           'Accept': 'application/json'
         },
         success: (res) => {
-          if(res.data.status === 1){
+          if (res.data.status == 1) {
             wx.showToast({
-              title: '注册成功',
+              title: '密码修改成功',
               icon: 'none'
             })
-            wx.reLaunch({
-              url: '/pages/ucenter/login/main'
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 1
+              })
             })
-            return
-          } else if (res.data.status === -3) {
+          } else if (res.data.status == -3) {
             wx.showModal({
               title: '提示',
               content: '验证码错误',
               showCancel: false,
             })
             return false;
-          }else if (res.data.status === -4) {
-            wx.showModal({
-              title: '提示',
-              content: '手机号已存在',
-              showCancel: false,
-            })
-            return false;
-          }else if (res.data.status === -7) {
+          }else if (res.data.status == -7) {
             wx.showModal({
               title: '提示',
               content: '手机号错误',
               showCancel: false,
             })
             return false;
-          } else  {
+          }else if (res.data.status == -13) {
             wx.showModal({
               title: '提示',
-              content: '注册失败，请联系客服解决',
-              showCancel: false
+              content: '该账户不存在',
+              showCancel: false,
+            })
+            return false;
+          }  else if (res.data.status == 0) {
+            wx.showModal({
+              title: '提示',
+              content: res.data.msg,
+              showCancel: false,
+              success: function (m) {
+                if (m.confirm) {
+
+                }
+              }
             })
             return false;
           }
@@ -189,13 +183,6 @@ export default {
       if (this.password !== this.password_02) {
         wx.showToast({
           title: '您两次输入的密码不相同，请检查后提交！',
-          icon: 'none'
-        })
-        return false
-      }
-      if (this.email && !isEmail(this.email)) {
-        wx.showToast({
-          title: '请输入正确的邮箱地址，或者留空！',
           icon: 'none'
         })
         return false
