@@ -10,7 +10,7 @@
 	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
 	"appid": "wx31f11806d5822081",
-	"projectname": "y",
+	"projectname": "意大利之家小程序",
 	"condition": {
 		"search": {
 			"current": -1,
