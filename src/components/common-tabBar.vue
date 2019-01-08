@@ -25,7 +25,7 @@
       </a>
     </li>
     <li class="item">
-      <a href="/pages/user/main">
+      <a href="/pages/ucenter/account/main">
         <i class="iconfont" :class="selected === '4' ? 'icon-zhanghu1' : 'icon-zhanghu'"></i>
         我的
       </a>

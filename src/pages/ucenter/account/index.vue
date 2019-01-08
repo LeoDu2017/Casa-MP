@@ -5,54 +5,56 @@
       <div class="profile_photo" :style="{top:height - 63 + 'px'}">
         <i class="iconfont icon-zhanghu"></i>
       </div>
+      <div class="row">
+        <a class="btn" href="/pages/ucenter/login/main">登录</a>
+        <a class="btn active" href="/pages/ucenter/sign/main">注册</a>
+      </div>
     </div>
+    <common-division height="10"></common-division>
+    <div class="menu_box">
+      <ul class="row">
+        <li class="item">
+          <i class="iconfont icon-shoucang0"></i>
+          <span class="text">产品收藏</span>
+        </li>
+        <li class="item">
+          <i class="iconfont icon-zhaopian"></i>
+          <span class="text">灵感收藏</span>
+        </li>
+        <li class="item">
+          <i class="iconfont icon-xin_02"></i>
+          <span class="text">我的心愿</span>
+        </li>
+      </ul>
+      <ul class="row">
+        <li class="item">
+          <i class="iconfont icon-baojiahou"></i>
+          <span class="text">我的报价</span>
+        </li>
+        <li class="item">
+          <i class="iconfont icon-dingdan2"></i>
+          <span class="text">我的订单</span>
+        </li>
+        <li class="item">
+          <i class="iconfont icon-xiugai"></i>
+          <span class="text">修改密码</span>
+        </li>
+      </ul>
+    </div>
+    <common-division height="110">
+      <span class="phone">
+        咨询客服：400-065-0601
+      </span>
+    </common-division>
+    <tab-bar selected="4"></tab-bar>
   </div>
 </template>
 
-<script>
-  export default {
-    data () {
-      return {
-        height: 0
-      }
-    },
-    onLoad () {
-      wx.setNavigationBarColor({
-        frontColor: '#ffffff',
-        fontFamily: '微软雅黑',
-        backgroundColor: '#212224',
-        animation: {
-          duration: 100,
-          timingFunc: 'easeIn'
-        }
-      })
-    },
-    onReady () {
-      this.drawWave()
-    },
-    methods: {
-      drawWave () {
-        const ctx = wx.createCanvasContext('wave')
-        const width = wx.getSystemInfoSync().windowWidth
-        this.height = width / 2
-        ctx.beginPath()
-        ctx.moveTo(0, 0)
-        ctx.lineTo(0, this.height - 30)
-        ctx.bezierCurveTo(width / 4, this.height + 20, width * 3 / 4, this.height - 70, width, this.height - 30)
-        ctx.lineTo(width, 0)
-        ctx.fillStyle = '#212224'
-        ctx.closePath()
-        ctx.fill()
-        ctx.draw()
-      }
-    }
-  }
-</script>
+<script src="./index.js"></script>
 <style scoped lang="less">
   .account{
     width: 100vw;
     height: 100vh;
-
     .profile_box{
       position: relative;
       canvas {
@@ -72,13 +74,76 @@
         transform: translateX(-50%);
         color: #999;
         text-align: center;
+        z-index: 10000;
         .icon-zhanghu{
           font-size: 30px;
         }
       }
+      .row{
+        margin: 30px 0;
+        display: flex;
+        justify-content: center;
+        .btn{
+          width:80px;
+          height:30px;
+          text-align:center;
+          line-height:30px;
+          border:1px solid #999999;
+          border-radius:6px;
+          font-size:14px;
+          & + .btn{
+            margin-left: 30px;
+          }
+          &.active{
+            background-color:#333;
+            border-color: #999;
+            color: #fff;
+          }
+        }
+      }
+    }
+    .menu_box{
+      padding: 40px 35px;
+      .row{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        & + .row{
+          margin-top: 40px;
+        }
+        .item{
+          text-align: center;
+          .iconfont{
+            background-image: linear-gradient(-45deg,rgba(33,34,35,1),rgba(92,97,102,1));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 40px;
+          }
+          .icon-zhaopian{
+            font-size: 30px;
+            margin-bottom: 5px;
+            margin-top: 5px;
+          }
+          .text{
+            font-size:14px;
+            font-family:PingFangSC-Regular,serif;
+            font-weight:400;
+            color:rgba(102,102,102,1);
+            line-height:0;
+          }
+        }
+      }
 
     }
-
+    .phone{
+      font-size:12px;
+      font-weight:400;
+      color:rgba(102,102,102,1);
+      padding-top: 15px;
+      text-align: center;
+      width:100%;
+      display:block;
+    }
   }
 
 </style>

@@ -62,7 +62,17 @@ export default {
         'Accept': 'application/json'
       },
       success: (res) => {
-        setTimeout(() => { store.commit('hideLoading') }, 4500)
+        setTimeout(() => {
+          store.commit('hideLoading')
+          wx.setNavigationBarColor({
+            frontColor: '#000000',
+            backgroundColor: '#ffffff',
+            animation: {
+              duration: 100,
+              timingFunc: 'easeIn'
+            }
+          })
+        }, 4500)
         const {spaces, banner, purchase, recommend, like, prodlist, brand, resource: {a, b, c, d}} = res.data.data
         this.banner = banner
         this.spaces = spaces
@@ -89,25 +99,12 @@ export default {
             data: d.about_company
           }
         ]
-        // console.log(spaces, banner, purchase, recommend, like, prodlist, brand)
-        //
-        // self.spaces = spaces;
-        // self.banner = banner;
-        // self.promotion.goods = purchase;
-        // self.recommend = recommend;
-        // self.like = like;
-        // self.prodlist = prodlist;
-        // self.brands = brand;
-        // console.log(res)
+
+
       },
       fail: function () {
 
       }
-    })
-  },
-  onShow () { // 小程序 hook
-    wx.setNavigationBarTitle({
-      title: '意大利之家'
     })
   }
 }

@@ -8,6 +8,16 @@
 <script>
   import store from '@/status/store'
   export default {
+    onLoad () {
+      wx.setNavigationBarColor({
+        frontColor: '#ffffff',
+        backgroundColor: '#212224',
+        animation: {
+          duration: 100,
+          timingFunc: 'easeIn'
+        }
+      })
+    },
     computed: {
       hide () {
         return store.state.hide

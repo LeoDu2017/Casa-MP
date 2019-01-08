@@ -44,7 +44,7 @@ export default {
     wx.request({
       url: `${store.state.url}/wxapi/product/prod_detail`,
       method: 'GET',
-      data: {id:25758},
+      data: {id: this.id},
       header: {
         'Accept': 'application/json'
       },
