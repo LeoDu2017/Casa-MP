@@ -40,6 +40,7 @@
 </script>
 
 <style scoped lang="less">
+  @import "../utils/common.less";
   ul{
     background:#fff;
     height: 49pt;
@@ -66,7 +67,7 @@
     }
     .circle{
       border-radius:50%;
-      background:#212223;
+      background: @gradient_black;
       color:#fff;
       height: 45pt;
       width: 45pt;
@@ -77,10 +78,12 @@
         font-size:21pt;
       }
     }
-    .iconfont{
-      font-size: 18pt;
-      padding-bottom:4pt;
-
+    .item{
+      .iconfont{
+        font-size: 18pt;
+        padding-bottom:4pt;
+        .font_gradient_color;
+      }
     }
   }
 </style>

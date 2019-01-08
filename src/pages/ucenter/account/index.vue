@@ -1,5 +1,6 @@
 <template>
   <div class="account">
+    <common-loading></common-loading>
     <div class="profile_box">
       <canvas canvas-id="wave" :style="{height:height + 'px'}"></canvas>
       <div class="profile_photo" :style="{top:height - 63 + 'px'}">
@@ -52,6 +53,7 @@
 
 <script src="./index.js"></script>
 <style scoped lang="less">
+  @import "../../../utils/common.less";
   .account{
     width: 100vw;
     height: 100vh;
@@ -114,9 +116,7 @@
         .item{
           text-align: center;
           .iconfont{
-            background-image: linear-gradient(-45deg,rgba(33,34,35,1),rgba(92,97,102,1));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            .font_gradient_color;
             font-size: 40px;
           }
           .icon-zhaopian{

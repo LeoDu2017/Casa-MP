@@ -26,6 +26,7 @@
   }
 </script>
 <style scoped lang="less">
+  @import "../utils/common.less";
   .wrap{
     position: fixed;
     top:0;

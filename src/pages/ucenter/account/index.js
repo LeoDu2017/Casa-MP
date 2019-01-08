@@ -1,5 +1,8 @@
+import store from '@/status/store'
+import CommonLoading from '@/components/common-loading'
 import CommonDivision from '@/components/common-division'
 import TabBar from '@/components/common-tabBar.vue'
+
 export default {
   data () {
     return {
@@ -10,23 +13,20 @@ export default {
 
   },
   onLoad () {
+    store.commit('showLoading')
     wx.setNavigationBarTitle({
       title: '个人中心'
     })
-    wx.setNavigationBarColor({
-      frontColor: '#ffffff',
-      backgroundColor: '#212224',
-      animation: {
-        duration: 100,
-        timingFunc: 'easeIn'
-      }
-    })
+    setTimeout(() => {
+      store.commit('hideLoading')
+    }, 4500)
   },
   onReady () {
     this.drawWave()
   },
   components: {
     CommonDivision,
+    CommonLoading,
     TabBar
   },
   methods: {
