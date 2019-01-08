@@ -98,7 +98,7 @@
           }
           &.active{
             background-color:#333;
-            border-color: #999;
+            border-color: #333;
             color: #fff;
           }
         }

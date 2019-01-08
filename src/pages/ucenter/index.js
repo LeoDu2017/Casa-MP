@@ -6,6 +6,7 @@ export default {
   data () {
     return {
       timeState: '获取验证码',
+      page: '',
       phone: null,
       code: null,
       password: null,
@@ -91,7 +92,87 @@ export default {
       this[state] = !this[state]
     },
     onSubmit (type) {
-      const submit_parameters = {
+      const {url,data,success_hint,reLaunch,fail_hint} = this.submit_parameters(type)
+      if (!this.verification()) {
+        return
+      }
+      wx.request({
+        url: url,
+        method: 'POST',
+        data: data,
+        header: {
+          'Accept': 'application/json'
+        },
+        success: (res) => {
+          const { status,msg,data } = res.data
+          if(status === 1){
+            wx.showToast({
+              title: success_hint,
+              icon: 'none'
+            })
+            this.page === 'sign' && wx.reLaunch({
+              url: reLaunch,
+            })
+            if (this.page === 'login') {
+              wx.removeStorage({ key: 'token'})
+              wx.setStorage({
+                key: 'token',
+                data: data
+              })
+              this.productId ? wx.redirectTo({
+                url: `/pages/product/detail/main?id=${this.productId}`
+              }) : wx.reLaunch({
+                url: reLaunch
+              })
+
+            }
+
+            this.page === 'forget' && wx.navigateBack({
+              delta: 1
+            })
+          } else if (status === -3) {
+            wx.showModal({
+              title: '提示',
+              content: '验证码错误',
+              showCancel: false,
+            })
+          }else if (status === -4) {
+            wx.showModal({
+              title: '提示',
+              content: '手机号已存在',
+              showCancel: false,
+            })
+          }else if (status === -7) {
+            wx.showModal({
+              title: '提示',
+              content: '手机号错误',
+              showCancel: false,
+            })
+          } else if (status === 0) {
+            wx.showModal({
+              title: '提示',
+              content: fail_hint ? fail_hint : msg,
+              showCancel: false
+            })
+          } else if (res.data.status === -13) {
+            wx.showModal({
+              title: '提示',
+              content: '该账户不存在',
+              showCancel: false,
+            })
+          }
+        },
+        fail: () => {
+          wx.showToast({
+            title: '网络链接失败，请检查网络链接',
+            icon: 'none'
+          })
+        }
+      });
+    },
+    submit_parameters (type) {
+      this.page = type
+      return {
         sign: {
           url: `${store.state.url}/wxapi/login/ajaxEnroll`,
           data: {
@@ -113,7 +194,7 @@ export default {
           },
           success_hint: '登录成功',
           fail_hint: '账号或密码错误',
-          reLaunch:''
+          reLaunch: '/pages/ucenter/account/main'
         },
         forget: {
           url: `${store.state.url}/wxapi/login/ajaxRetrievePassword`,
@@ -123,94 +204,11 @@ export default {
             csr_password: this.password
           },
           success_hint: '密码修改成功',
-          fail_hint: res.data.msg,
+          fail_hint: null
         }
-      }
-      if (!this.verification()) {
-        console.log('验证不通过');
-        return
-      }
-      wx.request({
-        url: submit_parameters[type].url,
-        method: 'POST',
-        data: submit_parameters[type].data,
-        header: {
-          'Accept': 'application/json'
-        },
-        success: (res) => {
-          if(res.data.status === 1){
-            wx.showToast({
-              title: submit_parameters[type].success_hint,
-              icon: 'none'
-            })
-            wx.reLaunch({
-              url: submit_parameters[type].reLaunch,
-            })
-            if (type === 'login') {
-              wx.removeStorage({ key: 'token'});
-              wx.setStorage({
-                key: 'token',
-                data: res.data,
-              })
-              if (productId) {
-                wx.redirectTo({
-                  url: `/pages/product/detail/main?id=${this.productId}`
-                })
-              } else {
-                wx.reLaunch({
-                  url: '/pages/account/account'
-                })
-              }
-            }
-            if (type === 'forget') {
-              setTimeout(function () {
-                wx.navigateBack({
-                  delta: 1
-                })
-              })
-            }
-          } else if (res.data.status === -3) {
-            wx.showModal({
-              title: '提示',
-              content: '验证码错误',
-              showCancel: false,
-            })
-          }else if (res.data.status === -4) {
-            wx.showModal({
-              title: '提示',
-              content: '手机号已存在',
-              showCancel: false,
-            })
-          }else if (res.data.status === -7) {
-            wx.showModal({
-              title: '提示',
-              content: '手机号错误',
-              showCancel: false,
-            })
-          } else if (status === 0) {
-            wx.showModal({
-              title: '提示',
-              content: submit_parameters[type].fail_hint,
-              showCancel: false
-            })
-          } else if (res.data.status === -13) {
-            wx.showModal({
-              title: '提示',
-              content: '该账户不存在',
-              showCancel: false,
-            })
-          }
-        },
-        fail: () => {
-          wx.showToast({
-            title: '网络链接失败，请检查网络链接',
-            icon: 'none'
-          })
-        }
-      });
+      }[type]
     },
     verification () {
-
       if (!isPhoneNo(this.phone)) {
         wx.showToast({
           title: '请输入正确的手机号码！',
@@ -218,15 +216,14 @@ export default {
         })
         return false
       }
-      if (!this.isSend) {
+      if (!this.isSend && this.page !== 'login') {
         wx.showToast({
           title: '您还没有获取验证码，请获取验证码后再提交！',
           icon: 'none'
         })
         return false
       }
-      if (!this.code) {
-        console.log(this.code)
+      if (!this.code && this.page !== 'login') {
         wx.showToast({
           title: '请输入您收到的验证码！',
           icon: 'none'
@@ -240,14 +237,14 @@ export default {
         })
         return false
       }
-      if (!this.password_02) {
+      if (!this.password_02 && this.page !== 'login') {
         wx.showToast({
           title: '请确认您的登录密码！',
           icon: 'none'
         })
         return false
       }
-      if (this.password !== this.password_02) {
+      if (this.password !== this.password_02 && this.page !== 'login') {
         wx.showToast({
           title: '您两次输入的密码不相同，请检查后提交！',
           icon: 'none'
@@ -261,6 +258,7 @@ export default {
         })
         return false
       }
+      return true
     }
   }
 }

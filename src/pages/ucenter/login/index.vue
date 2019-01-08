@@ -6,7 +6,7 @@
       <u-input icon="icon-mima" placeholder="请输入您的密码" :hide="hide01" @callBack="setPassword">
         <i class="iconfont icon" :class="hide01 ? 'icon-biyan' : 'icon-yanjing'" @click="onSee"></i>
       </u-input>
-      <button class="btn" @click="onSubmit">登录</button>
+      <button class="btn" @click="onSubmit('login')">登录</button>
       <p class="bottom">
         <a href="/pages/ucenter/forget/main">忘记密码</a>
         <a href="/pages/ucenter/sign/main">免费注册</a>
