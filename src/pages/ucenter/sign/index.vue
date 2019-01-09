@@ -30,7 +30,7 @@
       <button class="btn" @click="onSubmit">注册</button>
       <div class="bottom">
         <span>已有账号,</span>
-        <a href="/pages/ucenter/login/main">去登录</a>
+        <a href="/pages/ucenter/login/main?page=login">去登录</a>
       </div>
     </div>
   </div>
@@ -39,42 +39,42 @@
 <style scoped lang="less">
   #Sign {
     .form_box{
-      padding: 30rpx;
+      padding: 15px;
     }
     .icon{
-      font-size: 40rpx;
+      font-size: 20px;
     }
     .btn{
-      border-radius:10px;
-      height:94rpx;
+      border-radius: 10px;
+      height: 94rpx;
       line-height:94rpx;
       width:100%;
       background-color:#333;
-      font-size:36rpx;
+      font-size: 18px;
       word-break:break-all;
       text-align: center;
       color: #fff;
-      margin-top: 30rpx;
+      margin-top: 15px;
     }
     .bottom{
       display: flex;
       justify-content: center;
-      margin-top: 30rpx;
-      font-size: 28rpx ;
+      margin-top: 15px;
+      font-size: 14px ;
       color: #666;
       a{
         color: #000
       }
     }
     .verify_btn{
-      width:200rpx;
-      height:64rpx;
+      width: 100px;
+      height: 32px;
       text-align:center;
-      line-height:64rpx;
+      line-height: 32px;
       font-size:14px;
       color:#000;
-      border:1rpx solid #cccccc;
-      border-radius:10rpx;
+      border:1px solid #cccccc;
+      border-radius:5px;
       &:hover,&:active{
         color: #fff;
         border-color: #212226;
@@ -82,16 +82,16 @@
       }
     }
     .mt40{
-      margin-top: 40rpx;
+      margin-top: 20px;
     }
     .radioSex {
       display: flex;
       label {
-        margin-right: 50rpx;
-        font-size: 28rpx;
+        margin-right: 25px;
+        font-size: 14px;
       }
       radio {
-        width: 108rpx;
+        width: 60px;
       }
     }
   }

@@ -8,8 +8,8 @@
       </u-input>
       <button class="btn" @click="onSubmit('login')">登录</button>
       <p class="bottom">
-        <a href="/pages/ucenter/forget/main">忘记密码</a>
-        <a href="/pages/ucenter/sign/main">免费注册</a>
+        <a href="/pages/ucenter/forget/main?page=forget">忘记密码</a>
+        <a href="/pages/ucenter/sign/main?page=sign">免费注册</a>
       </p>
     </div>
   </div>

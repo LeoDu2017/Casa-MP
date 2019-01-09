@@ -7,7 +7,7 @@
         <open-data class="avatar" v-if="isLogin" type="userAvatarUrl"></open-data>
         <i v-else class="iconfont icon-zhanghu"></i>
       </div>
-      <a href="/pages/ucenter/information/main" class="row" v-if="isLogin">
+      <a href="/pages/ucenter/information/main?page=info" class="row" v-if="isLogin">
         <!--<i class="phone">{{phone}}</i>-->
         <i class="phone">
           <open-data type="userNickName"></open-data>
@@ -15,27 +15,27 @@
         <i class='iconfont icon-return'></i>
       </a>
       <div class="row" v-else>
-        <a class="btn" href="/pages/ucenter/login/main">登录</a>
-        <a class="btn active" href="/pages/ucenter/sign/main">注册</a>
+        <a class="btn" href="/pages/ucenter/login/main?page=login">登录</a>
+        <a class="btn active" href="/pages/ucenter/sign/main?page=sign">注册</a>
       </div>
     </div>
     <common-division height="10"></common-division>
     <div class="menu_box">
       <ul class="row">
         <li class="item">
-          <a :href="isLogin ? '/pages/ucenter/collection/main':'/pages/ucenter/login/main'">
+          <a :href="isLogin ? '/pages/ucenter/collection/main':'/pages/ucenter/login/main?page=login'">
             <i class="iconfont icon-shoucang0"></i>
             <span class="text">产品收藏</span>
           </a>
         </li>
         <li class="item">
-          <a :href="isLogin ? '/pages/ucenter/inspiration/main':'/pages/ucenter/login/main'">
+          <a :href="isLogin ? '/pages/ucenter/inspiration/main':'/pages/ucenter/login/main?page=login'">
             <i class="iconfont icon-zhaopian"></i>
             <span class="text">灵感收藏</span>
           </a>
         </li>
         <li class="item">
-          <a :href="isLogin ? '/pages/ucenter/wish/main':'/pages/ucenter/login/main'">
+          <a :href="isLogin ? '/pages/ucenter/wish/main':'/pages/ucenter/login/main?page=login'">
             <i class="iconfont icon-xin_02"></i>
             <span class="text">我的心愿</span>
           </a>
@@ -43,19 +43,19 @@
       </ul>
       <ul class="row">
         <li class="item">
-          <a :href="isLogin ? '/pages/ucenter/quoteOrder/main':'/pages/ucenter/login/main'">
+          <a :href="isLogin ? '/pages/ucenter/quoteOrder/main':'/pages/ucenter/login/main?page=login'">
             <i class="iconfont icon-baojiahou"></i>
             <span class="text">我的报价</span>
           </a>
         </li>
         <li class="item">
-          <a :href="isLogin ? '/pages/ucenter/orderList/main':'/pages/ucenter/login/main'">
+          <a :href="isLogin ? '/pages/ucenter/orderList/main':'/pages/ucenter/login/main?page=login'">
             <i class="iconfont icon-dingdan2"></i>
             <span class="text">我的订单</span>
           </a>
         </li>
         <li class="item">
-          <a :href="isLogin ? '/pages/ucenter/pwdEdit/main':'/pages/ucenter/login/main'">
+          <a :href="isLogin ? '/pages/ucenter/pwdEdit/main':'/pages/ucenter/login/main?page=login'">
             <i class="iconfont icon-xiugai"></i>
             <span class="text">修改密码</span>
           </a>
