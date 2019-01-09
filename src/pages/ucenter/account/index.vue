@@ -63,9 +63,12 @@
       </ul>
     </div>
     <common-division height="110">
-      <span class="service">
-        咨询客服：400-065-0601
-      </span>
+      <div class="bottom">
+        <span class="service">
+          咨询客服：400-065-0601
+        </span>
+        <span class="exit" v-if="isLogin" @click="exit">退出登录</span>
+      </div>
     </common-division>
     <tab-bar selected="4"></tab-bar>
   </div>
@@ -175,15 +178,24 @@
       }
 
     }
-    .service{
-      font-size:12px;
-      font-weight:400;
-      color:rgba(102,102,102,1);
+    .bottom{
+      /*display: flex;*/
+      justify-content: center;
       padding-top: 15px;
       text-align: center;
-      width:100%;
-      display:block;
+      .exit,
+      .service{
+        font-size:12px;
+        font-weight:400;
+        color:rgba(102,102,102,1);
+        width:100%;
+        display:inline!important;
+      }
+      .exit{
+        margin-left: 10px;
+      }
     }
+
   }
 
 </style>

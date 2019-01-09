@@ -12,19 +12,19 @@ export default {
     pages: [
       'pages/web/main',
       'pages/logs/main',
-      'pages/index/main',
+      '^pages/index/main',
       'pages/search/main',
       'pages/counter/main',
       'pages/ucenter/sign/main',
       'pages/ucenter/login/main',
       'pages/ucenter/forget/main',
       'pages/product/detail/main',
-      '^pages/ucenter/account/main',
+      'pages/ucenter/account/main',
       'pages/ucenter/information/main'],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: '有容-意大利之家',
+      navigationBarTitleText: '有容-意大利之家-2',
       navigationBarTextStyle: 'black'
     }
   }

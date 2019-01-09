@@ -55,6 +55,18 @@ export default {
       ctx.fill()
       ctx.draw()
     },
+    exit () {
+      wx.showModal({
+        title: '提示',
+        content: '确认退出登陆?',
+        success: res => {
+          if (res.confirm) {
+            wx.removeStorage({key: 'token'})
+            store.commit('onExit')
+          }
+        }
+      })
+    }
     // getUserInfo () {
     //   wx.getUserInfo({
     //     success: res => {

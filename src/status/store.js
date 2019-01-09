@@ -18,6 +18,7 @@ const store = new Vuex.Store({
     hideLoading: state => { state.hide = true },
     showLoading: state => { state.hide = false },
     onLogin: state => { state.isLogin = true },
+    onExit: state => { state.isLogin = false },
     setPhone: (state, phone) => { state.phone = phone }
   },
   actions: {
