@@ -9,6 +9,16 @@ export default {
       height: 0
     }
   },
+  computed: {
+    isLogin () {
+      return store.state.isLogin
+    },
+    phone () {
+      const tel = "" + store.state.phone;
+      const reg=/(\d{3})\d{4}(\d{4})/;
+      return tel.replace(reg, "$1****$2")
+    }
+  },
   onShow () {
 
   },
@@ -23,6 +33,7 @@ export default {
   },
   onReady () {
     this.drawWave()
+    // store.state.isLogin && this.getUserInfo()
   },
   components: {
     CommonDivision,
@@ -43,6 +54,19 @@ export default {
       ctx.closePath()
       ctx.fill()
       ctx.draw()
-    }
+    },
+    // getUserInfo () {
+    //   wx.getUserInfo({
+    //     success: res => {
+    //       console.log(res);
+    //       // var avatarUrl = 'userInfo.avatarUrl';
+    //       // var nickName = 'userInfo.nickName';
+    //       // that.setData({
+    //       //   [avatarUrl]: res.userInfo.avatarUrl,
+    //       //   [nickName]:res.userInfo.nickName,
+    //       // })
+    //     }
+    //   })
+    // }
   }
 }

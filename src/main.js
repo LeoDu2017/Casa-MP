@@ -19,7 +19,8 @@ export default {
       'pages/ucenter/login/main',
       'pages/ucenter/forget/main',
       'pages/product/detail/main',
-      '^pages/ucenter/account/main'],
+      '^pages/ucenter/account/main',
+      'pages/ucenter/information/main'],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',

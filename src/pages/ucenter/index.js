@@ -2,6 +2,8 @@ import { isPhoneNo, isEmail, formatNumber } from '@/utils/index'
 import store from '@/status/store'
 import UTitle from '@/components/units/u-title'
 import UInput from '@/components/units/u-input'
+// import { mapActions } from 'vuex'
+
 export default {
   data () {
     return {
@@ -26,6 +28,9 @@ export default {
     UInput
   },
   methods: {
+    // ...mapActions({
+    //   saveName: 'saveName'
+    // }),
     setPhone (val) {
       this.phone = val
     },
@@ -103,7 +108,7 @@ export default {
         header: {
           'Accept': 'application/json'
         },
-        success: (res) => {
+        success: res => {
           const { status,msg,data } = res.data
           if(status === 1){
             wx.showToast({
@@ -119,6 +124,9 @@ export default {
                 key: 'token',
                 data: data
               })
+              console.log(this.$store)
+              store.commit('onLogin')
+              store.commit('setPhone', this.phone);
               this.productId ? wx.redirectTo({
                 url: `/pages/product/detail/main?id=${this.productId}`
               }) : wx.reLaunch({
