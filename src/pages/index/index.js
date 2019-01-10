@@ -17,12 +17,6 @@ export default {
     return {
       show: true,
       banner: [],
-      spaces: [],
-      recommend: [],
-      prodlist: [],
-      brands: [],
-      like: [],
-      dash: [],
       promotion: {
         title: '双十一活动精选',
         goods: []
@@ -48,20 +42,22 @@ export default {
       this.on = toggle
     }
   },
-  created () {
-    // 调用应用实例的方法获取全局数据
-    // this.getUserInfo()
+  computed:{
+    serverSide () {
+      return store.state.serverSide
+    }
   },
   onLoad () {
     store.commit('showLoading')
+    const {serverSide} = this
     wx.request({
-      url: `${store.state.url}/wxapi/index/index`,
+      url: `${serverSide}/wxapi/index/index`,
       method: 'GET',
       data: {},
       header: {
         'Accept': 'application/json'
       },
-      success: (res) => {
+      success: ({data: {data: {spaces, banner, purchase, recommend, like, prodlist, brand, resource: {a, b, c, d}}}}) => {
         setTimeout(() => {
           store.commit('hideLoading')
           wx.setNavigationBarColor({
@@ -73,36 +69,26 @@ export default {
             }
           })
         }, 4500)
-        const {spaces, banner, purchase, recommend, like, prodlist, brand, resource: {a, b, c, d}} = res.data.data
-        this.banner = banner
-        this.spaces = spaces
-        this.recommend = recommend
-        this.prodlist = prodlist
-        this.brands = brand
-        this.like = like
-        this.promotion.goods = purchase
-        this.dash = [
-          {
-            title: '合作厂商',
-            data: a.about_company
-          },
-          {
-            title: '在售产品',
-            data: b.about_company
-          },
-          {
-            title: '全国案例',
-            data: c.about_company
-          },
-          {
-            title: '全球员工',
-            data: d.about_company
-          }
-        ]
-
-
+        Object.assign(this, {spaces}, {banner}, {purchase}, {recommend}, {like}, {prodlist}, {brand}, {dash:[
+            {
+              title: '合作厂商',
+              data: a.about_company
+            },
+            {
+              title: '在售产品',
+              data: b.about_company
+            },
+            {
+              title: '全国案例',
+              data: c.about_company
+            },
+            {
+              title: '全球员工',
+              data: d.about_company
+            }
+          ]})
       },
-      fail: function () {
+      fail () {
 
       }
     })
