@@ -53,7 +53,6 @@ export default {
     wx.request({
       url: `${serverSide}/wxapi/index/index`,
       method: 'GET',
-      data: {},
       header: {
         'Accept': 'application/json'
       },
@@ -89,7 +88,10 @@ export default {
           ]})
       },
       fail () {
-
+        wx.showToast({
+          title: '网络链接失败，请检查网络链接',
+          icon: 'none'
+        })
       }
     })
   }
