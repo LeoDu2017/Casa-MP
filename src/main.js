@@ -14,11 +14,11 @@ export default {
       'pages/logs/main',
       'pages/index/main',
       'pages/search/main',
-      '^pages/counter/main',
+      'pages/counter/main',
       'pages/ucenter/sign/main',
       'pages/ucenter/login/main',
       'pages/ucenter/forget/main',
-      'pages/product/detail/main',
+      '^pages/product/detail/main',
       'pages/ucenter/account/main',
       'pages/ucenter/information/main'],
     window: {

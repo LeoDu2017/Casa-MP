@@ -17,11 +17,11 @@
     <common-division height="15"></common-division>
     <product-recommend
       title="设计师推荐组合，搭配首选"
-      v-if="comProd"
-      :more="comProd"
-      :products="comProd">
+      v-if="com_prod"
+      :more="com_prod"
+      :products="com_prod">
     </product-recommend>
-    <common-division v-if="comProd" height="15"></common-division>
+    <common-division v-if="com_prod" height="15"></common-division>
     <product-details :modular="modular" :article="article"></product-details>
     <!--<common-division height="15"></common-division>-->
   </div>
