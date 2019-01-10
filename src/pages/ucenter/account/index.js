@@ -19,9 +19,7 @@ export default {
       return tel.replace(reg, "$1****$2")
     }
   },
-  onShow () {
 
-  },
   onLoad () {
     store.commit('showLoading')
     wx.setNavigationBarTitle({

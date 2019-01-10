@@ -1,8 +1,11 @@
+// import { mapActions } from 'vuex'
 import { isPhoneNo, isEmail, formatNumber } from '@/utils/index'
 import store from '@/status/store'
 import UTitle from '@/components/units/u-title'
 import UInput from '@/components/units/u-input'
-// import { mapActions } from 'vuex'
+import CommonLoading from '@/components/common-loading'
+import CommonDivision from '@/components/common-division'
+import TabBar from '@/components/common-tabBar.vue'
 
 export default {
   data () {
@@ -23,9 +26,22 @@ export default {
       productId: null
     }
   },
+  computed: {
+    isLogin () {
+      return store.state.isLogin
+    },
+    phone () {
+      const tel = "" + store.state.phone;
+      const reg=/(\d{3})\d{4}(\d{4})/;
+      return tel.replace(reg, "$1****$2")
+    }
+  },
   components: {
     UTitle,
-    UInput
+    UInput,
+    CommonLoading,
+    CommonDivision,
+    TabBar
   },
   onLoad (option) {
     const {page} = option
@@ -281,6 +297,7 @@ export default {
         sign: '注册',
         forget: '找回密码',
         information: '个人信息',
+        account: '个人中心'
       }[page]
     }
   }
