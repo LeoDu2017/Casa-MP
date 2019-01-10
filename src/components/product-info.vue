@@ -53,11 +53,11 @@
       </p>
       <div class="more-detail" :class="on ? 'on' : ''">
         <ul class="_list">
-          <li class="_item" @click="is_wish ? deleteWish() :addWishList()">
+          <li class="_item" @click="onToggle(0,is_wish)">
             <i class="iconfont" :class="is_wish?'icon-xin_02':'icon-love'"></i>
             <span class="_title">加入心愿单</span>
           </li>
-          <li class="_item" @click="is_collect ? deleteCollect() : addToCollection()">
+          <li class="_item" @click="onToggle(1,is_collect)">
             <i class="iconfont" :class="is_collect ? 'icon-shoucang0' :'icon-shoucang'"></i>
             <span class="_title">添加收藏</span>
           </li>
@@ -114,96 +114,21 @@
       }
     },
     methods: {
-      addWishList () {
-        const {id, token, serverSide, toggleStatus} = this
-        this.checkLogin()
+      onToggle (type, status) {
+        const {id, token, toggleStatus, getUrl, checkLogin} = this
+        const s = type ? 'on' : 'off'
+        const state = status ? 'is_collect' : 'is_wish'
+        const url = getUrl(s).status
+        checkLogin()
         wx.request({
-          url: `${serverSide}/wxapi/product/addProdToWish`,
+          url,
           method: 'GET',
           data: {id, token},
           header: {'Accept': 'application/json'},
-          success ({data: {status, info}}) {
-            status === 1 && toggleStatus('is_wish')
+          success ({data: {status, info, msg}}) {
+            status === 1 && toggleStatus(state)
             info && wx.showToast({
-              title: info,
-              icon: 'none',
-              duration: 2000
-            })
-          },
-          fail () {
-            wx.showToast({
-              title: '数据请求失败，请检查网络链接',
-              icon: 'none'
-            })
-          }
-        })
-      },
-      deleteWish () {
-        const {id, token, serverSide, toggleStatus} = this
-        this.checkLogin()
-        wx.request({
-          url: `${serverSide}/wxapi/user/delWith`,
-          method: 'GET',
-          data: {id, token},
-          header: {
-            'Accept': 'application/json'
-          },
-          success ({data: {status, msg}}) {
-            status === 1 && toggleStatus('is_wish')
-            msg && wx.showToast({
-              title: msg,
-              icon: 'none',
-              duration: 2000
-            })
-          },
-          fail () {
-            wx.showToast({
-              title: '数据请求失败，请检查网络链接',
-              icon: 'none'
-            })
-          }
-        })
-      },
-      addToCollection () {
-        const {id, token, serverSide, toggleStatus} = this
-        this.checkLogin()
-        wx.request({
-          url: `${serverSide}/wxapi/product/collectProdById`,
-          method: 'GET',
-          data: {id, token},
-          header: {
-            'Accept': 'application/json'
-          },
-          success ({data: {status, msg}}) {
-            status === 1 && toggleStatus('is_collect')
-            msg && wx.showToast({
-              title: msg,
-              icon: 'none',
-              duration: 2000
-            })
-          },
-          fail () {
-            wx.showToast({
-              title: '数据请求失败，请检查网络链接',
-              icon: 'none'
-            })
-          }
-        })
-      },
-      deleteCollect () {
-        const {id, token, serverSide, toggleStatus} = this
-        this.checkLogin()
-        wx.request({
-          url: `${serverSide}/wxapi/user/delProdCollect`,
-          method: 'GET',
-          data: {id, token},
-          header: {
-            'Accept': 'application/json'
-          },
-          success ({data: {status, msg}}) {
-            status === 1 && toggleStatus('is_collect')
-            msg && wx.showToast({
-              title: msg,
+              title: info || msg,
               icon: 'none',
               duration: 2000
             })
@@ -258,6 +183,12 @@
         !this.isLogin && wx.navigateTo({
           url: `/pages/ucenter/login/main?productId=${this.id}`
         })
+      },
+      getUrl (status) {
+        return {
+          on: [`${this.serverSide}/wxapi/user/delWith`, `${this.serverSide}/wxapi/user/delProdCollect`],
+          off: [`${this.serverSide}/wxapi/product/addProdToWish`, `${this.serverSide}/wxapi/product/collectProdById`]
+        }[status]
       }
     },
     components: {
