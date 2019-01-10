@@ -181,7 +181,7 @@
       },
       checkLogin () {
         !this.isLogin && wx.navigateTo({
-          url: `/pages/ucenter/login/main?productId=${this.id}`
+          url: `/pages/ucenter/login/main?page=login&id=${this.id}`
         })
       },
       getUrl (status) {

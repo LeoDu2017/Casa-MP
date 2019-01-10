@@ -35,6 +35,9 @@ export default {
       const tel = "" + store.state.phone;
       const reg=/(\d{3})\d{4}(\d{4})/;
       return tel.replace(reg, "$1****$2")
+    },
+    serverSide () {
+      return store.state.serverSide
     }
   },
   components: {
@@ -47,8 +50,8 @@ export default {
   onLoad (option) {
     console.log(option)
     store.commit('showLoading')
-    const {page,productId} = option
-    this.productId = productId
+    const {page, id} = option
+    this.productId = id
     const title = this.getPageTitle(page)
     wx.setNavigationBarTitle({
       title: title
@@ -202,36 +205,37 @@ export default {
     },
     submit_parameters (type) {
       this.page = type
+      const {phone, code, password, email, sex} = this
       return {
         sign: {
-          url: `${store.state.url}/wxapi/login/ajaxEnroll`,
+          url: `${this.serverSide}/wxapi/login/ajaxEnroll`,
           data: {
-            'csr_mobile': this.phone,
-            'code': this.code,
-            'csr_password': this.password,
-            'csr_email': this.email,
-            'csr_sex': this.sex
+            'csr_mobile': phone,
+            'code': code,
+            'csr_password': password,
+            'csr_email': email,
+            'csr_sex': sex
           },
           success_hint: '注册成功',
           fail_hint: '注册失败，请联系客服解决',
           reLaunch: '/pages/ucenter/login/main'
         },
         login: {
-          url: `${store.state.url}/wxapi/login/ajaxLogin`,
+          url: `${this.serverSide}/wxapi/login/ajaxLogin`,
           data: {
-            csr_account: this.phoneNumber,
-            csr_password: this.password
+            csr_account: phone,
+            csr_password: password
           },
           success_hint: '登录成功',
           fail_hint: '账号或密码错误',
           reLaunch: '/pages/ucenter/account/main'
         },
         forget: {
-          url: `${store.state.url}/wxapi/login/ajaxRetrievePassword`,
+          url: `${this.serverSide}/wxapi/login/ajaxRetrievePassword`,
           data: {
-            csr_mobile: this.phone,
-            code: this.code,
-            csr_password: this.password
+            csr_mobile: phone,
+            code: code,
+            csr_password: password
           },
           success_hint: '密码修改成功',
           fail_hint: null
