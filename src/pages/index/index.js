@@ -49,14 +49,13 @@ export default {
   },
   onLoad () {
     store.commit('showLoading')
-    const {serverSide} = this
     wx.request({
-      url: `${serverSide}/wxapi/index/index`,
+      url: `${this.serverSide}/wxapi/index/index`,
       method: 'GET',
       header: {
         'Accept': 'application/json'
       },
-      success: ({data: {data: {spaces, banner, purchase, recommend, like, prodlist, brand, resource: {a, b, c, d}}}}) => {
+      success: ({data: {data, data:{resource: {a, b, c, d}}}}) => {
         setTimeout(() => {
           store.commit('hideLoading')
           wx.setNavigationBarColor({
@@ -68,7 +67,7 @@ export default {
             }
           })
         }, 4500)
-        Object.assign(this, {spaces}, {banner}, {purchase}, {recommend}, {like}, {prodlist}, {brand}, {dash:[
+        Object.assign(this, data, {dash:[
             {
               title: '合作厂商',
               data: a.about_company

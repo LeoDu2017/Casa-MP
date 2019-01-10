@@ -5,8 +5,8 @@
     <home-spaces :spaces="spaces"></home-spaces>
     <common-banner :banner="banner" form="pointer"></common-banner>
     <home-slogan title="买进口家具 找有荣-意大利之家"></home-slogan>
-    <home-promotion :promotion="promotion"></home-promotion>
-    <common-division height="15"></common-division>
+    <home-promotion :promotion="promotion" v-if="promotion.goods.length"></home-promotion>
+    <common-division height="15" v-if="promotion.goods.length"></common-division>
     <home-showcase title="精品推荐" :products="recommend"></home-showcase>
     <common-division height="15"></common-division>
     <home-category title="精选分类" :categories="prodlist" :more="prodlist"></home-category>
