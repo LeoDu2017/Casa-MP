@@ -28,7 +28,11 @@ export default {
     UInput
   },
   onLoad (option) {
-    console.log(option)
+    const {page} = option
+    const title = this.getPageTitle(page)
+    wx.setNavigationBarTitle({
+      title: title
+    })
   },
   methods: {
     // ...mapActions({
@@ -270,6 +274,14 @@ export default {
         return false
       }
       return true
+    },
+    getPageTitle (page) {
+      return {
+        login: '登录',
+        sign: '注册',
+        forget: '找回密码',
+        information: '个人信息',
+      }[page]
     }
   }
 }
