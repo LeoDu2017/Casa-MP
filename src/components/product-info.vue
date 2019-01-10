@@ -78,6 +78,7 @@
   import store from '@/status/store'
   import Division from './common-division.vue'
   import CounterDown from './units/count-down.vue'
+
   export default {
     data () {
       return {
@@ -101,6 +102,9 @@
     computed: {
       now () {
         return Date.parse(new Date()) / 1000
+      },
+      isLogin () {
+        return store.state.isLogin
       }
     },
     methods: {
@@ -111,59 +115,105 @@
         this.folder = !this.folder
       },
       addWishList () {
-        wx.getStorage({
-          key: 'token',
-          success: (_res) => {
-            wx.request({
-              url: `${store.state.url}/wxapi/product/addProdToWish`,
-              method: 'GET',
-              data: {
-                prod_id: this.id,
-                'token': _res.data
-              },
-              header: {
-                'Accept': 'application/json'
-              },
-              success: (res) => {
-                // 提示登录
-                if (res.data.status === -14) {
-                  wx.navigateTo({
-                    url: `/pages/login/in/in?productId=${this.id}`
-                  })
-                } else if (res.data.status === 1) {
-                  wx.showToast({
-                    title: res.data.info,
-                    icon: 'none',
-                    duration: 2000
-                  })
-                  this.is_wish = true
-                } else {
-                  wx.showToast({
-                    title: res.data.info,
-                    icon: 'none',
-                    duration: 2000
-                  })
-                }
-              },
-              fail: () => {
-                wx.showToast({
-                  title: '数据请求失败，请检查网络链接',
-                  icon: 'none'
-                })
-              }
-            })
-          },
-          fail: () => {
-            wx.navigateTo({
-              url: `/pages/login/in/in?productId=${this.id}`
-            })
-          }
-        })
+        const {id, isLogin} = this
+        console.log(this, id, isLogin)
+        // if(isLogin){
+        //   wx.request({
+        //     url: `${store.state.url}/wxapi/product/addProdToWish`,
+        //     method: 'GET',
+        //     data: {
+        //       prod_id: this.id,
+        //       'token': _res.data
+        //     },
+        //     header: {
+        //       'Accept': 'application/json'
+        //     },
+        //     success: (res) => {
+        //       // 提示登录
+        //       if (res.data.status === -14) {
+        //         wx.navigateTo({
+        //           url: `/pages/login/in/in?productId=${this.id}`
+        //         })
+        //       } else if (res.data.status === 1) {
+        //         wx.showToast({
+        //           title: res.data.info,
+        //           icon: 'none',
+        //           duration: 2000
+        //         })
+        //         this.is_wish = true
+        //       } else {
+        //         wx.showToast({
+        //           title: res.data.info,
+        //           icon: 'none',
+        //           duration: 2000
+        //         })
+        //       }
+        //     },
+        //     fail: () => {
+        //       wx.showToast({
+        //         title: '数据请求失败，请检查网络链接',
+        //         icon: 'none'
+        //       })
+        //     }
+        //   })
+        // }else{
+        //   wx.navigateTo({
+        //     url: `/pages/ucenter/login/main?page=login&productId=${id}`
+        //   })
+        // }
+        // wx.getStorage({
+        //   key: 'token',
+        //   success (_res) {
+        //     wx.request({
+        //       url: `${store.state.url}/wxapi/product/addProdToWish`,
+        //       method: 'GET',
+        //       data: {
+        //         prod_id: this.id,
+        //         'token': _res.data
+        //       },
+        //       header: {
+        //         'Accept': 'application/json'
+        //       },
+        //       success: (res) => {
+        //         // 提示登录
+        //         if (res.data.status === -14) {
+        //           wx.navigateTo({
+        //             url: `/pages/login/in/in?productId=${this.id}`
+        //           })
+        //         } else if (res.data.status === 1) {
+        //           wx.showToast({
+        //             title: res.data.info,
+        //             icon: 'none',
+        //             duration: 2000
+        //           })
+        //           this.is_wish = true
+        //         } else {
+        //           wx.showToast({
+        //             title: res.data.info,
+        //             icon: 'none',
+        //             duration: 2000
+        //           })
+        //         }
+        //       },
+        //       fail: () => {
+        //         wx.showToast({
+        //           title: '数据请求失败，请检查网络链接',
+        //           icon: 'none'
+        //         })
+        //       }
+        //     })
+        //   },
+        //   fail () {
+        //     wx.navigateTo({
+        //       url: `/pages/ucenter/login/main?page=login&productId=${id}`
+        //     })
+        //   }
+        // })
       },
       deleteWish () {
         wx.getStorage({
           key: 'token',
-          success: (_res) => {
+          success: _res => {
             wx.request({
               url: `${store.state.url}/wxapi/user/delWith`,
               method: 'GET',

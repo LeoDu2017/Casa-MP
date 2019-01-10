@@ -45,6 +45,7 @@ export default {
     TabBar
   },
   onLoad (option) {
+    console.log(option)
     store.commit('showLoading')
     const {page} = option
     const title = this.getPageTitle(page)
@@ -129,6 +130,7 @@ export default {
     },
     onSubmit (type) {
       const {url,data,success_hint,reLaunch,fail_hint} = this.submit_parameters(type)
+      const {page} = this
       if (!this.verification()) {
         return
       }
@@ -139,23 +141,25 @@ export default {
         header: {
           'Accept': 'application/json'
         },
-        success: res => {
+        success (res) {
           const { status,msg,data } = res.data
           if(status === 1){
             wx.showToast({
               title: success_hint,
               icon: 'none'
             })
-            this.page === 'sign' && wx.reLaunch({
+
+            page === 'sign' && wx.reLaunch({
               url: reLaunch,
             })
-            if (this.page === 'login') {
+
+            if (page === 'login') {
               wx.removeStorage({ key: 'token'})
               wx.setStorage({
                 key: 'token',
                 data: data
               })
-              console.log(this.$store)
+
               store.commit('onLogin')
               store.commit('setPhone', this.phone);
               this.productId ? wx.redirectTo({
