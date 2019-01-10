@@ -63,7 +63,6 @@ export default {
   methods: {
     setData (res) {
       const {gallery, subtitle, origin, style, article, activity, attr, modular} = res
-
       this.prod_name = res.prod_name
       this.product_tag = res.article_option_name
       this.is_activity = res.is_activity

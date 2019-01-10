@@ -23,7 +23,8 @@ export default {
       hide01: true,
       hide02: true,
       email: null,
-      productId: null
+      productId: null,
+      height: 0
     }
   },
   computed: {
@@ -44,11 +45,18 @@ export default {
     TabBar
   },
   onLoad (option) {
+    store.commit('showLoading')
     const {page} = option
     const title = this.getPageTitle(page)
     wx.setNavigationBarTitle({
       title: title
     })
+    setTimeout(() => {
+      store.commit('hideLoading')
+    }, 4500)
+  },
+  onReady () {
+    this.drawWave()
   },
   methods: {
     // ...mapActions({
@@ -290,6 +298,32 @@ export default {
         return false
       }
       return true
+    },
+    drawWave () {
+      const ctx = wx.createCanvasContext('wave')
+      const width = wx.getSystemInfoSync().windowWidth
+      this.height = width / 2
+      ctx.beginPath()
+      ctx.moveTo(0, 0)
+      ctx.lineTo(0, this.height - 30)
+      ctx.bezierCurveTo(width / 4, this.height + 20, width * 3 / 4, this.height - 70, width, this.height - 30)
+      ctx.lineTo(width, 0)
+      ctx.fillStyle = '#212224'
+      ctx.closePath()
+      ctx.fill()
+      ctx.draw()
+    },
+    exit () {
+      wx.showModal({
+        title: '提示',
+        content: '确认退出登陆?',
+        success: res => {
+          if (res.confirm) {
+            wx.removeStorage({key: 'token'})
+            store.commit('onExit')
+          }
+        }
+      })
     },
     getPageTitle (page) {
       return {
