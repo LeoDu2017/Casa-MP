@@ -19,13 +19,12 @@ export default {
       origin: '',
       style: '',
       is_wish: false,
-      is_collect: false,
-      comProd: null,
-      product_tag: null,
-      is_activity: null,
-      activity: null,
-      start: null,
-      end: null
+      is_collect: false
+    }
+  },
+  computed:{
+    serverSide () {
+      return store.state.serverSide
     }
   },
   components: {
@@ -42,43 +41,28 @@ export default {
     this.id = id ? id : 25758
 
     wx.request({
-      url: `${store.state.url}/wxapi/product/prod_detail`,
+      url: `${this.serverSide}/wxapi/product/prod_detail`,
       method: 'GET',
       data: {id: this.id},
       header: {
         'Accept': 'application/json'
       },
-      success: (res) => {
+      success: ({data: {data}}) => {
         setTimeout(() => { store.commit('hideLoading') }, 4500)
-        this.setData(res.data.data)
+        Object.assign(this, data)
       },
-      fail: () => { }
+      fail () {
+        wx.showToast({
+          title: '网络链接失败，请检查网络链接',
+          icon: 'none'
+        })
+      }
     })
   },
   onShow () {
     wx.setNavigationBarTitle({
       title: '商品详情'
     })
-  },
-  methods: {
-    setData (res) {
-      const {gallery, subtitle, origin, style, article, activity, attr, modular} = res
-      this.prod_name = res.prod_name
-      this.product_tag = res.article_option_name
-      this.is_activity = res.is_activity
-      this.comProd = res.com_prod
-      this.act_attr = res.act_attr
-      this.is_wish = res.is_wish
-      this.is_collect = res.is_collect
-      this.gallery = gallery
-      this.subtitle = subtitle
-      this.origin = origin
-      this.style = style
-      this.article = article
-      this.activity = activity
-      this.attr = attr
-      this.modular = modular
-    }
   },
   onShareAppMessage () {
     return {
