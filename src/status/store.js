@@ -1,4 +1,3 @@
-
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -7,10 +6,11 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     on: false,
-    url: 'https://www.italyclassico.com',
+    serverSide: 'https://www.italyclassico.com',
     hide: false,
     isLogin: false,
-    phone: null
+    phone: null,
+    token: null
   },
   mutations: {
     unfold: state => { state.on = true },
@@ -19,7 +19,9 @@ const store = new Vuex.Store({
     showLoading: state => { state.hide = false },
     onLogin: state => { state.isLogin = true },
     onExit: state => { state.isLogin = false },
-    setPhone: (state, phone) => { state.phone = phone }
+    setPhone: (state, phone) => { state.phone = phone },
+    setToken: (state, token) => { state.token = token },
+    removeToken: (state) => { state.token = null }
   },
   actions: {
     savePhone ({commit}, phone) {

@@ -47,7 +47,8 @@ export default {
   onLoad (option) {
     console.log(option)
     store.commit('showLoading')
-    const {page} = option
+    const {page,productId} = option
+    this.productId = productId
     const title = this.getPageTitle(page)
     wx.setNavigationBarTitle({
       title: title
@@ -130,7 +131,8 @@ export default {
     },
     onSubmit (type) {
       const {url,data,success_hint,reLaunch,fail_hint} = this.submit_parameters(type)
-      const {page} = this
+      const {page,productId,phone,getModalInfo} = this
+
       if (!this.verification()) {
         return
       }
@@ -154,58 +156,43 @@ export default {
             })
 
             if (page === 'login') {
-              wx.removeStorage({ key: 'token'})
-              wx.setStorage({
-                key: 'token',
-                data: data
-              })
+              // wx.removeStorage({ key: 'token'})
+              // wx.setStorage({
+              //   key: 'token',
+              //   data: data
+              // })
 
               store.commit('onLogin')
-              store.commit('setPhone', this.phone);
-              this.productId ? wx.redirectTo({
-                url: `/pages/product/detail/main?id=${this.productId}`
+              store.commit('setPhone', phone)
+              store.commit('setToken', data)
+              productId ? wx.redirectTo({
+                url: `/pages/product/detail/main?id=${productId}`
               }) : wx.reLaunch({
                 url: reLaunch
               })
 
             }
 
-            this.page === 'forget' && wx.navigateBack({
+            page === 'forget' && wx.navigateBack({
               delta: 1
             })
-          } else if (status === -3) {
+          } else {
+            const info = getModalInfo(status)
             wx.showModal({
               title: '提示',
-              content: '验证码错误',
-              showCancel: false,
-            })
-          }else if (status === -4) {
-            wx.showModal({
-              title: '提示',
-              content: '手机号已存在',
-              showCancel: false,
-            })
-          }else if (status === -7) {
-            wx.showModal({
-              title: '提示',
-              content: '手机号错误',
-              showCancel: false,
-            })
-          } else if (status === 0) {
-            wx.showModal({
-              title: '提示',
-              content: fail_hint ? fail_hint : msg,
-              showCancel: false
-            })
-          } else if (res.data.status === -13) {
-            wx.showModal({
-              title: '提示',
-              content: '该账户不存在',
+              content: info,
               showCancel: false,
             })
           }
+          // else if (status === 0) {
+          //   wx.showModal({
+          //     title: '提示',
+          //     content: fail_hint ? fail_hint : msg,
+          //     showCancel: false
+          //   })
+          // }
         },
-        fail: () => {
+        fail () {
           wx.showToast({
             title: '网络链接失败，请检查网络链接',
             icon: 'none'
@@ -321,11 +308,9 @@ export default {
       wx.showModal({
         title: '提示',
         content: '确认退出登陆?',
-        success: res => {
-          if (res.confirm) {
-            wx.removeStorage({key: 'token'})
-            store.commit('onExit')
-          }
+        success ({confirm}) {
+          // wx.removeStorage({key: 'token'})
+          confirm && store.commit('removeToken'), store.commit('onExit')
         }
       })
     },
@@ -337,6 +322,14 @@ export default {
         information: '个人信息',
         account: '个人中心'
       }[page]
+    },
+    getModalInfo (status) {
+      return {
+        '-3': '验证码错误',
+        '-4': '手机号已存在',
+        '-7': '手机号错误',
+        '-13': '该账户不存在',
+      }[status + '']
     }
   }
 }

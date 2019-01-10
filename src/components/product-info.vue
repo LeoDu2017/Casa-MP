@@ -30,7 +30,7 @@
       <dl class="parameter" :class="folder ? 'folder' : ''">
         <dt>
           <span class="title">参数</span>
-          <i @click="toggleFolder" class="iconfont" :class="folder ? 'icon-up' : 'icon-down'"></i>
+          <i @click="toggleStatus('folder')" class="iconfont" :class="folder ? 'icon-up' : 'icon-down'"></i>
         </dt>
         <dd class="item" v-for="(item,index) in act_attr" :key="index"  v-if="item.attr_name && item.option_name">
           <label class="label">{{item.attr_name}}：</label>
@@ -47,7 +47,7 @@
       <p class="dot-line" v-if="!is_activity"></p>
       <span class="apply-btn" :class="{'disabled': now < activity.start_time || now > activity.end_time}" v-if="is_activity" @click="onPay">支付预定金</span>
       <span class="apply-btn" v-else @click="offerOrder">申请报价</span>
-      <p class="view-more" @click="setMore">
+      <p class="view-more" @click="toggleStatus('on')">
         <span class="text">更多</span>
         <i class="iconfont" :class="on ? 'icon-up' : 'icon-down'"></i>
       </p>
@@ -105,336 +105,158 @@
       },
       isLogin () {
         return store.state.isLogin
+      },
+      token () {
+        return store.state.token
+      },
+      serverSide () {
+        return store.state.serverSide
       }
     },
     methods: {
-      setMore () {
-        this.on = !this.on
-      },
-      toggleFolder () {
-        this.folder = !this.folder
-      },
       addWishList () {
-        const {id, isLogin} = this
-        console.log(this, id, isLogin)
-        // if(isLogin){
-        //   wx.request({
-        //     url: `${store.state.url}/wxapi/product/addProdToWish`,
-        //     method: 'GET',
-        //     data: {
-        //       prod_id: this.id,
-        //       'token': _res.data
-        //     },
-        //     header: {
-        //       'Accept': 'application/json'
-        //     },
-        //     success: (res) => {
-        //       // 提示登录
-        //       if (res.data.status === -14) {
-        //         wx.navigateTo({
-        //           url: `/pages/login/in/in?productId=${this.id}`
-        //         })
-        //       } else if (res.data.status === 1) {
-        //         wx.showToast({
-        //           title: res.data.info,
-        //           icon: 'none',
-        //           duration: 2000
-        //         })
-        //         this.is_wish = true
-        //       } else {
-        //         wx.showToast({
-        //           title: res.data.info,
-        //           icon: 'none',
-        //           duration: 2000
-        //         })
-        //       }
-        //     },
-        //     fail: () => {
-        //       wx.showToast({
-        //         title: '数据请求失败，请检查网络链接',
-        //         icon: 'none'
-        //       })
-        //     }
-        //   })
-        // }else{
-        //   wx.navigateTo({
-        //     url: `/pages/ucenter/login/main?page=login&productId=${id}`
-        //   })
-        // }
-        // wx.getStorage({
-        //   key: 'token',
-        //   success (_res) {
-        //     wx.request({
-        //       url: `${store.state.url}/wxapi/product/addProdToWish`,
-        //       method: 'GET',
-        //       data: {
-        //         prod_id: this.id,
-        //         'token': _res.data
-        //       },
-        //       header: {
-        //         'Accept': 'application/json'
-        //       },
-        //       success: (res) => {
-        //         // 提示登录
-        //         if (res.data.status === -14) {
-        //           wx.navigateTo({
-        //             url: `/pages/login/in/in?productId=${this.id}`
-        //           })
-        //         } else if (res.data.status === 1) {
-        //           wx.showToast({
-        //             title: res.data.info,
-        //             icon: 'none',
-        //             duration: 2000
-        //           })
-        //           this.is_wish = true
-        //         } else {
-        //           wx.showToast({
-        //             title: res.data.info,
-        //             icon: 'none',
-        //             duration: 2000
-        //           })
-        //         }
-        //       },
-        //       fail: () => {
-        //         wx.showToast({
-        //           title: '数据请求失败，请检查网络链接',
-        //           icon: 'none'
-        //         })
-        //       }
-        //     })
-        //   },
-        //   fail () {
-        //     wx.navigateTo({
-        //       url: `/pages/ucenter/login/main?page=login&productId=${id}`
-        //     })
-        //   }
-        // })
-      },
-      deleteWish () {
-        wx.getStorage({
-          key: 'token',
-          success: _res => {
-            wx.request({
-              url: `${store.state.url}/wxapi/user/delWith`,
-              method: 'GET',
-              data: {
-                prod_id: this.id,
-                'token': _res.data
-              },
-              header: {
-                'Accept': 'application/json'
-              },
-              success: (res) => {
-                if (res.data.status === 1) {
-                  wx.showToast({
-                    title: res.data.msg,
-                    icon: 'none',
-                    duration: 2000
-                  })
-                  this.is_wish = false
-                } else {
-                  wx.showToast({
-                    title: res.data.msg,
-                    icon: 'none',
-                    duration: 2000
-                  })
-                }
-              },
-              fail: () => {
-                wx.showToast({
-                  title: '数据请求失败，请检查网络链接',
-                  icon: 'none'
-                })
-              }
+        const {id, token, serverSide, toggleStatus} = this
+        this.checkLogin()
+        wx.request({
+          url: `${serverSide}/wxapi/product/addProdToWish`,
+          method: 'GET',
+          data: {id, token},
+          header: {'Accept': 'application/json'},
+          success ({data: {status, info}}) {
+            status === 1 && toggleStatus('is_wish')
+            info && wx.showToast({
+              title: info,
+              icon: 'none',
+              duration: 2000
             })
           },
-          fail: () => {
-            wx.navigateTo({
-              url: `/pages/login/in/in?productId=${this.id}`
+          fail () {
+            wx.showToast({
+              title: '数据请求失败，请检查网络链接',
+              icon: 'none'
+            })
+          }
+        })
+      },
+      deleteWish () {
+        const {id, token, serverSide, toggleStatus} = this
+        this.checkLogin()
+        wx.request({
+          url: `${serverSide}/wxapi/user/delWith`,
+          method: 'GET',
+          data: {id, token},
+          header: {
+            'Accept': 'application/json'
+          },
+          success ({data: {status, msg}}) {
+            status === 1 && toggleStatus('is_wish')
+            msg && wx.showToast({
+              title: msg,
+              icon: 'none',
+              duration: 2000
+            })
+          },
+          fail () {
+            wx.showToast({
+              title: '数据请求失败，请检查网络链接',
+              icon: 'none'
             })
           }
         })
       },
       addToCollection () {
-        wx.getStorage({
-          key: 'token',
-          success: (_res) => {
-            wx.request({
-              url: `${store.state.url}/wxapi/product/collectProdById`,
-              method: 'GET',
-              data: {
-                prod_id: this.id,
-                'token': _res.data
-              },
-              header: {
-                'Accept': 'application/json'
-              },
-              success: (res) => {
-                // 提示登录
-                if (res.data.status === -14) {
-                  wx.navigateTo({
-                    url: `/pages/login/in/in?productId=${this.id}`
-                  })
-                } else if (res.data.status === 1) {
-                  wx.showToast({
-                    title: res.data.msg,
-                    icon: 'none',
-                    duration: 2000
-                  })
-                  this.is_collect = true
-                } else {
-                  wx.showToast({
-                    title: res.data.msg,
-                    icon: 'none',
-                    duration: 2000
-                  })
-                }
-              },
-              fail: () => {
-                wx.showToast({
-                  title: '数据请求失败，请检查网络链接',
-                  icon: 'none'
-                })
-              }
+        const {id, token, serverSide, toggleStatus} = this
+        this.checkLogin()
+        wx.request({
+          url: `${serverSide}/wxapi/product/collectProdById`,
+          method: 'GET',
+          data: {id, token},
+          header: {
+            'Accept': 'application/json'
+          },
+          success ({data: {status, msg}}) {
+            status === 1 && toggleStatus('is_collect')
+            msg && wx.showToast({
+              title: msg,
+              icon: 'none',
+              duration: 2000
             })
           },
-          fail: () => {
-            wx.navigateTo({
-              url: `/pages/login/in/in?productId=${this.id}`
+          fail () {
+            wx.showToast({
+              title: '数据请求失败，请检查网络链接',
+              icon: 'none'
             })
           }
         })
       },
       deleteCollect () {
-        wx.getStorage({
-          key: 'token',
-          success: (_res) => {
-            wx.request({
-              url: `${store.state.url}/wxapi/user/delProdCollect`,
-              method: 'GET',
-              data: {
-                prod_id: this.id,
-                'token': _res.data
-              },
-              header: {
-                'Accept': 'application/json'
-              },
-              success: (res) => {
-                // 提示登录
-                if (res.data.status === 1) {
-                  wx.showToast({
-                    title: res.data.msg,
-                    icon: 'none',
-                    duration: 2000
-                  })
-                  this.is_collect = false
-                } else {
-                  wx.showToast({
-                    title: res.data.msg,
-                    icon: 'none',
-                    duration: 2000
-                  })
-                }
-              },
-              fail: () => {
-                wx.showToast({
-                  title: '数据请求失败，请检查网络链接',
-                  icon: 'none'
-                })
-              }
+        const {id, token, serverSide, toggleStatus} = this
+        this.checkLogin()
+        wx.request({
+          url: `${serverSide}/wxapi/user/delProdCollect`,
+          method: 'GET',
+          data: {id, token},
+          header: {
+            'Accept': 'application/json'
+          },
+          success ({data: {status, msg}}) {
+            status === 1 && toggleStatus('is_collect')
+            msg && wx.showToast({
+              title: msg,
+              icon: 'none',
+              duration: 2000
             })
           },
-          fail: () => {
-            wx.navigateTo({
-              url: `/pages/login/in/in?productId=${this.id}`
+          fail () {
+            wx.showToast({
+              title: '数据请求失败，请检查网络链接',
+              icon: 'none'
             })
           }
         })
       },
       toSeeReal () {
-        wx.getStorage({
-          key: 'token',
-          success: (_res) => {
-            wx.request({
-              url: `${store.state.url}/wxapi/product/mSeeRealProd`,
-              method: 'GET',
-              data: {
-                prod_id: this.id,
-                'token': _res.data
-              },
-              header: {
-                'Accept': 'application/json'
-              },
-              success: (res) => {
-                // 提示登录
-                if (res.data.status === -14) {
-                  wx.navigateTo({
-                    url: `/pages/login/in/in?productId=${this.id}`
-                  })
-                } else if (res.data.status === 1) {
-                  wx.navigateTo({
-                    url: `seeTheReal/seeTheReal?id=${this.id}&mobile=${res.data.data.user.csr_mobile}`
-                  })
-                } else {
-                  wx.showToast({
-                    title: res.data.info,
-                    icon: 'fails',
-                    duration: 2000
-                  })
-                }
-              },
-              fail: () => {
-                wx.showToast({
-                  title: '数据请求失败，请检查网络链接',
-                  icon: 'none'
-                })
-              }
+        const {id, token, serverSide} = this
+        this.checkLogin()
+        wx.request({
+          url: `${serverSide}/wxapi/product/mSeeRealProd`,
+          method: 'GET',
+          data: {id, token},
+          header: {
+            'Accept': 'application/json'
+          },
+          success ({data: {status, info, data: {user}}}) {
+            status === 1 && wx.navigateTo({
+              url: `seeTheReal/seeTheReal?id=${id}&mobile=${user.csr_mobile}`
+            })
+            info && wx.showToast({
+              title: info,
+              icon: 'fails',
+              duration: 2000
             })
           },
-          fail: () => {
-            wx.navigateTo({
-              url: `/pages/login/in/in?productId=${this.id}`
+          fail () {
+            wx.showToast({
+              title: '数据请求失败，请检查网络链接',
+              icon: 'none'
             })
           }
         })
       },
       onPay () {
-        wx.getStorage({
-          key: 'token',
-          success: (_res) => {
-            wx.request({
-              url: `${store.state.url}/wxapi/login/is_login`,
-              method: 'GET',
-              data: {
-                'token': _res.data
-              },
-              header: {
-                'Accept': 'application/json'
-              },
-              success: (res) => {
-                if (res.data.status === 1) {
-                  wx.navigateTo({
-                    url: `quotation/quotation?id=${this.id}`
-                  })
-                } else {
-                  wx.navigateTo({
-                    url: `/pages/login/in/in?productId=${this.id}`
-                  })
-                }
-              },
-              fail: () => {
-                wx.showToast({
-                  title: '数据请求失败，请检查网络链接',
-                  icon: 'none'
-                })
-              }
-            })
-          },
-          fail: () => {
-            wx.navigateTo({
-              url: `/pages/login/in/in?productId=${this.id}`
-            })
-          }
+        const {id} = this
+        this.checkLogin()
+        wx.navigateTo({
+          url: `/page/ucenter/quotation/main?id=${id}`
+        })
+      },
+      toggleStatus (state) {
+        this[state] = !this[state]
+      },
+      checkLogin () {
+        !this.isLogin && wx.navigateTo({
+          url: `/pages/ucenter/login/main?productId=${this.id}`
         })
       }
     },
@@ -450,11 +272,11 @@
       display: flex;
       justify-content: space-between;
       .title{
-        font-size: 24rpx;
+        font-size: 12px;
         color:#999;
       }
       .iconfont{
-        font-size: 28rpx;
+        font-size: 14px;
         color:#999;
       }
     }
@@ -466,13 +288,13 @@
       height:107pt;
     }
     .label{
-      font-size:22rpx;
+      font-size: 12px;
       color:#999;
     }
     .data{
-      font-size:22rpx;
+      font-size: 12px;
       color:#666;
-      margin-left:20rpx;
+      margin-left: 10px;
     }
   }
   .activity-info{
@@ -491,28 +313,28 @@
       .price_box{
         .curr{
           color:#fff;
-          font-size:36rpx;
+          font-size: 18px;
           margin-right: 7pt;
           ._symbol{
-            font-size:24rpx;
+            font-size: 12px;
             display: inline;
           }
         }
         .origin{
-          font-size:24rpx;
+          font-size: 12px;
           color:rgba(255,255,255,.6)
         }
       }
       .time{
         color:#fff;
-        font-size:24rpx;
+        font-size: 12px;
       }
     }
     ._bottom{
       display: flex;
       justify-content: space-between;
       .group{
-        font-size: 24rpx;
+        font-size: 12px;
         color: #FFFFFF;
         .title{
           color:rgba(255,255,255,.6);
@@ -522,7 +344,7 @@
       }
       .join{
         color:rgba(255,255,255,.6);
-        font-size:24rpx;
+        font-size: 12px;
       }
     }
   }
@@ -531,11 +353,11 @@
     background: #fff;
 
     .sub-title{
-      font-size: 25rpx;
+      font-size: 12px;
       color:#999;
     }
     .main-title{
-      font-size: 32rpx;
+      font-size: 16px;
       color:#666;
       margin-top: 7pt;
       display: flex;
@@ -548,14 +370,14 @@
         color: #fff;
         line-height: 16pt;
         text-align:center;
-        font-size: 22rpx;
+        font-size: 12px;
         border-radius: 2pt;
         margin-right: 7pt;
       }
     }
     .addition-info{
        margin-top: 12pt;
-       font-size: 25rpx;
+       font-size: 12px;
        color:#999;
        ._left{
          margin-right:30pt
@@ -575,7 +397,7 @@
       background: #212224;
       color: #fff;
       display: block;
-      font-size: 32rpx;
+      font-size: 16px;
       text-align: center;
       line-height: 40pt;
       border-radius: 4pt;
@@ -588,7 +410,7 @@
     .view-more{
       text-align: center;
       .text{
-        font-size: 28rpx;
+        font-size: 14px;
         color:#333;
         cursor:pointer;
         display:inline-block;
@@ -616,11 +438,11 @@
           text-align: center;
           .iconfont{
             color:#212224;
-            font-size: 66rpx;
+            font-size: 33px;
           }
           ._title{
             color:#999999;
-            font-size: 25rpx;
+            font-size: 12px;
           }
         }
       }
@@ -629,8 +451,8 @@
   .share_btn{
     border-radius:50%;
     background:#fff;
-    height:80rpx;
-    width:80rpx;
+    height: 40px;
+    width: 40px;
     border:1pt solid #fff;
 
     display:flex;
@@ -641,7 +463,7 @@
     line-height:1 !important;
 
     color:#212224;
-    font-size: 66rpx !important;
+    font-size: 33px !important;
 
   }
 </style>
