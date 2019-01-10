@@ -4,9 +4,10 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
+  // http://italy.cn
   state: {
     on: false,
-    serverSide: 'http://italy.cn',
+    serverSide: 'https://www.italyclassico.com',
     hide: false,
     isLogin: false,
     phone: null,

@@ -5,6 +5,9 @@ import CommonDivision from '@/components/common-division.vue'
 import ProductInfo from '@/components/product-info.vue'
 import ProductRecommend from '@/components/product-recommend.vue'
 import ProductDetails from '@/components/product-details.vue'
+import DTitle from '@/components/units/d-title.vue'
+import DInput from '@/components/units/d-input.vue'
+
 export default {
   data () {
     return {
@@ -39,7 +42,8 @@ export default {
     ProductInfo,
     CommonDivision,
     ProductRecommend,
-    ProductDetails
+    ProductDetails,
+    DTitle,DInput
   },
   onLoad (options) {
     store.commit('showLoading')
@@ -54,7 +58,17 @@ export default {
         'Accept': 'application/json'
       },
       success: ({data: {data}}) => {
-        setTimeout(() => { store.commit('hideLoading') }, 4500)
+        setTimeout(() => {
+          store.commit('hideLoading')
+          wx.setNavigationBarColor({
+            frontColor: '#000000',
+            backgroundColor: '#ffffff',
+            animation: {
+              duration: 100,
+              timingFunc: 'easeIn'
+            }
+          })
+        }, 4500)
         Object.assign(this, data)
       },
       fail () {
@@ -70,26 +84,26 @@ export default {
       title: '商品详情'
     })
   },
-  methods: {
-    setData (res) {
-      const {gallery, subtitle, origin, style, article, activity, attr, modular} = res
-      this.prod_name = res.prod_name
-      this.product_tag = res.article_option_name
-      this.is_activity = res.is_activity
-      this.comProd = res.com_prod
-      this.act_attr = res.act_attr
-      this.is_wish = res.is_wish
-      this.is_collect = res.is_collect
-      this.gallery = gallery
-      this.subtitle = subtitle
-      this.origin = origin
-      this.style = style
-      this.article = article
-      this.activity = activity
-      this.attr = attr
-      this.modular = modular
-    }
-  },
+  // methods: {
+  //   setData (res) {
+  //     const {gallery, subtitle, origin, style, article, activity, attr, modular} = res
+  //     this.prod_name = res.prod_name
+  //     this.product_tag = res.article_option_name
+  //     this.is_activity = res.is_activity
+  //     this.comProd = res.com_prod
+  //     this.act_attr = res.act_attr
+  //     this.is_wish = res.is_wish
+  //     this.is_collect = res.is_collect
+  //     this.gallery = gallery
+  //     this.subtitle = subtitle
+  //     this.origin = origin
+  //     this.style = style
+  //     this.article = article
+  //     this.activity = activity
+  //     this.attr = attr
+  //     this.modular = modular
+  //   }
+  // },
   onShareAppMessage () {
     return {
       title: this.prod_name,

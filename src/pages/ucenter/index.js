@@ -159,12 +159,6 @@ export default {
             })
 
             if (page === 'login') {
-              // wx.removeStorage({ key: 'token'})
-              // wx.setStorage({
-              //   key: 'token',
-              //   data: data
-              // })
-
               store.commit('onLogin')
               store.commit('setPhone', phone)
               store.commit('setToken', data)
@@ -173,7 +167,6 @@ export default {
               }) : wx.reLaunch({
                 url: reLaunch
               })
-
             }
 
             page === 'forget' && wx.navigateBack({
@@ -183,17 +176,10 @@ export default {
             const info = getModalInfo(status)
             wx.showModal({
               title: '提示',
-              content: info,
+              content: info || fail_hint || msg,
               showCancel: false,
             })
           }
-          // else if (status === 0) {
-          //   wx.showModal({
-          //     title: '提示',
-          //     content: fail_hint ? fail_hint : msg,
-          //     showCancel: false
-          //   })
-          // }
         },
         fail () {
           wx.showToast({

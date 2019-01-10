@@ -116,19 +116,21 @@
     methods: {
       onToggle (type, status) {
         const {id, token, toggleStatus, getUrl, checkLogin} = this
-        const s = type ? 'on' : 'off'
-        const state = status ? 'is_collect' : 'is_wish'
-        const url = getUrl(s).status
-        checkLogin()
-        wx.request({
+        const s = status ? 'on' : 'off'
+        const state = type ? 'is_collect' : 'is_wish'
+
+        const url = getUrl(s)[type]
+
+        checkLogin() && wx.request({
           url,
           method: 'GET',
           data: {id, token},
           header: {'Accept': 'application/json'},
           success ({data: {status, info, msg}}) {
+            const hint = info || msg
             status === 1 && toggleStatus(state)
-            info && wx.showToast({
-              title: info || msg,
+            hint && wx.showToast({
+              title: hint,
               icon: 'none',
               duration: 2000
             })
@@ -142,9 +144,8 @@
         })
       },
       toSeeReal () {
-        const {id, token, serverSide} = this
-        this.checkLogin()
-        wx.request({
+        const {id, token, serverSide, checkLogin} = this
+        checkLogin() && wx.request({
           url: `${serverSide}/wxapi/product/mSeeRealProd`,
           method: 'GET',
           data: {id, token},
@@ -152,13 +153,13 @@
             'Accept': 'application/json'
           },
           success ({data: {status, info, data: {user}}}) {
-            status === 1 && wx.navigateTo({
-              url: `seeTheReal/seeTheReal?id=${id}&mobile=${user.csr_mobile}`
-            })
             info && wx.showToast({
               title: info,
-              icon: 'fails',
+              icon: 'none',
               duration: 2000
+            })
+            status === 1 && wx.navigateTo({
+              url: `seeTheReal/main?id=${id}&mobile=${user.csr_mobile}`
             })
           },
           fail () {
@@ -170,9 +171,8 @@
         })
       },
       onPay () {
-        const {id} = this
-        this.checkLogin()
-        wx.navigateTo({
+        const {id, checkLogin} = this
+        checkLogin() && wx.navigateTo({
           url: `/page/ucenter/quotation/main?id=${id}`
         })
       },
@@ -180,9 +180,14 @@
         this[state] = !this[state]
       },
       checkLogin () {
-        !this.isLogin && wx.navigateTo({
-          url: `/pages/ucenter/login/main?page=login&id=${this.id}`
-        })
+        if (!this.isLogin) {
+          wx.navigateTo({
+            url: `/pages/ucenter/login/main?page=login&id=${this.id}`
+          })
+          return false
+        } else {
+          return true
+        }
       },
       getUrl (status) {
         return {
@@ -280,9 +285,7 @@
     }
   }
   .common-block{
-    padding:15pt;
-    background: #fff;
-
+    padding: 15pt 15pt 0;
     .sub-title{
       font-size: 12px;
       color:#999;
@@ -317,7 +320,6 @@
     .dot-line{
       height: 1pt;
       border-bottom: 1pt dotted #999999;
-      margin-top:15pt;
       margin-bottom:15pt;
       display: inline-block;
       width: 100%;
@@ -347,6 +349,7 @@
         display:inline-block;
         margin-right:5pt;
       }
+      padding-bottom: 15pt;
       .iconfont{
         display:inline-block;
         cursor:pointer;
@@ -363,7 +366,7 @@
       ._list{
         display: flex;
         justify-content: space-between;
-        margin-top:23pt;
+        margin-top: 10pt;
         ._item{
           flex-basis: 20%;
           text-align: center;

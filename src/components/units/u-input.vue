@@ -35,21 +35,21 @@
   #Input {
     display: flex;
     border-bottom: 1px solid #cccccc;
-    height:54px;
+    height: 54px;
     line-height:54px;
     align-items: center;
     justify-content: space-between;
-    font-size: 28rpx;
+    font-size: 14px;
     .label{
       display: flex;
       align-items: center;
     }
     .iconfont{
       margin-right: 12px;
-      font-size: 32rpx;
+      font-size: 16px;
     }
     .icon-mima, .icon{
-      font-size: 40rpx !important;
+      font-size: 20px !important;
     }
   }
 </style>
