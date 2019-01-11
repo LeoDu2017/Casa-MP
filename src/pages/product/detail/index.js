@@ -34,6 +34,9 @@ export default {
   computed:{
     serverSide () {
       return store.state.serverSide
+    },
+    phone () {
+      return store.state.phone
     }
   },
   components: {

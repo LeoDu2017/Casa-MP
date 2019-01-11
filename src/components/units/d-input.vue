@@ -1,12 +1,12 @@
 <template>
   <div class="input" :style="{height: height + 'px'}">
     <i class="iconfont" :class="icon"></i>
-    <textarea :placeholder="placeholder" :maxlength="maxlength"></textarea>
+    <textarea :placeholder="placeholder" :maxlength="maxlength" :value="value"></textarea>
   </div>
 </template>
 <script>
   export default{
-    props: ['icon', 'placeholder', 'height', 'maxlength']
+    props: ['icon', 'placeholder', 'height', 'maxlength', 'value']
   }
 </script>
 <style scoped lang="less">
