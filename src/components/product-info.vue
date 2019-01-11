@@ -216,12 +216,12 @@
         color:#999;
       }
     }
-    height:15pt;
+    height:15px;
     box-sizing: border-box;
     transition:height .5s;
     overflow: hidden;
     &.folder{
-      height:107pt;
+      height:107px;
     }
     .label{
       font-size: 12px;
@@ -234,10 +234,10 @@
     }
   }
   .activity-info{
-    padding:5pt 15pt;
+    padding:5px 15px;
     background:#212224;
     color:#fff;
-    height: 45pt;
+    height: 45px;
     box-sizing:border-box;
     display:flex;
     justify-content: space-between;
@@ -250,7 +250,7 @@
         .curr{
           color:#fff;
           font-size: 18px;
-          margin-right: 7pt;
+          margin-right: 7px;
           ._symbol{
             font-size: 12px;
             display: inline;
@@ -275,7 +275,7 @@
         .title{
           color:rgba(255,255,255,.6);
           display:inline;
-          margin-right:3pt;
+          margin-right:3px;
         }
       }
       .join{
@@ -285,7 +285,7 @@
     }
   }
   .common-block{
-    padding: 15pt 15pt 0;
+    padding: 15px 15px 0;
     .sub-title{
       font-size: 12px;
       color:#999;
@@ -293,48 +293,48 @@
     .main-title{
       font-size: 16px;
       color:#666;
-      margin-top: 7pt;
+      margin-top: 7px;
       display: flex;
       align-items:center;
       .symbol{
         display:inline-block;
-        width: 30pt;
-        height: 16pt;
+        width: 30px;
+        height: 16px;
         background: #666;
         color: #fff;
-        line-height: 16pt;
+        line-height: 16px;
         text-align:center;
         font-size: 12px;
-        border-radius: 2pt;
-        margin-right: 7pt;
+        border-radius: 2px;
+        margin-right: 7px;
       }
     }
     .addition-info{
-       margin-top: 12pt;
+       margin-top: 12px;
        font-size: 12px;
        color:#999;
        ._left{
-         margin-right:30pt
+         margin-right:30px
        }
      }
     .dot-line{
-      height: 1pt;
-      border-bottom: 1pt dotted #999999;
-      margin-bottom:15pt;
+      height: 1px;
+      border-bottom: 1px dotted #999999;
+      margin-bottom:15px;
       display: inline-block;
       width: 100%;
     }
     .apply-btn{
       width:74.6vw;
-      height:40pt;
+      height:40px;
       background: #212224;
       color: #fff;
       display: block;
       font-size: 16px;
       text-align: center;
-      line-height: 40pt;
-      border-radius: 4pt;
-      margin: 0 auto 25pt;
+      line-height: 40px;
+      border-radius: 4px;
+      margin: 0 auto 25px;
       &.disabled {
         background: #ccc;
         pointer-events: none;
@@ -347,9 +347,9 @@
         color:#333;
         cursor:pointer;
         display:inline-block;
-        margin-right:5pt;
+        margin-right:5px;
       }
-      padding-bottom: 15pt;
+      padding-bottom: 15px;
       .iconfont{
         display:inline-block;
         cursor:pointer;
@@ -387,7 +387,7 @@
     background:#fff;
     height: 40px;
     width: 40px;
-    border:1pt solid #fff;
+    border:1px solid #fff;
 
     display:flex;
     align-items:center;

@@ -23,11 +23,11 @@
 <style scoped lang="less">
   .category{
     background: #fff;
-    padding: 15pt;
+    padding: 15px;
     width: 100vw;
     box-sizing: border-box;
     .categoryBox{
-      padding-top:15pt;
+      padding-top:15px;
       display:flex;
       flex-wrap:wrap;
       justify-content: space-between;

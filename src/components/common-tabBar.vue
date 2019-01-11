@@ -43,7 +43,7 @@
   @import "../utils/common.less";
   ul{
     background:#fff;
-    height: 49pt;
+    height: 49px;
     position: fixed;
     bottom:0;
     left:0;
@@ -52,14 +52,14 @@
     display:flex;
     font-size: 10pt;
     justify-content: space-between;
-    padding-left: 50rpx;
-    padding-right: 50rpx;
+    padding-left: 25px;
+    padding-right: 25px;
     align-items:flex-end;
     padding-bottom: 3pt;
     color:#666666;
     z-index:1000;
     .center{
-      flex:0 0 53pt;
+      flex:0 0 53px;
       text-align: center;
       .iconfont{
         display:block;
@@ -69,19 +69,19 @@
       border-radius:50%;
       background: @gradient_black;
       color:#fff;
-      height: 45pt;
-      width: 45pt;
-      line-height: 45pt;
-      border: 4pt solid #fff;
-      box-shadow: 0px -4px 10px 0px rgba(0, 0, 0, 0.04);
+      height: 45px;
+      width: 45px;
+      line-height: 45px;
+      border: 4px solid #fff;
+      box-shadow: 0 -4px 10px 0 rgba(0, 0, 0, 0.04);
       .icon-zixun{
-        font-size:21pt;
+        font-size: 21px;
       }
     }
     .item{
       .iconfont{
-        font-size: 18pt;
-        padding-bottom:4pt;
+        font-size: 18px;
+        padding-bottom: 4px;
         .font_gradient_color;
       }
     }

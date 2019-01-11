@@ -13,22 +13,22 @@
 <style scoped lang="less">
   .sloganBox{
     width:100%;
-    height:43pt;
+    height:43px;
     display: flex;
-    line-height: 43pt;
+    line-height: 43px;
     justify-content: center;
     align-items: center;
     background: #F2F2F2;
     ._text{
       color: #212224;
-      font-size: 42rpx;
+      font-size: 21px;
       display: inline-block;
-      padding: 0 6pt;
+      padding: 0 6px;
     }
     ._line{
       display: inline-block;
-      height: 2pt;
-      width: 20pt;
+      height: 2px;
+      width: 20px;
       background:#999999;
     }
   }

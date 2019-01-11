@@ -45,7 +45,7 @@
   .loading {
     text-transform: uppercase;
     font-family: '微软雅黑', sans-serif;
-    font-size: 42rpx;
+    font-size: 21px;
     text-align: center;
     height: 20px;
     line-height: 20px;
@@ -64,7 +64,7 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 0px 0px rgba(255, 255, 255, 0.06);
+    text-shadow: 0 0 rgba(255, 255, 255, 0.06);
     animation: wave-animation 1s infinite linear, loading-animation 10s infinite linear alternate;
     background-repeat: repeat-x;
     opacity: 1;
@@ -81,7 +81,7 @@
   }
   @keyframes loading-animation {
     0% {
-      background-size: 108px 0px;
+      background-size: 108px 0;
     }
 
     100% {

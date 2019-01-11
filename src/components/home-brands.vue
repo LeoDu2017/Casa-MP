@@ -21,12 +21,12 @@
 
 <style scoped lang="less">
   .brands{
-    padding: 15pt 15pt 10pt;
+    padding: 15px 15px 10px;
     background: #fff;
     width: 100vw;
     box-sizing: border-box;
     .brandsBox{
-      padding-top: 15pt;
+      padding-top: 15px;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;

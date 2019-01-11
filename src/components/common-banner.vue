@@ -78,33 +78,33 @@
       left: 50%;
       transform:translateX(-50%);
       ._item{
-        height: 8pt;
-        width: 8pt;
-        border-radius: 4pt;
-        border: 1pt solid #fff;
+        height: 8px;
+        width: 8px;
+        border-radius: 4px;
+        border: 1px solid #fff;
         float: left;
         box-sizing:border-box;
         transition:width .5s;
         transform-origin: 50% 50%;
         & + ._item{
-          margin-left: 4pt;
+          margin-left: 4px;
         }
         &.active{
-          width: 20pt;
+          width: 20px;
           background: #fff;
         }
       }
     }
     .numBox{
       position:absolute;
-      bottom:15pt;
-      right:15pt;
-      width:34pt;
-      height:18pt;
+      bottom:15px;
+      right:15px;
+      width:34px;
+      height:18px;
       background: rgba(0,0,0,.6);
       color: #fff;
       text-align:center;
-      line-height:18pt;
+      line-height:18px;
       display: flex;
       align-items:center;
       justify-content: center;

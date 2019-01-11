@@ -21,24 +21,24 @@
 <style scoped lang="less">
   .dash {
     background: #fff;
-    padding:20pt 24px 32pt 24pt;
+    padding:20px 24px 32px 24px;
     display: flex;
     justify-content: space-between;
     width: 100vw;
     box-sizing: border-box;
     ._item{
-      height: 40pt;
+      height: 40px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       text-align: center;
       .__title{
-        font-size: 30rpx;
+        font-size: 15px;
         color:#666;
       }
       .__data{
         color: #212224;
-        font-size: 35rpx;
+        font-size: 18px;
         display:flex;
         align-items:flex-end;
       }

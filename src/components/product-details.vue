@@ -53,13 +53,13 @@
 </script>
 <style scoped lang="less">
   .detailBox{
-    padding:24rpx 30rpx;
+    padding: 12px 15px;
     width: 100vw;
     box-sizing: border-box;
     overflow: hidden;
     .detail_wrap{
-      margin-top:30rpx;
-      height:1000rpx;
+      margin-top: 15px;
+      height: 500px;
     }
   }
 </style>

@@ -22,10 +22,10 @@
 <style scoped lang="less">
   .showcase {
     background: #fff;
-    padding: 15pt 15pt 5pt;
+    padding: 15px 15px 5px;
     .product-wrap{
       display:flex;
-      padding-top:15pt;
+      padding-top:15px;
       flex-wrap:wrap;
       justify-content: space-between;
       overflow:hidden;

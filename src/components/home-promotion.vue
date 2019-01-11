@@ -120,8 +120,8 @@
     padding: 15pt 0;
     .goodsWrap{
       width: 100vw;
-      height: 263pt;
-      overflow: hidden;margin-top: 16pt;
+      height: 263px;
+      overflow: hidden;margin-top: 16px;
       .swiper{
         height: 100%;
         ._item{
@@ -140,16 +140,16 @@
           }
 
           ._bottom{
-            height:62pt;
+            height:62px;
             background:#F5F5F5;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
             box-sizing:border-box;
             width: 82.4vw;
-            margin-left: 15rpx;
-            margin-top: -30rpx;
-            padding: 25rpx;
+            margin-left: 8px;
+            margin-top: -15px;
+            padding: 12px;
 
             ._row{
               display: flex;
@@ -161,13 +161,13 @@
                 align-items: baseline;
               }
               ._current{
-                font-size: 14pt;
+                font-size: 14px;
                 color:#333;
                 display: inline-block;
-                margin-right:7pt;
+                margin-right:7px;
               }
               ._price{
-                font-size: 10pt;
+                font-size: 10px;
                 color:#ccc;
                 text-decoration:line-through;
                 text-overflow: ellipsis;
@@ -177,7 +177,7 @@
                 word-break: break-all;
               }
               ._pre{
-                font-size:10pt;
+                font-size:10px;
                 color:#999;
                 text-overflow: ellipsis;
                 display: -webkit-box;
@@ -196,18 +196,18 @@
               }
               ._join{
                 color:#999;
-                font-size:10pt;
+                font-size:10px;
               }
               ._btn{
                 display: block;
-                height: 20pt;
-                width:50pt;
+                height: 20px;
+                width:50px;
                 background:#212224;
-                border-radius:2pt;
+                border-radius:2px;
                 color:#fff;
-                font-size: 10pt;
+                font-size: 10px;
                 text-align:center;
-                line-height:20pt;
+                line-height:20px;
               }
             }
 
@@ -215,14 +215,14 @@
               display:flex;
               flex-direction: column;
               justify-content: space-between;
-              padding:15pt 10pt;
+              padding:15px 10px;
 
             }
             ._right{
               flex-direction: column;
               justify-content: space-between;
               align-items: flex-end;
-              padding:10pt;
+              padding:10px;
               text-align: right;
 
             }
@@ -247,15 +247,15 @@
         justify-content: center;
         align-items: center;
         .points_item{
-          height: 6pt;
-          width: 6pt;
+          height: 6px;
+          width: 6px;
           border-radius: 50%;
           background: #ccc;
           &.active{
             background:#212224;
           }
           & + .points_item{
-            margin-left: 5pt;
+            margin-left: 5px;
           }
         }
       }
