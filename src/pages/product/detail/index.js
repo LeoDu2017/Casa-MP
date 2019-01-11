@@ -28,7 +28,9 @@ export default {
       is_activity: null,
       activity: null,
       start: null,
-      end: null
+      end: null,
+      address: null,
+      remark: null
     }
   },
   computed:{
@@ -37,6 +39,9 @@ export default {
     },
     phone () {
       return store.state.phone
+    },
+    token () {
+      return store.state.token
     }
   },
   components: {
@@ -88,8 +93,40 @@ export default {
     })
   },
   methods: {
-    setValue (val) {
-      console.log(val)
+    setPhone (val) {
+      this.phone = val
+    },
+    setAddress (val) {
+      this.address = val
+    },
+    setRemark (val) {
+      this.remark = val
+    },
+    onSubmit (type) {
+      wx.request({
+        url: `${serverSide}/wxapi/product/addQuoteApplyProd`,
+        method: 'post',
+        data: {
+          prod_id: id,
+          remark: type ? remark : address,
+          customer_phone: phone,
+          type,
+          token
+        },
+        header: {'Accept': 'application/json'},
+        success ({data: {status, info}}) {
+          wx.showToast({
+            title: info,
+            icon: 'none',
+            duration: 1000,
+            success () {
+              status === 1 && setTimeout(function(){
+                wx.navigateBack({ changed: true });
+              },2000);
+            }
+          })
+        }
+      })
     }
   },
   // methods: {
