@@ -19,8 +19,8 @@
     min-height:100vh;
     background:#fff;
     .header{
-      padding: 10pt 15pt;
-      border-bottom: 1pt solid #E6E6E6;
+      padding: 10px 15px;
+      border-bottom: 1px solid #E6E6E6;
       display:flex;
       justify-content: space-between;
       .left{
@@ -28,8 +28,8 @@
       }
       ._btn{
         color:#4d4d4d;
-        font-size:12pt;
-        flex:0 0 40pt;
+        font-size:12px;
+        flex:0 0 40px;
         text-align:right;
       }
       align-items:center;
@@ -39,12 +39,12 @@
         height: 41pt;
         line-height:41pt;
         color: #666;
-        font-size:12pt;
-        padding-left: 15pt;
+        font-size:12px;
+        padding-left: 15px;
         span{
           color:#212224
         }
-        border-bottom:1pt solid #E6E6E6
+        border-bottom:1px solid #E6E6E6
       }
     }
   }

@@ -18,29 +18,29 @@
 <style scoped lang="less">
   #Login {
     .form_box{
-      padding: 30rpx;
+      padding: 20px;
     }
     .icon{
-      font-size: 40rpx;
+      font-size: 20px;
     }
     .btn{
       border-radius:10px;
-      height:94rpx;
-      line-height:94rpx;
+      height: 47px;
+      line-height: 47px;
       width:100%;
       background-color:#333;
-      font-size:36rpx;
+      font-size: 18px;
       word-break:break-all;
       text-align: center;
       color: #fff;
-      margin-top: 30rpx;
+      margin-top: 15px;
     }
     .bottom{
       display: flex;
       justify-content: space-between;
-      margin-top: 30rpx;
+      margin-top: 15px;
       a{
-        font-size: 28rpx ;
+        font-size: 14px ;
         color: #666;
         &:active,&hover{
           color: #000

@@ -46,8 +46,8 @@
     }
     .btn{
       border-radius: 10px;
-      height: 94rpx;
-      line-height:94rpx;
+      height: 47px;
+      line-height: 47px;
       width:100%;
       background-color:#333;
       font-size: 18px;

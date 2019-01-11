@@ -59,7 +59,7 @@
     color:#666666;
     z-index:1000;
     .center{
-      flex:0 0 53px;
+      flex:0 0 60px;
       text-align: center;
       .iconfont{
         display:block;
@@ -79,6 +79,7 @@
       }
     }
     .item{
+      text-align: center;
       .iconfont{
         font-size: 18px;
         padding-bottom: 4px;
