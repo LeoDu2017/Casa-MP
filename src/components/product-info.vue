@@ -124,7 +124,7 @@
         checkLogin() && wx.request({
           url,
           method: 'GET',
-          data: {id, token},
+          data: {prod_id: id, token},
           header: {'Accept': 'application/json'},
           success ({data: {status, info, msg}}) {
             const hint = info || msg

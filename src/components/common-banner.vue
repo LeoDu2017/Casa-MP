@@ -109,10 +109,10 @@
       align-items:center;
       justify-content: center;
       .curr{
-        font-size:30rpx;
+        font-size: 15px;
       }
       .total{
-        font-size:25rpx;
+        font-size: 14px;
       }
     }
   }

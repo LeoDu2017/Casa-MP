@@ -35,8 +35,8 @@
 <style scoped lang="less">
   .searchBox{
     width: 100%;
-    height: 50pt;
-    padding:20pt 15pt;
+    /*height: 50pt;*/
+    padding: 10px 15px;
     box-sizing:border-box;
     background: #fff;
     display: flex;
@@ -49,10 +49,10 @@
       flex: 1;
     }
     ._right{
-      flex: 0 0 33pt;
+      flex: 0 0 33px;
       text-align: right;
       .iconfont{
-        font-size: 18pt;
+        font-size: 18px;
         color: #333;
       }
     }

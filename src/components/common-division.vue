@@ -1,5 +1,5 @@
 <template>
-  <div class="division" :style="{height:height + 'pt'}">
+  <div class="division" :style="{height:height + 'px'}">
     <slot></slot>
   </div>
 </template>

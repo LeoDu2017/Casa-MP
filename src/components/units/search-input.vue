@@ -40,9 +40,9 @@
 
 <style scoped lang="less">
   .search{
-    height: 30pt;
-    border-radius: 15pt;
-    padding:7.5pt 7pt;
+    height: 30px;
+    border-radius: 15px;
+    padding: 7.5px 7px;
     box-sizing:border-box;
     display: flex;
     align-items: center;
@@ -56,25 +56,25 @@
       background: #fff;
     }
     .icon-sousuo{
-      font-size: 15pt;
+      font-size: 15px;
       display:inline-block;
     }
     .searchInput{
-      font-size: 12pt;
+      font-size: 12px;
       display:inline-block;
-      margin-left: 7pt;
+      margin-left: 7px;
     }
     .icon-cha{
       display: flex;
-      height:20pt;
-      width:20pt;
+      height:20px;
+      width:20px;
       border-radius: 50%;
       background:#666;
       color:#fff;
-      font-size: 9pt;
+      font-size: 9px;
       box-sizing: border-box;
       position:absolute;
-      right: 7pt;
+      right: 7px;
       align-items: center;
       justify-content: center;
     }

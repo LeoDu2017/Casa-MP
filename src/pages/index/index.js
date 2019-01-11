@@ -56,17 +56,18 @@ export default {
         'Accept': 'application/json'
       },
       success: ({data: {data, data:{resource: {a, b, c, d}}}}) => {
-        setTimeout(() => {
-          store.commit('hideLoading')
-          wx.setNavigationBarColor({
-            frontColor: '#000000',
-            backgroundColor: '#ffffff',
-            animation: {
-              duration: 100,
-              timingFunc: 'easeIn'
-            }
-          })
-        }, 4500)
+        // setTimeout(() => {
+        //
+        // }, 4500)
+        store.commit('hideLoading')
+        wx.setNavigationBarColor({
+          frontColor: '#000000',
+          backgroundColor: '#ffffff',
+          animation: {
+            duration: 100,
+            timingFunc: 'easeIn'
+          }
+        })
         Object.assign(this, data, {dash:[
             {
               title: '合作厂商',

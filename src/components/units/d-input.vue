@@ -1,18 +1,18 @@
 <template>
   <div class="input" :style="{height: height + 'px'}">
     <i class="iconfont" :class="icon"></i>
-    <textarea :placeholder="placeholder"></textarea>
+    <textarea :placeholder="placeholder" :maxlength="maxlength"></textarea>
   </div>
 </template>
 <script>
   export default{
-    props: ['icon', 'placeholder', 'height']
+    props: ['icon', 'placeholder', 'height', 'maxlength']
   }
 </script>
 <style scoped lang="less">
   .input{
     width: 100%;
-    border: 1pt solid #999999;
+    border: 1px solid #999999;
     border-radius: 3px;
     box-sizing: border-box;
     padding: 9px  11px;
@@ -28,7 +28,7 @@
     textarea{
       height: 100%!important;
       font-size: 14px;
-      line-height: 40px;
+      line-height: 16px!important;
     }
   }
 </style>
