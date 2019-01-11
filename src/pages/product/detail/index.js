@@ -87,6 +87,11 @@ export default {
       title: '商品详情'
     })
   },
+  methods: {
+    setValue (val) {
+      console.log(val)
+    }
+  },
   // methods: {
   //   setData (res) {
   //     const {gallery, subtitle, origin, style, article, activity, attr, modular} = res

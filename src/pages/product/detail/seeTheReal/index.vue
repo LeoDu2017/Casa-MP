@@ -6,6 +6,7 @@
       height="40"
       :value="phone"
       placeholder="请输入您的手机号"
+      @callBack="setValue"
       maxlength="11">
     </d-input>
     <d-input

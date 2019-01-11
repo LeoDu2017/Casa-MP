@@ -1,12 +1,21 @@
 <template>
   <div class="input" :style="{height: height + 'px'}">
     <i class="iconfont" :class="icon"></i>
-    <textarea :placeholder="placeholder" :maxlength="maxlength" :value="value"></textarea>
+    <textarea
+      :placeholder="placeholder"
+      :maxlength="maxlength"
+      v-model="value">
+    </textarea>
   </div>
 </template>
 <script>
   export default{
-    props: ['icon', 'placeholder', 'height', 'maxlength', 'value']
+    props: ['icon', 'placeholder', 'height', 'maxlength', 'value'],
+    watch: {
+      value (val) {
+        this.$emit('callBack', val)
+      }
+    }
   }
 </script>
 <style scoped lang="less">
