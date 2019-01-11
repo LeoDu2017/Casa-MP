@@ -1,8 +1,8 @@
 <template>
-  <h1 class="common-title" :style="{height:height + 'rpx'}">
-    <span class="title" :style="{fontSize:height + 'rpx',height:height + 'rpx',lineHeight:height + 'rpx'}">{{ title }}</span>
-    <span class="more" v-show="more" :style="{fontSize:(height - 10) + 'rpx'}">
-      更多 <i class="iconfont icon-return" :style="{fontSize:height + 'rpx'}"></i>
+  <h1 class="common-title" :style="{height:height + 'px'}">
+    <span class="title" :style="{fontSize:height + 'px',height:height + 'px',lineHeight:height + 'px'}">{{ title }}</span>
+    <span class="more" v-show="more" :style="{fontSize:(height - 10) + 'px'}">
+      更多 <i class="iconfont icon-return" :style="{fontSize:height + 'px'}"></i>
     </span>
   </h1>
 </template>
@@ -18,13 +18,13 @@
     align-items:center;
     .title{
       color: #333;
-      padding-left: 7pt;
-      border-left: 3pt solid #212224;
+      padding-left: 7px;
+      border-left: 3px solid #212224;
       display: flex;
     }
     .more{
       color: #666;
-      font-size: 24rpx;
+      font-size:  12px;
       .iconfont{
         display: inline;
       }

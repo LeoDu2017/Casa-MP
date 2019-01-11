@@ -23,14 +23,14 @@
 </script>
 <style scoped lang="less">
   .date {
-    font-size: 28rpx;
+    font-size: 14px;
     color:#dcdcdc;
     .day{
-      font-size: 30rpx;
+      font-size: 15px;
       font-weight: bold;
     }
     .month{
-      margin-right: 8pt;
+      margin-right: 8px;
     }
 
   }

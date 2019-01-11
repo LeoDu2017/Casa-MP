@@ -62,30 +62,30 @@
     .box{
       height: 100vh;
       width: 70vw;
-      background:#212224;
-      color:#fff;
-      padding:15pt;
+      background: #212224;
+      color: #fff;
+      padding: 15px;
       box-sizing: border-box;
       .menu-list{
         margin-top: 10vh;
-        padding-left: 20pt;
+        padding-left: 20px;
         li{
           display: flex;
           align-items: center;
           .iconfont{
-            font-size: 18pt;
+            font-size: 18px;
           }
           a{
             display: flex;
             align-items: center;
           }
           span{
-            font-size: 10pt;
+            font-size: 10px;
             display: inline-block;
-            padding-left: 20pt;
+            padding-left: 20px;
           }
           & + li{
-            margin-top: 40pt;
+            margin-top: 40px;
           }
         }
       }

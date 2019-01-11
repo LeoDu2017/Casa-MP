@@ -83,11 +83,11 @@
 <style scoped lang="less">
   .counter-warp{
     .text{
-      font-size: 24rpx;
+      font-size: 12px;
       color: #999999;
     }
     .time{
-      font-size: 24rpx;
+      font-size: 12px;
       color: #333;
     }
     .text_box{

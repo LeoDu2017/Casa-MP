@@ -34,9 +34,9 @@
 
 <style scoped lang="less">
   .product{
-    width: calc(50% - 2.5pt);
+    width: calc(50% - 2.5px);
     .img_wrap{
-      height:113pt;
+      height:113px;
       width:100%;
       img{
         height:100%;
@@ -44,7 +44,7 @@
       }
     }
     ._bottom{
-      padding:10pt 0;
+      padding:10px 0;
       p{
         overflow: hidden;
         text-overflow: ellipsis;
@@ -52,10 +52,10 @@
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
         word-break: break-all;
-        font-size: 30rpx;
+        font-size: 15px;
         color:#333;
         &.min{
-          font-size: 24rpx;
+          font-size: 12px;
           color:#666
         }
       }

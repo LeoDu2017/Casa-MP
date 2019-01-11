@@ -19,24 +19,24 @@
     justify-content:space-between;
     align-items: center;
     .circle{
-      height: 5pt;
-      width: 5pt;
-      flex: 0 0 5pt;
-      border:1pt solid #ccc;
+      height: 5px;
+      width: 5px;
+      flex: 0 0 5px;
+      border: 1px solid #ccc;
       display:inline-block;
       border-radius: 50%;
     }
     .text{
-      flex: 0 0 63pt;
+      flex: 0 0 63px;
       display:inline-block;
-      font-size: 24rpx;
+      font-size: 12px;
       text-align:center;
       color:#666;
     }
     .line{
       flex:1;
       display:inline-block;
-      height: 1pt;
+      height: 1px;
       background: #ccc;
     }
 

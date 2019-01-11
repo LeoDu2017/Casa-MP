@@ -27,17 +27,17 @@
       background:rgba(0,0,0,.5);
       color:#fff;
       text-align: center;
-      height: 25pt;
-      line-height: 25pt;
-      font-size: 30rpx;
+      height: 25px;
+      line-height: 25px;
+      font-size: 15px;
     }
     &.c-0,
     &.c-1{
-      width: calc(50% - 2.5pt);
-      margin-bottom: 5pt;
+      width: calc(50% - 2.5px);
+      margin-bottom: 5px;
       .imageBox{
         width: 100%;
-        height:113pt;
+        height:113px;
         img{
           height:100%;
           width: 100%;
@@ -50,13 +50,12 @@
       width: calc(33.333333% - 3.333333pt);
       .imageBox{
         width: 100%;
-        height: 75pt;
+        height: 75px;
         img{
           height:100%;
           width: 100%;
         }
       }
     }
-
   }
 </style>

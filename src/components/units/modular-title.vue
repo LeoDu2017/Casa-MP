@@ -17,26 +17,26 @@
     display: flex;
     justify-content:space-between;
     align-items: center;
-    margin: 30rpx 0;
+    margin: 15px 0;
     .circle{
-      height: 10rpx;
-      width: 10rpx;
-      flex: 0 0 10rpx;
-      border:2rpx solid #ccc;
+      height: 5px;
+      width: 5px;
+      flex: 0 0 5px;
+      border:1px solid #ccc;
       display:inline-block;
       border-radius: 50%;
     }
     .text{
-      flex: 0 0 126rpx;
+      flex: 0 0 63px;
       display:inline-block;
-      font-size: 24rpx;
+      font-size: 12px;
       text-align:center;
       color:#666;
     }
     .line{
       flex:1;
       display:inline-block;
-      height: 2rpx;
+      height: 1px;
       background: #ccc;
     }
   }

@@ -68,14 +68,14 @@
 <style scoped lang="less">
   .tabBox {
     .tab{
-      height:28rpx;
-      line-height: 28rpx;
+      height: 14px;
+      line-height: 14px;
       display: flex;
       justify-content: space-between;
       position: relative;
       .item{
         display:inline-block;
-        font-size:28rpx;
+        font-size: 14px;
         color:#999;
         position: relative;
         &.active{
@@ -83,29 +83,29 @@
         }
       }
       .division{
-        height: 28rpx;
+        height: 14px;
         width: 1px;
         display: inline-block;
         background: #e6e6e6;
       }
       .more{
         position: absolute;
-        padding:10rpx;
-        top: 40rpx;
+        padding: 4px;
+        top: 20px;
         right: -100%;
-        width:calc((100vw - 100rpx) / 4);
+        width:calc((100vw - 50px) / 4);
         transition: right .5s;
         background: #fff;
-        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1);
         z-index:10000;
         &.show{
           right:0
         }
         .item{
-          font-size: 28rpx;
+          font-size: 14px;
           color: #999;
-          height: 60rpx;
-          line-height: 60rpx;
+          height: 30px;
+          line-height: 30px;
           text-align: center;
           display: block;
           & + .item{

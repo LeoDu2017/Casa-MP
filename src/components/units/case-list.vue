@@ -26,16 +26,16 @@
 </script>
 <style scoped lang="less">
   .caseBox{
-    padding:30rpx;
+    padding: 15px;
     width: 100%;
-    height: 212rpx;
+    height:  106px;
     ._item {
-      margin-top: 30rpx;
+      margin-top: 15px;
       display: flex;
       justify-content: space-between;
       ._right,._left{
-        width: calc((100vw - 82rpx) / 2);
-        height: 212rpx;
+        width: calc((100vw - 41px) / 2);
+        height: 106px;
         ._img{
           height:100%;
           width:100%;
@@ -46,15 +46,15 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
-        padding-left:22rpx;
+        padding-left: 11px;
         .title{
           color:#333;
-          font-size: 28rpx
+          font-size: 14px
         }
         .tag{
-          font-size: 30rpx;
+          font-size: 15px;
           .iconfont{
-            font-size: 30rpx;
+            font-size: 15px;
             display: inline-block;
           }
         }

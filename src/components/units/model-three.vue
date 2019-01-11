@@ -17,7 +17,7 @@
 
 <style scoped lang="less">
   .brand{
-    width:calc(50% - 2.5pt);
+    width:calc(50% - 2.5px);
     margin-bottom: 5pt;
     position:relative;
     .imageBox{
@@ -29,10 +29,10 @@
       }
     }
     ._bottom{
-      width: 68pt;
-      height: 45pt;
+      width: 68px;
+      height: 45px;
       position:absolute;
-      bottom: 1pt;
+      bottom: 1px;
       left: 50%;
       transform: translateX(-50%);
       z-index:10;

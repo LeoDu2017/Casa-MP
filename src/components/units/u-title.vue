@@ -16,14 +16,14 @@
     padding:15pt;
     border-top:1px solid #e6e6e6;
     .en-title{
-      font-size:36rpx;
-      line-height:40rpx;
+      font-size: 18px;
+      line-height: 20px;
       color:#999999;
-      margin-bottom: 15rpx;
+      margin-bottom: 8px;
     }
     .cn-title{
-      font-size:48rpx;
-      line-height:52rpx;
+      font-size: 24px;
+      line-height: 26px;
       color:#666666;
     }
   }

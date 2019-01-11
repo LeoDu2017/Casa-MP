@@ -44,15 +44,15 @@
 <style scoped lang="less">
   .case_box{
     width: 100%;
-    height: 106pt;
+    height: 106px;
     ._item{
-      margin-top:15pt;
+      margin-top:15px;
       display: flex;
       justify-content: space-between;
       ._right,
       ._left{
-        width: calc((100vw - 41pt) / 2);
-        height: 106pt;
+        width: calc((100vw - 41px) / 2);
+        height: 106px;
       }
       ._left{
         ._img{
@@ -63,12 +63,12 @@
       ._right{
         .title{
           color:#333;
-          font-size: 30rpx
+          font-size: 15px
         }
         .tag{
-          font-size: 30rpx;
+          font-size: 15px;
           .iconfont{
-            font-size: 30rpx;
+            font-size: 15px;
             display: inline-block;
           }
         }
