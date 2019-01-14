@@ -46,7 +46,7 @@
     <div class="common-block">
       <p class="dot-line" v-if="!is_activity"></p>
       <span class="apply-btn" :class="{'disabled': now < activity.start_time || now > activity.end_time}" v-if="is_activity" @click="onPay">支付预定金</span>
-      <span class="apply-btn" v-else @click="offerOrder">申请报价</span>
+      <a class="apply-btn" v-else @click="offerOrder">申请报价</a>
       <p class="view-more" @click="toggleStatus('on')">
         <span class="text">更多</span>
         <i class="iconfont" :class="on ? 'icon-up' : 'icon-down'"></i>
@@ -168,6 +168,12 @@
               icon: 'none'
             })
           }
+        })
+      },
+      offerOrder () {
+        const {id, checkLogin} = this
+        checkLogin() && wx.navigateTo({
+          url: `offerOrder/main?id=${id}`
         })
       },
       onPay () {

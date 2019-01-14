@@ -17,6 +17,26 @@
       maxlength="100">
     </d-input>
     <button class="btn" @click="onSubmit(1)">立即提交</button>
+    <common-division height="15"></common-division>
+    <div class="wrap2">
+      <div class="totalBox">
+        已选
+        <span class="number">
+          {{total}}
+        </span>
+        件产品
+      </div>
+      <ul class="_list">
+        <li class="_item">
+          <div class="imgBox">
+            <img class="_img" :src="prod_image"/>
+          </div>
+          <div class="_text">
+            {{prod_name}}
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script src="../index.js"></script>
@@ -34,6 +54,45 @@
       text-align: center;
       color: #fff;
       margin-top: 20px;
+    }
+    .wrap2{
+      .totalBox{
+        display: flex;
+        font-size: 14px;
+        color:#999;
+        margin-bottom: 12px;
+        .number{
+          color:#333;
+        }
+      }
+      ._list {
+        ._item{
+          height: 60px;
+          width: 100%;
+          padding-bottom: 12px;
+          border-bottom: 1px solid #ccc;
+          display: flex;
+          align-items: center;
+          & + ._item{
+            margin-top: 12px;
+          }
+          .imgBox{
+            height: 60px;
+            flex: 0 0 90px;
+            ._img{
+              height:100%;
+              width:100%;
+            }
+          }
+          ._text{
+            flex:1;
+            text-align: left;
+            padding-left: 12px;
+            font-size: 12px;
+            color:#666;
+          }
+        }
+      }
     }
   }
 </style>

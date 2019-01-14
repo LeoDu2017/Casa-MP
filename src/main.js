@@ -15,6 +15,7 @@ export default {
       'pages/index/main',
       'pages/search/main',
       'pages/counter/main',
+      'pages/category/main',
       'pages/ucenter/sign/main',
       'pages/ucenter/login/main',
       'pages/ucenter/forget/main',

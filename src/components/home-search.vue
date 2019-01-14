@@ -4,7 +4,7 @@
       <label>
         <input/>
       </label>
-      <!--<search-input :go='1' type="home"></search-input>-->
+      <search-input :go='1' type="home"></search-input>
     </div>
     <div class="_right">
       <i class="iconfont icon-daohang" @click="showMenu"></i>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  // import SearchInput from './units/search-input'
+  import SearchInput from './units/search-input'
   export default {
     methods: {
       showMenu () {

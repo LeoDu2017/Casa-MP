@@ -7,7 +7,7 @@
       </a>
     </li>
     <li class="item">
-      <a href="/pages/counter/main">
+      <a href="/pages/category/main">
         <i class="iconfont" :class="selected === '2' ? 'icon-fenlei1' : 'icon-fenlei'"></i>
         分类
       </a>

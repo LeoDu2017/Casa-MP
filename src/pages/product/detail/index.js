@@ -18,7 +18,6 @@ export default {
       modular: [],
       article: [],
       subtitle: '',
-      prod_name: '',
       origin: '',
       style: '',
       is_wish: false,
@@ -30,7 +29,10 @@ export default {
       start: null,
       end: null,
       address: null,
-      remark: null
+      remark: null,
+      prod_name: null,
+      prod_image: null,
+      total: null
     }
   },
   computed:{
@@ -55,9 +57,11 @@ export default {
   },
   onLoad (options) {
     store.commit('showLoading')
+    const token = store.state.token
     const {id} = options
     this.id = id ? id : 25758
 
+    // 获取产品信息
     wx.request({
       url: `${this.serverSide}/wxapi/product/prod_detail`,
       method: 'GET',
@@ -84,6 +88,18 @@ export default {
           title: '网络链接失败，请检查网络链接',
           icon: 'none'
         })
+      }
+    })
+    // 获取组合商品
+    token && wx.request({
+      url: `${this.serverSide}/wxapi/product/mProdInfo`,
+      method: 'GET',
+      data: {prod_id:id, token},
+      header: {
+        'Accept': 'application/json'
+      },
+      success: ({data, data: {status, data: {num, prod_info: {prod_image, prod_name}}}}) => {
+        status && Object.assign(this, {total: num, prod_image, prod_name})
       }
     })
   },
