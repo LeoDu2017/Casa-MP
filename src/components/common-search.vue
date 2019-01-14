@@ -1,5 +1,5 @@
 <template>
-  <div class="searchBox">
+  <div class="searchBox" :class="border ? 'border' : ''">
     <!--v-show="!on"-->
     <!--:class="on ? 'reverse' : ''"-->
     <div class="_left">
@@ -25,7 +25,7 @@
         store.commit('unfold')
       }
     },
-    props: ['go'],
+    props: ['go', 'border'],
     components: {
       SearchInput, MenuBoard
     }
@@ -35,7 +35,7 @@
 <style scoped lang="less">
   .searchBox{
     width: 100%;
-    /*height: 50pt;*/
+    height: 50px;
     padding: 10px 15px;
     box-sizing:border-box;
     background: #fff;
@@ -44,6 +44,9 @@
     justify-content: space-between;
     &.reverse{
       justify-content: flex-end;
+    }
+    &.border{
+      border-bottom: 1px solid #E6E6E6;
     }
     ._left{
       flex: 1;

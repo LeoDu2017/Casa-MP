@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <common-loading></common-loading>
-    <common-search></common-search>
+    <common-search :border="false"></common-search>
     <home-spaces :spaces="spaces"></home-spaces>
     <common-banner :banner="banner" form="pointer"></common-banner>
     <home-slogan title="买进口家具 找有荣-意大利之家"></home-slogan>

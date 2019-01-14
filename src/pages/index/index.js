@@ -37,11 +37,6 @@ export default {
     HomeDash,
     TabBar
   },
-  methods: {
-    menuToggle (toggle) {
-      this.on = toggle
-    }
-  },
   computed:{
     serverSide () {
       return store.state.serverSide
