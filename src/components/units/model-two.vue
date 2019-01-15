@@ -1,11 +1,13 @@
 <template>
   <li class="categoryItem" :class="'c-' + index">
-    <div class="imageBox">
-      <img :src="category.image_path"/>
-    </div>
-    <div class="_bottom">
-      {{category.image_head}}
-    </div>
+    <a :href="'/pages/product/list/main?uclassb='+category.class_seo_name+'&type=cate'">
+      <div class="imageBox">
+        <img :src="category.image_path"/>
+      </div>
+      <div class="_bottom">
+        {{category.image_head}}
+      </div>
+    </a>
   </li>
 </template>
 
@@ -18,6 +20,9 @@
 <style scoped lang="less">
   .categoryItem{
     position:relative;
+    a{
+      display: block;
+    }
     ._bottom{
       position:absolute;
       bottom:0;

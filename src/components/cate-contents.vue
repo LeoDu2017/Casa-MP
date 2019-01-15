@@ -13,7 +13,7 @@
             v-for="(item, i) in category.list"
             :key="i">
             <a
-              :href="'menulist/menulist?uclassb='+item.class_seo_name"
+              :href="'/pages/product/list/main?uclassb='+item.class_seo_name+'&type=cate'"
               class="wrap">
               <img  class="_img" :src="item.class_icon+'@!class_icon'"/>
               <span class="name">{{item.class_name}}</span>

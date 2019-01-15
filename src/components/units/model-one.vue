@@ -1,6 +1,6 @@
 <template>
   <li class="product">
-    <a :href="'/pages/product/detail/main?id=' + product.prod_id" >
+    <a :href="'/pages/product/detail/main?id=' + id" >
       <div class="img_wrap">
         <img :src="product.image_path" v-if="product.image_path"/>
         <img :src="product.prod_image" v-if="product.prod_image"/>
@@ -17,7 +17,12 @@
 <script>
   export default {
     name: 'model-one',
-    props: ['product', 'min']
+    props: ['product', 'min'],
+    computed: {
+      id () {
+        return this.product.prod_id || this.product.id
+      }
+    }
     // computed: {
     //   image_head () {
     //     return this.product.hasOwnProperty('image_head') ? this.product.image_head : ''

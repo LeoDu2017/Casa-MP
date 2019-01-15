@@ -1,6 +1,6 @@
 <template>
   <div class="showcase">
-    <common-title :title="title" :more="more"></common-title>
+    <common-title :title="title" :more="more" v-if="title"></common-title>
     <ul class="product-wrap">
       <product-window v-for="product in products" :product="product" :key="product.id">
       </product-window>
