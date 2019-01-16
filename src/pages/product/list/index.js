@@ -10,10 +10,11 @@ export default {
       words: null,
       uclassc: null,
       prod_list: [],
-      origin: null,
+      origins: null,
       current_page: 0,
       isload: true,
-      filters: null
+      filters: null,
+      origin: null
     }
   },
   computed: {
@@ -48,6 +49,26 @@ export default {
           }
         })
       }
+    },
+    onFilter (brand, uclassc, origin) {
+      const {uclassb} = this
+      wx.request({
+        url: `${this.serverSide}/wxapi/product/getProdByClass`,
+        data: {brand, uclassc, origin, uclassb},
+        success: ({data: {data: {prod_list}}}) => {
+          Object.assign(this, {prod_list: prod_list.data})
+          console.log(this.prod_list)
+          // cyl.setData({
+          //   brandstyle: res.data.data.list.category,
+          //   brandcountry: res.data.data.list.origin,
+          //   brandallinfo: res.data.data.list.brand_list.brand,
+          //   newpro_use: parm_use,
+          //   newpro_country: parm_country,
+          //   newpro_brand: parm_brand,
+          //   brandallinfo: res.data.data.prod_list.data,
+          // })
+        }
+      });
     }
   },
   onLoad ({uclassb, words, uclassc, type}) {

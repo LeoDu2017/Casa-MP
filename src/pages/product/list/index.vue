@@ -2,7 +2,7 @@
   <div class="detail">
     <div class="tabs">
       <common-search :border="true"></common-search>
-      <product-filter :filters="filters"></product-filter>
+      <product-filter :filters="filters" @filter="onFilter"></product-filter>
     </div>
 
     <scroll-view
