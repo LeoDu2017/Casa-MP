@@ -2,7 +2,9 @@
   <h1 class="common-title" :style="{height:height + 'px'}">
     <span class="title" :style="{fontSize:height + 'px',height:height + 'px',lineHeight:height + 'px'}">{{ title }}</span>
     <span class="more" v-show="more" :style="{fontSize:(height - 10) + 'px'}">
-      更多 <i class="iconfont icon-return" :style="{fontSize:height + 'px'}"></i>
+      <a :href="more">
+        更多 <i class="iconfont icon-return" :style="{fontSize:height + 'px'}"></i>
+      </a>
     </span>
   </h1>
 </template>
@@ -27,6 +29,7 @@
       font-size:  12px;
       .iconfont{
         display: inline;
+        font-size:  12px;
       }
     }
   }

@@ -9,7 +9,7 @@
     <common-division height="15" v-if="promotion.goods.length"></common-division>
     <home-showcase title="精品推荐" :products="recommend"></home-showcase>
     <common-division height="15"></common-division>
-    <home-category title="精选分类" :categories="prodlist" :more="prodlist"></home-category>
+    <home-category title="精选分类" :categories="prodlist" more="/pages/category/main"></home-category>
     <common-division height="15"></common-division>
     <home-brands title="精选品牌" :brands="brand" :more="brand"></home-brands>
     <common-division height="15"></common-division>
