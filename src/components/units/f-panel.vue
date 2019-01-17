@@ -83,11 +83,11 @@
     }
     ._wrap{
       width: 100vw;
-      height: 202px;
+      height: calc(100vh - 90px);
       background: #fff;
       ._swiper{
         width: 100vw;
-        height: 202px;
+        height: calc(100vh - 90px);
 
       }
     }

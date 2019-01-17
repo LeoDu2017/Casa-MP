@@ -47,7 +47,7 @@
 
 <style scoped lang="less">
   .cate_wrap {
-    height: 202px;
+    height: calc(100vh - 90px);
     ._list {
       padding: 0 15px;
       ._item {
