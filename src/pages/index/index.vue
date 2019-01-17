@@ -13,7 +13,7 @@
     <common-division height="15"></common-division>
     <home-brands title="精选品牌" :brands="brand" :more="brand"></home-brands>
     <common-division height="15"></common-division>
-    <home-showcase title="猜你喜欢" :products="like" :more="like"></home-showcase>
+    <home-showcase title="猜你喜欢" :products="like" more="/pages/product/list/main?uclassb=furniture"></home-showcase>
     <common-division height="15"></common-division>
     <home-dash :dash="dash"></home-dash>
     <common-division height="64"></common-division>
