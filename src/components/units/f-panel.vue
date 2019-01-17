@@ -9,40 +9,14 @@
         class="_swiper"
         @change="onChange">
         <swiper-item>
-          <scroll-view
-            :scroll-with-animation="true"
-            scroll-y
-            class="cate_wrap"
-            scroll-y>
-            <ul class="_list">
-              <li class="_item"
-                  :class="{selected: class_c_id === 0}"
-                  @click.stop="onFilter(0, {class_c_id: 0, class_name: '功能', class_seo_name:''})">
-                <span class="text">全部</span>
-                <i class="iconfont icon-duihao"></i>
-              </li>
-              <li
-                class="_item"
-                v-for="(category, index) in categories"
-                @click.stop="onFilter(0, category)"
-                :class="{selected: class_c_id === category.class_c_id}"
-                :key="index">
-                  <span class="text">
-                    {{category.class_name}}
-                  </span>
-                <i class="iconfont icon-duihao"></i>
-              </li>
-            </ul>
-          </scroll-view>
-          <div class="footer">
-            ...
-          </div>
+          <!--@filter="onFilter"-->
+          <p-category v-bind="$attrs" v-on="$listeners" :categories="category" />
         </swiper-item>
         <swiper-item>
-          国家
+          <p-origin v-bind="$attrs" v-on="$listeners" :origins="origin"></p-origin>
         </swiper-item>
         <swiper-item>
-          品牌
+          <p-brand v-bind="$attrs" v-on="$listeners" :brands="brand_list.brand"></p-brand>
         </swiper-item>
       </swiper>
     </div>
@@ -50,36 +24,46 @@
 </template>
 
 <script>
+  import Bus from '@/utils/eventBus'
+  import PCategory from './p-category.vue'
+  import POrigin from './p-origin.vue'
+  import PBrand from './p-brand.vue'
   export default {
     data () {
       return {
-        class_c_id: 0,
-        class_seo_name: null,
-        categories: null,
-        origins: null
+        selected: -1,
+        categorie: null,
+        origin: null,
+        brand_list: {
+          brand: null
+        }
       }
     },
-    props: ['selected', 'filters'],
+    mounted () {
+      Bus.$on('getSelected', res => Object.assign(this, res))
+    },
+    props: ['filters'],
+    components: {
+      PCategory,
+      POrigin,
+      PBrand
+    },
     watch: {
       filters () {
-        const {origin, category, ...rest} = this.filters
-        Object.assign(this, {origins: origin, categories: category, ...rest})
+        Object.assign(this, this.filters)
       }
     },
     methods: {
       onClose () {
-        this.$emit('close')
+        Bus.$emit('getSelected', {selected: -1})
       },
       onChange ({target: {current}}) {
-        this.$emit('onchange', current)
-      },
-      onFilter (type, data) {
-        if (type === 0) {
-          Object.assign(this, data)
-        }
-        const {brand, origin} = this
-        this.$emit('filter', brand, this.class_seo_name, origin, this.class_name)
+        Bus.$emit('getSelected', {selected: current})
       }
+      // onFilter (data) {
+      //   Object.assign(this, data)
+      //   this.$emit('filter', this.brand_url_name, this.class_seo_name, this.cty_name_ab)
+      // }
     }
   }
 </script>
@@ -104,39 +88,7 @@
       ._swiper{
         width: 100vw;
         height: 202px;
-        .cate_wrap{
-          height: 170px;
-          ._list{
-            padding: 0 15px;
-            ._item{
-              border-bottom: 1px solid #E6E6E6;
-              height: 50px;
-              box-sizing: border-box;
-              color: #666;
-              font-size: 14px;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              .iconfont{
-                font-size: 0;
-                transition: all .3s;
-              }
-              &.selected{
-                color: #212223;
-                .iconfont{
-                  font-size: 16px;
-                }
-              }
-              &:last-child{
-                border-bottom: none;
-              }
-            }
-          }
-        }
-        .footer{
-          /*border-top: 1px solid #E6E6E6;*/
-          text-align: center;
-        }
+
       }
     }
   }
