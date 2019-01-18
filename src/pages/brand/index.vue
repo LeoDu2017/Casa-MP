@@ -2,7 +2,7 @@
   <div class="brand">
     <div class="tabs">
       <common-search :border="true"></common-search>
-      <brand-filter></brand-filter>
+      <brand-filter :filter="filter" @filter="onFilter"></brand-filter>
     </div>
     <scroll-view
       @scrolltolower="onAdd"
