@@ -16,7 +16,8 @@
           <p-origin v-bind="$attrs" v-on="$listeners" :origins="type ? origin : countryList"></p-origin>
         </swiper-item>
         <swiper-item>
-          <p-category v-bind="$attrs" v-on="$listeners" :categories="classList" />
+          <p-brand v-if="type" v-bind="$attrs" v-on="$listeners" :brands="brand_list.brand"></p-brand>
+          <p-category v-else v-bind="$attrs" v-on="$listeners" :categories="classList" />
         </swiper-item>
       </swiper>
     </div>
