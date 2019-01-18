@@ -20,15 +20,16 @@
     data () {
       return {
         selected: -1,
+        class_name: '功能',
         cty_name_cn: '国家',
         brand_en_name: '品牌',
         cate_name: '分类'
       }
     },
     computed: {
-      class_name () {
-        return this.type ? '功能' : '风格'
-      }
+      // class_name () {
+      //   return this.type ? '功能' : '风格'
+      // }
     },
     props: ['type'],
     mounted () {
@@ -37,6 +38,7 @@
     methods: {
       onSelect (index) {
         const i = this.selected === index ? -1 : index
+        console.log(46, i)
         Bus.$emit('getSelected', {selected: i})
       }
     }

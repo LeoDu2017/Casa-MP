@@ -43,7 +43,6 @@ export default {
       })
       wx.request({
         url:`${serverSide}/wxapi/brand/ajaxBrandMore`,
-        //uclass: parm_class,page:page
         data: { ubrand, uzone, uclass, page: current_page + 1 },
         success: ({data: {status, data: {data}}}) => {
           if(status) {
@@ -55,8 +54,21 @@ export default {
         }
       })
     },
-    onFilter () {
-
+    onFilter ({class_url_name = this.uclass, cty_name_ab = this.uzone, class_seo_name = this.ubrand}) {
+      const {serverSide} = this
+      wx.showLoading({
+        title: '加载中',
+      })
+      Object.assign(this, {uclass: class_url_name, uzone: cty_name_ab, ubrand: class_seo_name})
+      const {ubrand, uzone, uclass} = this
+      wx.request({
+        url: `${serverSide}/wxapi/brand/getBrandList`,
+        data: { ubrand, uzone, uclass},
+        success: ({data: {data: {brandList: {data}, ...filter}}}) => {
+          wx.hideLoading()
+          Object.assign(this, {filter, list: data})
+        }
+      })
     }
   }
 }

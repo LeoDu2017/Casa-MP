@@ -34,15 +34,18 @@
         id: 0
       }
     },
-    props: ['categories'],
+    props: ['categories', 'classType'],
     methods: {
       onFilter (data) {
         this.id = data.class_c_id || data.id
-        console.log(this.id)
-        Bus.$emit('getTitle', {class_name: data.class_name})
-        this.$emit('filter', {class_seo_name: data.class_seo_name})
+        const post = data.hasOwnProperty('class_url_name') ? {class_url_name: data.class_url_name} : {class_seo_name: data.class_seo_name}
+
+        const title = this.classType ? {cate_name: data.class_name} : {class_name: data.class_name}
+        Bus.$emit('getTitle', title)
+        this.$emit('filter', post)
       }
     }
+
   }
 </script>
 
