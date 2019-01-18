@@ -7,7 +7,6 @@
     </ul>
   </div>
 </template>
-
 <script>
   import CommonTitle from './units/c-title.vue'
   import ProductWindow from './units/model-one.vue'

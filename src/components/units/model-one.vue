@@ -23,17 +23,6 @@
         return this.product.prod_id || this.product.id
       }
     }
-    // computed: {
-    //   image_head () {
-    //     return this.product.hasOwnProperty('image_head') ? this.product.image_head : ''
-    //   },
-    //   brand_en_name () {
-    //     return this.product.hasOwnProperty('brand_en_name') ? this.product.brand_en_name : ''
-    //   },
-    //   prod_name () {
-    //     return this.product.hasOwnProperty('prod_name') ? this.product.prod_name : ''
-    //   }
-    // }
   }
 </script>
 
@@ -57,7 +46,7 @@
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
         word-break: break-all;
-        font-size: 15px;
+        font-size: 14px;
         color:#333;
         &.min{
           font-size: 12px;

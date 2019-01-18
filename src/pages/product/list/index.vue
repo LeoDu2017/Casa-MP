@@ -9,7 +9,6 @@
       @scrolltolower="onAdd"
       :scroll-with-animation="true"
       scroll-y
-      :scroll-into-view="current_tab"
       class="product_wrap">
       <product-showcase :products="prod_list"></product-showcase>
     </scroll-view>

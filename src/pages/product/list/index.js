@@ -51,7 +51,6 @@ export default {
       }
     },
     onFilter ({class_seo_name = this.uclassc, brand_url_name = this.brand, cty_name_ab = this.origin}) {
-
       Object.assign(this, {brand: brand_url_name, uclassc: class_seo_name, origin: cty_name_ab})
       const {brand, uclassc, origin, uclassb} = this
       wx.request({
