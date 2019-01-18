@@ -6,19 +6,19 @@
     scroll-y>
     <ul class="_list">
       <li class="_item"
-          :class="{selected: class_c_id === 0}"
+          :class="{selected: id === 0}"
           @click.stop="onFilter({class_c_id: 0, class_name: '功能', class_seo_name:''})">
         <span class="text">全部</span>
         <i class="iconfont icon-duihao"></i>
       </li>
       <li
         class="_item"
-        v-for="(category, index) in categories"
-        @click.stop="onFilter(category)"
-        :class="{selected: class_c_id === category.class_c_id}"
+        v-for="(data, index) in categories"
+        @click.stop="onFilter(data)"
+        :class="{selected: id === data.class_c_id || id === data.id}"
         :key="index">
         <span class="text">
-          {{category.class_name}}
+          {{data.class_name}}
         </span>
         <i class="iconfont icon-duihao"></i>
       </li>
@@ -31,15 +31,16 @@
   export default {
     data () {
       return {
-        class_c_id: 0
+        id: 0
       }
     },
     props: ['categories'],
     methods: {
-      onFilter (category) {
-        this.class_c_id = category.class_c_id
-        Bus.$emit('getTitle', {class_name: category.class_name})
-        this.$emit('filter', {class_seo_name: category.class_seo_name})
+      onFilter (data) {
+        this.id = data.class_c_id || data.id
+        console.log(this.id)
+        Bus.$emit('getTitle', {class_name: data.class_name})
+        this.$emit('filter', {class_seo_name: data.class_seo_name})
       }
     }
   }

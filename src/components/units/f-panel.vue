@@ -56,6 +56,7 @@
     },
     watch: {
       filters () {
+        console.log(this.filters)
         Object.assign(this, this.filters)
       }
     },
@@ -66,10 +67,6 @@
       onChange ({target: {current}}) {
         Bus.$emit('getSelected', {selected: current})
       }
-      // onFilter (data) {
-      //   Object.assign(this, data)
-      //   this.$emit('filter', this.brand_url_name, this.class_seo_name, this.cty_name_ab)
-      // }
     }
   }
 </script>

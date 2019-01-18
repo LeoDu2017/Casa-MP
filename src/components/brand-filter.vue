@@ -23,5 +23,9 @@
 </script>
 
 <style scoped lang="less">
-
+  .filter{
+    width: 100vw;
+    height: 40px;
+    position: relative;
+  }
 </style>
