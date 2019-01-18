@@ -10,13 +10,13 @@
         @change="onChange">
         <swiper-item>
           <!--@filter="onFilter"-->
-          <p-category v-bind="$attrs" v-on="$listeners" :categories="category" />
+          <p-category v-bind="$attrs" v-on="$listeners" :categories="type ? category : brandClassList" />
         </swiper-item>
         <swiper-item>
-          <p-origin v-bind="$attrs" v-on="$listeners" :origins="origin"></p-origin>
+          <p-origin v-bind="$attrs" v-on="$listeners" :origins="type ? origin : countryList"></p-origin>
         </swiper-item>
         <swiper-item>
-          <p-brand v-bind="$attrs" v-on="$listeners" :brands="brand_list.brand"></p-brand>
+          <p-category v-bind="$attrs" v-on="$listeners" :categories="classList" />
         </swiper-item>
       </swiper>
     </div>
@@ -25,6 +25,7 @@
 
 <script>
   import Bus from '@/utils/eventBus'
+  import PStyle from './p-style.vue'
   import PCategory from './p-category.vue'
   import POrigin from './p-origin.vue'
   import PBrand from './p-brand.vue'
@@ -34,6 +35,9 @@
         selected: -1,
         categorie: null,
         origin: null,
+        countryList: null,
+        brandClassList: null,
+        classList: null,
         brand_list: {
           brand: null
         }
@@ -42,11 +46,12 @@
     mounted () {
       Bus.$on('getSelected', res => Object.assign(this, res))
     },
-    props: ['filters'],
+    props: ['filters', 'type'],
     components: {
       PCategory,
       POrigin,
-      PBrand
+      PBrand,
+      PStyle
     },
     watch: {
       filters () {
@@ -88,7 +93,6 @@
       ._swiper{
         width: 100vw;
         height: calc(100vh - 90px);
-
       }
     }
   }

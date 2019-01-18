@@ -4,6 +4,7 @@
     <f-pane
       v-bind="$attrs"
       v-on="$listeners"
+      :type="1"
       :filters="filters">
     </f-pane>
   </div>
