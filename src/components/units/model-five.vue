@@ -1,6 +1,6 @@
 <template>
   <li class="brand">
-    <a :url="'detail/main?brand_url_name='+brand.brand_url_name">
+    <a :href="'detail/main?id='+brand.brand_url_name">
       <div class="img_wrap">
         <img :src="brand.brand_logo" />
       </div>

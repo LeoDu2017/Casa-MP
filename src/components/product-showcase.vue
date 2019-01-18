@@ -24,7 +24,6 @@
     padding: 15px 15px 5px;
     .product-wrap{
       display:flex;
-      padding-top:15px;
       flex-wrap:wrap;
       justify-content: space-between;
       overflow:hidden;
