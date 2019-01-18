@@ -1,6 +1,6 @@
 <template>
   <div class="filter">
-    <f-tab></f-tab>
+    <f-tab :type="1"></f-tab>
     <f-pane
       v-bind="$attrs"
       v-on="$listeners"

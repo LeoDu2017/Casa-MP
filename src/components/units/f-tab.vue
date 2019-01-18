@@ -9,7 +9,7 @@
       <i class="iconfont" :class="1 === selected ? 'icon-sanjiao_up' : 'icon-sanjiao_xia'"></i>
     </li>
     <li class="item" @click="onSelect(2)" :class="{'active': 2 === selected}">
-      <span class="text">{{brand_en_name}}</span>
+      <span class="text">{{type ? brand_en_name : cate_name}}</span>
       <i class="iconfont" :class="2 === selected ? 'icon-sanjiao_up' : 'icon-sanjiao_xia'"></i>
     </li>
   </ul>
@@ -20,12 +20,17 @@
     data () {
       return {
         selected: -1,
-        class_name: '功能',
         cty_name_cn: '国家',
-        brand_en_name: '品牌'
+        brand_en_name: '品牌',
+        cate_name: '分类'
       }
     },
-    props: ['list', 'selected'],
+    computed: {
+      class_name () {
+        return this.type ? '功能' : '风格'
+      }
+    },
+    props: ['type'],
     mounted () {
       Bus.$on(['getTitle', 'getSelected'], res => Object.assign(this, res))
     },
