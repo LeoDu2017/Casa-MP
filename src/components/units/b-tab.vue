@@ -5,12 +5,8 @@
       <i class="iconfont" :class="0 === selected ? 'icon-sanjiao_up' : 'icon-sanjiao_xia'"></i>
     </li>
     <li class="item" @click="onSelect(1)" :class="{'active': 1 === selected}">
-      <span class="text">{{cty_name_cn}}</span>
+      <span class="text">{{cate_name}}</span>
       <i class="iconfont" :class="1 === selected ? 'icon-sanjiao_up' : 'icon-sanjiao_xia'"></i>
-    </li>
-    <li class="item" @click="onSelect(2)" :class="{'active': 2 === selected}">
-      <span class="text">{{brand_en_name}}</span>
-      <i class="iconfont" :class="2 === selected ? 'icon-sanjiao_up' : 'icon-sanjiao_xia'"></i>
     </li>
   </ul>
 </template>
@@ -21,11 +17,10 @@
       return {
         selected: -1,
         class_name: '功能',
-        cty_name_cn: '国家',
-        brand_en_name: '品牌'
-
+        cate_name: '分类'
       }
     },
+    props: ['type'],
     mounted () {
       Bus.$on(['getTitle', 'getSelected'], res => Object.assign(this, res))
     },
@@ -51,7 +46,7 @@
       justify-content: center;
       align-items: center;
       color: #666666;
-      width: 33.333333%;
+      width: 50%;
       cursor: pointer;
       &.active{
         color: #212223;

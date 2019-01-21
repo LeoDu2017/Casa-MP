@@ -9,13 +9,10 @@
         class="_swiper"
         @change="onChange">
         <swiper-item>
-          <p-category v-bind="$attrs" v-on="$listeners" :categories="category" />
+          <m-category v-bind="$attrs" v-on="$listeners" :categories="classBList" />
         </swiper-item>
         <swiper-item>
-          <p-origin v-bind="$attrs" v-on="$listeners" :origins="origin"></p-origin>
-        </swiper-item>
-        <swiper-item>
-          <p-brand v-bind="$attrs" v-on="$listeners" :brands="brand_list.brand"></p-brand>
+          <m-class v-bind="$attrs"  v-on="$listeners" :categories="classCList" />
         </swiper-item>
       </swiper>
     </div>
@@ -24,36 +21,32 @@
 
 <script>
   import Bus from '@/utils/eventBus'
-  import PStyle from './p-style.vue'
-  import PCategory from './p-category.vue'
-  import POrigin from './p-origin.vue'
-  import PBrand from './p-brand.vue'
+  import MCategory from './m-category.vue'
+  import MClass from './m-class.vue'
   export default {
     data () {
       return {
         selected: -1,
-        origin: null,
-        countryList: null,
-        brandClassList: null,
-        category: null,
-        brand_list: {
-          brand: null
-        }
+        classBList: null,
+        classCList: null
       }
     },
+    onLoad () {
+      console.log(34, this.FS)
+    },
     mounted () {
+      console.log(35, this.FS)
       Bus.$on('getSelected', res => Object.assign(this, res))
     },
-    props: ['filters'],
+    props: ['FS'],
     components: {
-      PCategory,
-      POrigin,
-      PBrand,
-      PStyle
+      MCategory,
+      MClass
     },
     watch: {
-      filters: {
+      FS: {
         handler (val, oldVal) {
+          console.log('B-panel', val)
           Object.assign(this, val)
         },
         deep: true
@@ -81,15 +74,15 @@
     z-index: 100;
     overflow: hidden;
     &.show{
-      height: calc(100vh - 90px);
+      height: calc(100vh - 100px);
     }
     ._wrap{
       width: 100vw;
-      height: calc(100vh - 90px);
+      height: calc(100vh - 100px);
       background: #fff;
       ._swiper{
         width: 100vw;
-        height: calc(100vh - 90px);
+        height: calc(100vh - 100px);
       }
     }
   }

@@ -1,24 +1,20 @@
 <template>
   <div class="filter">
-    <f-tab :type="0"></f-tab>
-    <f-pane
-      v-bind="$attrs"
+    <c-tab></c-tab>
+    <c-panel
       v-on="$listeners"
-      :type="0"
-      :filters="filter">
-    </f-pane>
+      v-bind="$attrs"
+      :filters="filters">
+    </c-panel>
   </div>
 </template>
 
 <script>
-  import FTab from './units/f-tab.vue'
-  import FPane from './units/f-panel.vue'
+  import CTab from './units/c-tab.vue'
+  import CPanel from './units/c-panel.vue'
   export default {
-    components: {
-      FTab,
-      FPane
-    },
-    props: ['filter']
+    components: {CTab, CPanel},
+    props: ['filters']
   }
 </script>
 

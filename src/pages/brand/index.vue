@@ -1,8 +1,9 @@
 <template>
   <div class="brand">
+    <common-loading></common-loading>
     <div class="tabs">
       <common-search :border="true"></common-search>
-      <brand-filter :filter="filter" @filter="onFilter"></brand-filter>
+      <brand-filter :filters="filters" @filter="onFilter"></brand-filter>
     </div>
     <scroll-view
       @scrolltolower="onAdd"

@@ -62,7 +62,7 @@ export default {
       });
     }
   },
-  onLoad ({uclassb, words, uclassc, type}) {
+  onLoad ({uclassb, words, uclassc}) {
     Object.assign(this, {uclassb, words, uclassc})
     const {serverSide} = this
     wx.request({
@@ -70,7 +70,6 @@ export default {
       data: { uclassb, words, uclassc},
       success: ({data: {data: {list, prod_list, list: {brand_list: {class_b: {class_name}}}}}}) => {
         const {data, ...rest} = prod_list
-
         Object.assign(this, {filters: list,prod_list:data, ...rest})
         wx.setNavigationBarTitle({
           title: class_name

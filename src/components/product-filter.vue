@@ -1,14 +1,14 @@
 <template>
   <div class="filter">
-    <f-tab :type="1"></f-tab>
+    <f-tab></f-tab>
     <f-pane
       v-bind="$attrs"
       v-on="$listeners"
-      :type="1"
       :filters="filters">
     </f-pane>
   </div>
 </template>
+
 <script>
   import FTab from './units/f-tab.vue'
   import FPane from './units/f-panel.vue'
@@ -17,6 +17,7 @@
     props: ['filters']
   }
 </script>
+
 <style scoped lang="less">
   .filter{
     width: 100vw;

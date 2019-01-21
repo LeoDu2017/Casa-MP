@@ -1,5 +1,7 @@
 import CommonSearch from '@/components/common-search'
+import CommonLoading from '@/components/common-loading'
 import BrandFilter from '@/components/brand-filter'
+import BrandProductFilter from '@/components/brand-product-filter'
 import BrandShowcase from '@/components/brand-showcase'
 import store from '@/status/store'
 import TabBar from '@/components/common-tabBar.vue'
@@ -14,9 +16,8 @@ export default {
       uzone: null,
       uclass: null,
       list: null,
-      filter: null,
+      filters: null,
       pFilter: null,
-
       prodList: null,
       info: null
     }
@@ -32,10 +33,18 @@ export default {
     TabBar,
     BrandShowcase,
     BrandInfo,
-    productShowcase
+    productShowcase,
+    BrandProductFilter,
+    CommonLoading
   },
-  onLoad ({id}) {
-    id ? this.getBrand(id) : this.getBrandList()
+  onLoad () {
+    store.commit('showLoading')
+    Object.assign(this, {
+      ubrand: null,
+      uzone: null,
+      uclass: null
+    })
+    this.getBrandList(null)
   },
   methods: {
     onAdd () {
@@ -57,44 +66,32 @@ export default {
       })
     },
     onFilter ({class_url_name = this.uclass, cty_name_ab = this.uzone, class_seo_name = this.ubrand}) {
+
       wx.showLoading({
         title: '加载中',
       })
-      Object.assign(this, {uclass: class_url_name, uzone: cty_name_ab, ubrand: class_seo_name})
-      this.getBrandList()
+      const data = {uclass: class_url_name, uzone: cty_name_ab, ubrand: class_seo_name}
+      Object.assign(this, data)
+      this.getBrandList(data)
     },
-    getBrandList () {
-      const {serverSide, ubrand, uzone, uclass} = this
-      wx.request({
-        url: `${serverSide}/wxapi/brand/getBrandList`,
-        data: { ubrand, uzone, uclass},
-        success: ({data: {data: {brandList: {data}, ...filter}}}) => {
-          wx.hideLoading()
-          Object.assign(this, {filter, list: data})
-        }
+    onPFilter (res) {
+      wx.showLoading({
+        title: '加载中',
       })
+      Object.assign(this, {})
+      this.getBrandList(data)
     },
-    getBrand (id,search) {
+    getBrandList (data) {
       const {serverSide} = this
       wx.request({
-        url:`${serverSide}/wxapi/brand/getBrandDetail`,
-        data: { ubrand: id, words: search},
-        success: ({data: {data: {prod_list: {data}, info, ...pFilter}}}) => {
-          Object.assign(this, {prodList: data, info, ...pFilter})
-          // cyl.setData({
-          //      brandclass:res.data.data.classBList,
-          //        branduse:res.data.data.classCList,
-          //   brandallinfo: res.data.data.info,
-          //      brandtitle:res.data.data.info.brand_en_name
-
-          //   brandlist:res.data.data.prod_list.data,
-
-          // })
-          // WxParse.wxParse('detail', 'html', cyl.data.brandallinfo.brand_detail, cyl, 5)
-          // var brandtitle = cyl.data.brandtitle;
-          // wx.setNavigationBarTitle({
-          //   title: brandtitle
-          // })
+        url: `${serverSide}/wxapi/brand/getBrandList`,
+        data,
+        success: ({data: {data: {brandList: {data}, ...filters}}}) => {
+         setTimeout(() => {
+           store.commit('hideLoading')
+         }, 4500)
+          wx.hideLoading()
+          Object.assign(this, {filters, list: data})
         }
       })
     }
