@@ -3,10 +3,10 @@
     <div class="tabs">
       <common-search :border="true"></common-search>
       <brand-info :info="info"></brand-info>
-      <brand-product-filter :FS="FS" @filter="onFilter"></brand-product-filter>
+      <brand-product-filter :filters="filters" @filter="onFilter"></brand-product-filter>
     </div>
     <scroll-view
-      @scrolltolower="onAddProduct"
+      @scrolltolower="onAdd"
       :scroll-with-animation="true"
       scroll-y
       class="product_wrap">
@@ -25,14 +25,13 @@
   export default {
     data () {
       return {
-        current_page: 0,
         ubrand: null,
-        uzone: null,
-        uclass: null,
-        list: null,
-        FS: null,
+        filters: null,
         prodList: null,
-        info: null
+        info: null,
+        classB: null,
+        classC: null,
+        currentPage: 0
       }
     },
     computed: {
@@ -47,18 +46,44 @@
       BrandProductFilter
     },
     onLoad ({id}) {
-      const {serverSide} = this
+      this.ubrand = id
+      const {serverSide, ubrand} = this
       wx.request({
         url: `${serverSide}/wxapi/brand/getBrandDetail`,
-        data: {ubrand: id},
-        success: ({data: {data: {prod_list: {data}, info, classB, words, ...FS}}}) => {
-          Object.assign(this, {prodList: data, info, FS})
+        data: {ubrand},
+        success: ({data: {data: {prod_list: {data}, info, classB, words, ...filters}}}) => {
+          Object.assign(this, {prodList: data, info, filters})
         }
       })
     },
     methods: {
-      onFilter () {
-        console.log('filter')
+      onFilter ({classB = this.classB, classC = this.classC}) {
+        Object.assign(this, {classB, classC})
+        const {serverSide, ubrand} = this
+        wx.request({
+          url: `${serverSide}/wxapi/brand/getBrandDetail`,
+          data: {ubrand, classB, classC},
+          success: ({data: {data: {prod_list: {data}, info, ...filters}}}) => {
+            Object.assign(this, {prodList: data, info, filters})
+          }
+        })
+      },
+      onAdd () {
+        wx.showLoading({
+          title: '加载中'
+        })
+        const {serverSide, ubrand, classB, classC, prodList} = this
+        wx.request({
+          url: `${serverSide}/wxapi/brand/ajaxProdListByBrand`,
+          data: {ubrand, classB, classC, page: ++this.currentPage},
+          success: ({data: {data}, status}) => {
+            wx.hideLoading()
+            status ? prodList.push(...data.data) : wx.showToast({
+              title: '加载完毕',
+              icon: 'none'
+            })
+          }
+        })
       }
     }
   }

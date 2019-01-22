@@ -26,19 +26,13 @@
   export default {
     data () {
       return {
-        selected: -1,
-        classBList: null,
-        classCList: null
+        selected: -1
       }
     },
-    onLoad () {
-      console.log(34, this.FS)
-    },
     mounted () {
-      console.log(35, this.FS)
       Bus.$on('getSelected', res => Object.assign(this, res))
     },
-    props: ['FS'],
+    props: ['classBList', 'classCList'],
     components: {
       MCategory,
       MClass

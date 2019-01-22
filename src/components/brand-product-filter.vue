@@ -4,8 +4,8 @@
     <b-panel
       v-on="$listeners"
       v-bind="$attrs"
-      :B="classBList"
-      :C="classCList">
+      :classBList="filters.classBList"
+      :classCList="filters.classCList">
     </b-panel>
   </div>
 </template>
@@ -23,7 +23,7 @@
       }
     },
     watch: {
-      FS: {
+      filters: {
         handler (val, oldVal) {
           console.log('B-panel', val)
           Object.assign(this, val)
@@ -31,7 +31,7 @@
         deep: true
       }
     },
-    props: ['FS']
+    props: ['filters']
   }
 </script>
 
