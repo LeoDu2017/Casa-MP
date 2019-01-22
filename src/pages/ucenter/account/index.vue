@@ -23,7 +23,7 @@
     <div class="menu_box">
       <ul class="row">
         <li class="item">
-          <a :href="isLogin ? '/pages/ucenter/collection/main':'/pages/ucenter/login/main?page=login'">
+          <a :href="isLogin ? 'collection/main':'/pages/ucenter/login/main?page=login'">
             <i class="iconfont icon-shoucang0"></i>
             <span class="text">产品收藏</span>
           </a>

@@ -2,13 +2,19 @@
   <li class="product">
     <a :href="'/pages/product/detail/main?id=' + id" >
       <div class="img_wrap">
+        <i v-if="del" @click.stop="onDelete(id)" class="iconfont icon-web-icon-"></i>
         <img :src="product.image_path" v-if="product.image_path"/>
         <img :src="product.prod_image" v-if="product.prod_image"/>
       </div>
       <div class="_bottom">
+        <p v-if="product.brand_name">{{product.brand_name}}</p>
         <p v-if="product.image_head" :class="min ? 'min' : ''">{{ product.image_head }}</p>
         <p v-if="product.brand_en_name" :class="min ? 'min' : ''">{{ product.brand_en_name }}</p>
         <p v-if="product.prod_name" :class="min ? 'min' : ''">{{ product.prod_name }}</p>
+        <p v-if="product.add_date && product.add_time" class="time">
+          {{product.add_date }}
+          {{product.add_time}}
+        </p>
       </div>
     </a>
   </li>
@@ -17,10 +23,15 @@
 <script>
   export default {
     name: 'model-one',
-    props: ['product', 'min'],
+    props: ['product', 'min', 'del'], // delete: 是否显示删除按钮
     computed: {
       id () {
         return this.product.prod_id || this.product.id
+      }
+    },
+    methods: {
+      onDelete (id) {
+        this.$emit('delete', id)
       }
     }
   }
@@ -32,9 +43,21 @@
     .img_wrap{
       height:113px;
       width:100%;
+      position: relative;
       img{
         height:100%;
         width:100%;
+      }
+      .iconfont{
+        position: absolute;
+        height: 27px;
+        width: 27px;
+        background: rgba(0,0,0,.5);
+        color: #fff;
+        right: 0;
+        line-height: 27px;
+        font-size: 21px;
+        text-align: center;
       }
     }
     ._bottom{
@@ -51,6 +74,10 @@
         &.min{
           font-size: 12px;
           color:#666
+        }
+        &.time{
+          font-size: 10px;
+          color: #999;
         }
       }
     }
