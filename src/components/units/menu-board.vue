@@ -16,7 +16,7 @@
           <span>关于我们</span>
         </li>
         <li>
-          <a href="/page/inspiration/main">
+          <a href="/pages/others/inspiration/main">
             <i class="iconfont icon-zhaopian1"></i>
             <span>灵感库</span>
           </a>

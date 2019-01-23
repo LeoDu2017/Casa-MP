@@ -11,8 +11,7 @@
       scroll-y>
       <div v-if="total">
         <products :products="list" @delete="onDelete" />
-        <common-division :height="3" v-if="over"></common-division>
-        <div class="over" v-if="over">商品加载完毕！</div>
+        <loading-over v-if="over"></loading-over>
       </div>
       <div class="null" v-else>
         <div class="center">
@@ -76,13 +75,6 @@
       }
       .products{
         margin-bottom: 15px;
-      }
-      .over{
-        text-align: center;
-        font-size: 14px;
-        height: 100px;
-        line-height: 60px;
-        color: #666;
       }
     }
   }

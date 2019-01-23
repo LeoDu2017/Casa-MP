@@ -1,6 +1,6 @@
 import store from '@/status/store.js'
 import products from '@/components/product-collection.vue'
-import CommonDivision from '@/components/common-division.vue'
+import LoadingOver from '@/components/loading-over.vue'
 export default {
   data () {
     return {
@@ -20,7 +20,7 @@ export default {
   },
   components: {
     products,
-    CommonDivision
+    LoadingOver
   },
   methods: {
     onAdd () {
