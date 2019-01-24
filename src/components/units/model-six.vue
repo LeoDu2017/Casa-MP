@@ -2,7 +2,7 @@
   <li class="item">
     <i
       class="iconfont"
-      @click="onCollect(inspiration.id)"
+      @click="onCollect(inspiration.id, inspiration.is_collect)"
       :class="inspiration.is_collect ? 'icon-xin_02' : 'icon-xin_01'">
     </i>
     <img class="img" mode="widthFix" catchtap="tapImg" :src="inspiration.org_image" />
@@ -13,8 +13,8 @@
   export default {
     props: ['inspiration'],
     methods: {
-      onCollect (id) {
-        this.$emit('collect', id)
+      onCollect (id, type) {
+        this.$emit('collect', id, type)
       }
     }
   }

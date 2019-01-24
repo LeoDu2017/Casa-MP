@@ -84,19 +84,24 @@
           }
         }))
       },
-      onCollect (id) {
+      onCollect (id, type) {
         const {token, serverSide, list} = this
+        console.log(type)
+        const url = type
+          ? `${serverSide}/wxapi/originality/delOriginalCollect`
+          : `${serverSide}/wxapi/originality/collectOriginalById`
         !token
           ? wx.navigateTo({url: '/pages/ucenter/login/main'})
           : wx.request({
-            url: `${serverSide}/wxapi/originality/collectOriginalById`,
+            url,
             data: {id, token},
-            success: ({data: {status}}) => {
+            success: ({data: {status, msg}}) => {
               const index = list.findIndex(item => item.id === id)
-              status && void (list[index].is_collect = 1, wx.showToast({
-                title: '收藏成功',
+              status && void (list[index].is_collect = type ? 0 : 1)
+              wx.showToast({
+                title: msg,
                 icon: 'none'
-              }))
+              })
             },
             fail () {
               wx.showToast({
