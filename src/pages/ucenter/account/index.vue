@@ -29,13 +29,13 @@
           </a>
         </li>
         <li class="item">
-          <a :href="isLogin ? '/pages/ucenter/inspiration/main':'/pages/ucenter/login/main?page=login'">
+          <a :href="isLogin ? 'inspiration/main':'/pages/ucenter/login/main?page=login'">
             <i class="iconfont icon-zhaopian"></i>
             <span class="text">灵感收藏</span>
           </a>
         </li>
         <li class="item">
-          <a :href="isLogin ? '/pages/ucenter/wish/main':'/pages/ucenter/login/main?page=login'">
+          <a :href="isLogin ? 'wish/main':'/pages/ucenter/login/main?page=login'">
             <i class="iconfont icon-xin_02"></i>
             <span class="text">我的心愿</span>
           </a>
@@ -43,13 +43,13 @@
       </ul>
       <ul class="row">
         <li class="item">
-          <a :href="isLogin ? '/pages/ucenter/quoteOrder/main':'/pages/ucenter/login/main?page=login'">
+          <a :href="isLogin ? 'quoteOrder/main':'/pages/ucenter/login/main?page=login'">
             <i class="iconfont icon-baojiahou"></i>
             <span class="text">我的报价</span>
           </a>
         </li>
         <li class="item">
-          <a :href="isLogin ? '/pages/ucenter/orderList/main':'/pages/ucenter/login/main?page=login'">
+          <a :href="isLogin ? 'orderList/main':'/pages/ucenter/login/main?page=login'">
             <i class="iconfont icon-dingdan2"></i>
             <span class="text">我的订单</span>
           </a>

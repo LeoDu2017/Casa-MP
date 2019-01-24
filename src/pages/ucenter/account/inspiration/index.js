@@ -1,5 +1,5 @@
 import store from '@/status/store.js'
-import products from '@/components/product-collection.vue'
+import inspirations from '@/components/inspiration-collection.vue'
 import LoadingOver from '@/components/loading-over.vue'
 import AccountTitle from '@/components/account-title.vue'
 export default {
@@ -20,25 +20,25 @@ export default {
     }
   },
   components: {
-    products,
+    inspirations,
     LoadingOver,
     AccountTitle
   },
   methods: {
     onAdd () {
-      this.getProduct(++this.page)
+      this.getInspiration(++this.page)
     },
-    getProduct (page) {
+    getInspiration (page) {
       const {serverSide, token} = this
       if (this.over) {
         return
       }
       wx.showLoading({ title: '加载中' })
       wx.request({
-        url: `${serverSide}/wxapi/user/getCollectionList`,
+        url: `${serverSide}/wxapi/user/userCenterOriginality`,
         data: {page, token},
         success: ({data: {data: {list, total}, status}}) => {
-          wx.hideLoading()
+          wx.hideLoading(list, total)
           status ? void (this.total = total, this.list.push(...list)) : void (this.over = true)
         },
         fail () {
@@ -50,18 +50,18 @@ export default {
         }
       })
     },
-    onDelete (prod_id) {
+    onDelete (original_id) {
       const {token, serverSide} = this
       wx.request({
         url: `${serverSide}/wxapi/user/delProdCollect`,
         method: 'GET',
-        data: {prod_id, token},
+        data: {original_id, token},
         header: {'Accept': 'application/json'},
         success: ({data: {status}}) => {
           status && void (this.total--,
-            this.list.splice(this.list.findIndex(item => item.prod_id === prod_id), 1))
+            this.list.splice(this.list.findIndex(item => item.original_id === original_id), 1))
           wx.showToast({
-            title: status ? '产品收藏删除成功' : '产品收藏删除失败，请重试',
+            title: status ? '灵感收藏删除成功' : '灵感收藏删除失败，请重试',
             icon: 'none'
           })
         },
@@ -75,6 +75,6 @@ export default {
     }
   },
   onLoad () {
-    this.getProduct(0)
+    this.getInspiration(0)
   }
 }

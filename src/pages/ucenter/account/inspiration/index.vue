@@ -1,13 +1,13 @@
 <template>
   <div class="collection">
-    <account-title title="产品" :total="total"></account-title>
+    <account-title title="灵感" :total="total"></account-title>
     <scroll-view
       :scroll-with-animation="true"
       @scrolltolower="onAdd"
       class="product_wrap"
       scroll-y>
       <div v-if="total">
-        <products :products="list" @delete="onDelete" />
+        <inspirations :inspirations="list" @delete="onDelete" />
         <loading-over v-if="over"></loading-over>
       </div>
       <div class="null" v-else>
@@ -15,7 +15,7 @@
           <i class="iconfont icon-wushoucang"></i>
           <p class="text">
             您的收藏为空
-            <a class="red" href="/pages/product/list/main?uclassb=furniture">去逛逛</a>
+            <a class="red" href="/pages/other/inspiration/main">去逛逛</a>
           </p>
         </div>
       </div>
