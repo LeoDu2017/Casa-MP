@@ -39,9 +39,6 @@ export default {
     serverSide () {
       return store.state.serverSide
     },
-    phone () {
-      return store.state.phone
-    },
     token () {
       return store.state.token
     }
@@ -55,17 +52,16 @@ export default {
     ProductDetails,
     DTitle,DInput
   },
-  onLoad (options) {
+  onLoad ({id}) {
     store.commit('showLoading')
     const token = store.state.token
-    const {id} = options
     this.id = id ? id : 25758
 
     // 获取产品信息
     wx.request({
       url: `${this.serverSide}/wxapi/product/prod_detail`,
       method: 'GET',
-      data: {id: this.id},
+      data: {id},
       header: {
         'Accept': 'application/json'
       },

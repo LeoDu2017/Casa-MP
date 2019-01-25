@@ -1,61 +1,119 @@
 <template>
   <div class="see">
-    <d-title title="报价需求，一键送达" subTitle="意大利之家为您奉上心动家具价格"></d-title>
-    <d-input
-      icon="icon-zhanghu"
-      height="40"
-      :value="phone"
-      placeholder="请输入您的手机号"
-      @callBack="setPhone"
-      maxlength="11">
-    </d-input>
-    <d-input
-      icon="icon-xiangmuxuqiu"
-      height="100"
-      @callBack="setRemark"
-      placeholder="请告诉我们您的需求"
-      maxlength="100">
-    </d-input>
-    <button class="btn" @click="onSubmit(1)">立即提交</button>
+    <div class="wrap">
+      <d-title title="报价需求，一键送达" subTitle="意大利之家为您奉上心动家具价格"></d-title>
+      <d-input
+        icon="icon-zhanghu"
+        height="40"
+        :value="phone"
+        placeholder="请输入您的手机号"
+        @callBack="setPhone"
+        maxlength="11">
+      </d-input>
+      <d-input
+        icon="icon-xiangmuxuqiu"
+        height="100"
+        @callBack="setRemark"
+        placeholder="请告诉我们您的需求"
+        maxlength="100">
+      </d-input>
+      <button class="btn" @click="onSubmit">立即提交</button>
+    </div>
     <common-division height="15"></common-division>
-    <div class="wrap2">
+    <div class="wrap">
       <div class="totalBox">
         已选
         <span class="number">
-          {{total}}
+          {{ids.length}}
         </span>
-        件产品
+        种产品
       </div>
-      <ul class="_list">
-        <li class="_item">
-          <div class="imgBox">
-            <img class="_img" :src="prod_image"/>
-          </div>
-          <div class="_text">
-            {{prod_name}}
-          </div>
-        </li>
-      </ul>
+      <product-list :ids="ids" />
     </div>
   </div>
 </template>
-<script src="../index.js"></script>
+<script>
+  import store from '@/status/store.js'
+  import DTitle from '@/components/units/d-title.vue'
+  import DInput from '@/components/units/d-input.vue'
+  import ProductList from '@/components/product-list'
+  import CommonDivision from '@/components/common-division.vue'
+  export default {
+    data () {
+      return {
+        phone: null,
+        remark: null,
+        type: 1,
+        ids: []
+      }
+    },
+    computed: {
+      serverSide () {
+        return store.state.serverSide
+      },
+      phone () {
+        return store.state.phone
+      },
+      token () {
+        return store.state.token
+      }
+    },
+    onLoad ({id}) {
+      this.ids = id.split(',')
+    },
+    components: {
+      DTitle,
+      DInput,
+      ProductList,
+      CommonDivision
+    },
+    methods: {
+      onSubmit (type) {
+        const {serverSide, token, remark, phone, ids} = this
+        wx.request({
+          url: `${serverSide}/wxapi/product/addQuoteApplyProd`,
+          method: 'post',
+          data: {
+            prod_id: ids,
+            remark,
+            customer_phone: phone,
+            type,
+            token
+          },
+          header: {'Accept': 'application/json'},
+          success ({data: {status, info}}) {
+            wx.showToast({
+              title: info,
+              icon: 'none',
+              duration: 1000,
+              success () {
+                status === 1 && setTimeout(() => {
+                  wx.navigateBack({ changed: true })
+                }, 2000)
+              }
+            })
+          }
+        })
+      }
+    }
+  }
+</script>
 <style scoped lang="less">
   .see{
-    padding: 15px;
-    .btn{
-      border-radius:4px;
-      height: 47px;
-      line-height: 47px;
-      width:100%;
-      background-color:#333;
-      font-size: 18px;
-      word-break:break-all;
-      text-align: center;
-      color: #fff;
-      margin-top: 20px;
-    }
-    .wrap2{
+    .wrap{
+      padding: 15px;
+      .btn{
+        border-radius:4px;
+        height: 47px;
+        line-height: 47px;
+        width:100%;
+        background-color:#333;
+        font-size: 18px;
+        word-break:break-all;
+        text-align: center;
+        color: #fff;
+        margin-top: 20px;
+      }
       .totalBox{
         display: flex;
         font-size: 14px;
@@ -65,34 +123,8 @@
           color:#333;
         }
       }
-      ._list {
-        ._item{
-          height: 60px;
-          width: 100%;
-          padding-bottom: 12px;
-          border-bottom: 1px solid #ccc;
-          display: flex;
-          align-items: center;
-          & + ._item{
-            margin-top: 12px;
-          }
-          .imgBox{
-            height: 60px;
-            flex: 0 0 90px;
-            ._img{
-              height:100%;
-              width:100%;
-            }
-          }
-          ._text{
-            flex:1;
-            text-align: left;
-            padding-left: 12px;
-            font-size: 12px;
-            color:#666;
-          }
-        }
-      }
     }
+
+
   }
 </style>
