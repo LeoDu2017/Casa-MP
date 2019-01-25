@@ -39,7 +39,9 @@ export default {
         data: {page, token},
         success: ({data: {data: {list, total}, status}}) => {
           wx.hideLoading(list, total)
-          status ? void (this.total = total, this.list.push(...list)) : void (this.over = true)
+          status ? void (this.total = total,
+              page ?  this.list.push(...list) : void(this.list = list)
+          ) : void (this.over = true)
         },
         fail () {
           wx.hideLoading()

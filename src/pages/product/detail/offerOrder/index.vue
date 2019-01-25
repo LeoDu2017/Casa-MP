@@ -68,13 +68,20 @@
       CommonDivision
     },
     methods: {
-      onSubmit (type) {
-        const {serverSide, token, remark, phone, ids} = this
+      setPhone (val) {
+        this.phone = val
+      },
+      setRemark (val) {
+        this.remark = val
+      },
+      onSubmit () {
+        const {serverSide, token, type, remark, phone, ids} = this
+        console.log(phone)
         wx.request({
           url: `${serverSide}/wxapi/product/addQuoteApplyProd`,
           method: 'post',
           data: {
-            prod_id: ids,
+            prod_id: ids.join(','),
             remark,
             customer_phone: phone,
             type,
@@ -124,7 +131,5 @@
         }
       }
     }
-
-
   }
 </style>

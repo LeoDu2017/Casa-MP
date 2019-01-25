@@ -7,7 +7,7 @@ const store = new Vuex.Store({
   // http://italy.cn
   state: {
     on: false,
-    serverSide: 'https://www.italyclassico.com',
+    serverSide: 'http://italy.cn', // https://www.italyclassico.com
     hide: false,
     isLogin: false,
     phone: null,
