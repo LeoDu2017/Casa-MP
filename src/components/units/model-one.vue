@@ -2,6 +2,7 @@
   <li class="product">
     <a :href="'/pages/product/detail/main?id=' + id" >
       <div class="img_wrap">
+        <span class="cx_xh" :class="{show:product.is_spots}">{{product.sale_price > 0 ? '促销' : '现货'}}</span>
         <i v-if="del" @click.stop="onDelete(id)" class="iconfont icon-web-icon-"></i>
         <img :src="product.image_path" v-if="product.image_path"/>
         <img :src="product.prod_image" v-if="product.prod_image"/>
@@ -44,6 +45,25 @@
       height:113px;
       width:100%;
       position: relative;
+      overflow: hidden;
+      .cx_xh {
+        position:absolute;
+        display:none;
+        background:#bf2d2f;
+        color:#fff;
+        text-align:center;
+        box-sizing:border-box;
+        transform:rotate(-45deg);
+        font-size: 12px;
+        letter-spacing: 2px;
+        top: 10px;
+        width: 77px;
+        height:18px;
+        left: -19px;
+        &.show{
+          display:block;
+        }
+      }
       img{
         height:100%;
         width:100%;
