@@ -7,7 +7,7 @@
       class="product_wrap"
       scroll-y>
       <div v-if="total">
-        <products :products="list" @delete="onDelete" />
+        <quotes :quotes="list"></quotes>
         <loading-over v-if="over"></loading-over>
       </div>
       <div class="null" v-else>
