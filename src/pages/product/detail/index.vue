@@ -4,7 +4,7 @@
     <common-banner :banner="gallery"  form="number"></common-banner>
     <product-info
       :id="id"
-      :is_spot="is_spot"
+      :is_spots="is_spots"
       :activity="activity"
       :is_activity="is_activity"
       :act_attr="act_attr"
@@ -12,6 +12,8 @@
       :subtitle="subtitle"
       :prod_name="prod_name"
       :origin="origin"
+      :price="price"
+      :sale_price="sale_price"
       :pro_style="style">
     </product-info>
     <common-division height="15"></common-division>

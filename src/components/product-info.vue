@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <div v-if="is_activity" class="activity-info">
       <div class="_top">
         <div class="price_box">
@@ -15,10 +16,15 @@
         <span class="join">{{activity.buy_num}}人已参团</span>
       </div>
     </div>
+    <div class="spots_price" v-if="is_spots">
+      <span v-if="sale_price">￥{{sale_price}}</span>
+      <span v-else>￥{{price}}</span>
+    </div>
 
     <div class="common-block">
-      <p class="sub-title">{{subtitle}}</p>
-      <p class="main-title"><span v-if="is_spot" class="symbol">现货</span>{{prod_name}}</p>
+      <p class="sub-title" v-if="is_spots" style='color:red;' >在线支付满立减，满10万减1万，满20万减 2.5万</p>
+      <p class="sub-title" v-if="is_spots === 0 && subtitle">{{subtitle}}</p>
+      <p class="main-title"><span v-if="is_spots" class="symbol">现货</span>{{prod_name}}</p>
       <p class="addition-info">
         <span class="_left">产地：{{origin}}</span>
         <span>风格：{{pro_style}}</span>
@@ -26,7 +32,7 @@
     </div>
 
     <division v-if="is_activity" height="15"></division>
-    <div class="common-block">
+    <div class="common-block" style="padding:15px">
       <dl class="parameter" :class="folder ? 'folder' : ''">
         <dt>
           <span class="title">参数</span>
@@ -46,7 +52,9 @@
     <div class="common-block">
       <p class="dot-line" v-if="!is_activity"></p>
       <span class="apply-btn" :class="{'disabled': now < activity.start_time || now > activity.end_time}" v-if="is_activity" @click="onPay">支付预定金</span>
+      <span class="apply-btn" v-else-if="is_spots" @click="onPay">支付预定金</span>
       <a class="apply-btn" v-else @click="offerOrder">申请报价</a>
+
       <p class="view-more" @click="toggleStatus('on')">
         <span class="text">更多</span>
         <i class="iconfont" :class="on ? 'icon-up' : 'icon-down'"></i>
@@ -98,7 +106,9 @@
       'is_wish',
       'is_collect',
       'activity',
-      'is_spot'],
+      'sale_price',
+      'price',
+      'is_spots'],
     computed: {
       now () {
         return Date.parse(new Date()) / 1000
@@ -179,7 +189,7 @@
       onPay () {
         const {id, checkLogin} = this
         checkLogin() && wx.navigateTo({
-          url: `/page/ucenter/quotation/main?id=${id}`
+          url: `deposit/main?prod_id=${id}`
         })
       },
       toggleStatus (state) {
@@ -290,8 +300,11 @@
       }
     }
   }
+  .spots_price{
+    padding: 5px 15px;
+  }
   .common-block{
-    padding: 15px 15px 0;
+    padding:0 15px;
     .sub-title{
       font-size: 12px;
       color:#999;

@@ -32,7 +32,10 @@ export default {
       remark: null,
       prod_name: null,
       prod_image: null,
-      total: null
+      total: null,
+      is_spots: 0,
+      price: 0,
+      sale_price: 0,
     }
   },
   computed:{
