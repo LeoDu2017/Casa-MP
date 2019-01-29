@@ -55,14 +55,14 @@
           </a>
         </li>
         <li class="item">
-          <a :href="isLogin ? '/pages/ucenter/pwdEdit/main':'/pages/ucenter/login/main?page=login'">
+          <a :href="isLogin ? 'changePassword/main':'/pages/ucenter/login/main?page=login'">
             <i class="iconfont icon-xiugai"></i>
             <span class="text">修改密码</span>
           </a>
         </li>
       </ul>
     </div>
-    <common-division height="110">
+    <common-division height="200">
       <div class="bottom">
         <span class="service">
           咨询客服：400-065-0601
