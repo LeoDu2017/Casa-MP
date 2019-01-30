@@ -4,8 +4,10 @@
       <search-input :go='1' type="menu"></search-input>
       <ul class="menu-list">
         <li>
-          <i class="iconfont icon-anli"></i>
-          <span>案例分享</span>
+          <a href="/pages/others/article/main">
+            <i class="iconfont icon-anli"></i>
+            <span>案例分享</span>
+          </a>
         </li>
         <li>
           <i class="iconfont icon-xinwen2"></i>
