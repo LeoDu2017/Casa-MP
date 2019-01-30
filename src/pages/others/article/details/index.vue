@@ -107,6 +107,7 @@
     width: 50%;
     float: left;
     display: flex;
+    align-items: baseline;
   }
 
   .header_dis .time {
@@ -114,6 +115,7 @@
     float: right;
     text-align: right;
     display: flex;
+    align-items: baseline;
 
   }
 
