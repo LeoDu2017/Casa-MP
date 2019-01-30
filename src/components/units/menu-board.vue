@@ -4,14 +4,16 @@
       <search-input :go='1' type="menu"></search-input>
       <ul class="menu-list">
         <li>
-          <a href="/pages/others/article/main">
+          <a href="/pages/others/article/main?class_id=0">
             <i class="iconfont icon-anli"></i>
             <span>案例分享</span>
           </a>
         </li>
         <li>
-          <i class="iconfont icon-xinwen2"></i>
-          <span>新闻资讯</span>
+          <a href="/pages/others/article/main?class_id=1">
+            <i class="iconfont icon-xinwen2"></i>
+            <span>新闻资讯</span>
+          </a>
         </li>
         <li>
           <i class="iconfont icon-guanyuwomen"></i>

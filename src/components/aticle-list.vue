@@ -3,7 +3,7 @@
     <li class="item"
         v-for="(item, index) in list"
         :key="index">
-      <a :href="'details/main?id='+item.id">
+      <a :href="'details/main?article_id='+item.id">
         <div class="left">
           <img class="img" :src="item.article_img" />
         </div>
@@ -34,7 +34,7 @@
 
 <style scoped lang="less">
   .item{
-    padding:25px 15px;
+    padding:15px;
 
     a{
       display: flex;
@@ -70,8 +70,11 @@
           -webkit-line-clamp: 1;
           -webkit-box-orient: vertical;
           word-break: break-all;
+          display: flex;
+          align-items: baseline;
           .text{
             font-size: 14px;
+            margin-left: 10px;
           }
         }
       }
