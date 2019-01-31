@@ -80,16 +80,20 @@ export default {
   methods: {
     onAdd () {
       const {a, b, c, d} = this
+      this.countUp('a', a, 10, 100)
+      this.countUp('b', b, 1, 1000)
+      this.countUp('c', c, 50, 50)
+      this.countUp('d', d, 50, 10)
+    },
+    countUp (key, value, t, m) {
       let i = 0
-      let m1 = setInterval(() => {
-
-        i +=  Math.floor(Math.random()*(1 - 100) + 100)
-        this.a = i > a ?
-        if(i === Number(a)){
-          clearInterval(m1)
+      let time = setInterval(() => {
+        i +=  Math.floor(Math.random()*(1 - m) + m)
+        this[key] = i > value ? value : i
+        if(this[key] === value){
+          clearInterval(time)
         }
-      }, 10)
-
+      }, t)
     }
   }
 }
