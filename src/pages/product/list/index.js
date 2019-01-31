@@ -37,9 +37,10 @@ export default {
         wx.request({
           url:`${serverSide}/wxapi/product/getProdByPage`,
           data: { brand, uclassc, origin, uclassb, page: current_page + 1 },
-          success: ({data: {status, data: {data}}}) => {
+          success: ({data: {status, data: {data, current_page}}}) => {
             if(status) {
               this.prod_list.push(...data)
+              Object.assign(this, {current_page})
               wx.hideLoading()
             }else{
               this.bottom_show = "没有更多产品"

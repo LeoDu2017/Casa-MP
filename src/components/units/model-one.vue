@@ -28,6 +28,11 @@
     computed: {
       id () {
         return this.product.prod_id || this.product.id
+      },
+      crop () {
+        const width = wx.getSystemInfoSync().windowWidth
+        const img_width = Math.floor((width - 30) / 2 - 2.5)
+        return `@113h_${img_width}w_1e_1c`
       }
     },
     methods: {
@@ -46,6 +51,21 @@
       width:100%;
       position: relative;
       overflow: hidden;
+      background-color: #eee;
+      color: #ccc;
+      font-size: 14px;
+      font-weight: bold;
+      &:before{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: block;
+        content: '有容-意大利之家';
+        height: 10px;
+        width: 100%;
+        z-index: 0;
+        text-align: center;
+      }
       .cx_xh {
         position:absolute;
         display:none;
@@ -60,6 +80,7 @@
         width: 77px;
         height:18px;
         left: -19px;
+        z-index: 100;
         &.show{
           display:block;
         }
@@ -67,6 +88,8 @@
       img{
         height:100%;
         width:100%;
+        position: absolute;
+        z-index: 1;
       }
       .iconfont{
         position: absolute;

@@ -186,7 +186,7 @@
           </dd>
           <dd class="order_info order_class_list nine_orderlist" v-else-if="nine_tabindex === 2">
             <h1 class="info_title">3.意大利正品保证</h1>
-            <img src="https://static.casacdn.com/static/images/host/certificate3.jpg" />
+            <img mode="widthFix" src="https://static.casacdn.com/static/images/host/certificate3.jpg" />
             <wxParse :content="no2.about_company" />
           </dd>
           <dd class="order_info order_class_list nine_orderlist" v-else-if="nine_tabindex === 3">
