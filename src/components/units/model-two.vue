@@ -52,7 +52,7 @@
     &.c-2,
     &.c-3,
     &.c-4{
-      width: calc(33.333333% - 3.333333pt);
+      width: calc(33.333333% - 3.333333px);
       .imageBox{
         width: 100%;
         height: 75px;

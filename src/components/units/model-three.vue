@@ -18,11 +18,11 @@
 <style scoped lang="less">
   .brand{
     width:calc(50% - 2.5px);
-    margin-bottom: 5pt;
+    margin-bottom: 5px;
     position:relative;
     .imageBox{
       width:100%;
-      height: 113pt;
+      height: 113px;
       img{
         height:100%;
         width: 100%;
