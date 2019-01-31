@@ -17,6 +17,10 @@ export default {
     return {
       show: true,
       banner: [],
+      a: 0,
+      b: 0,
+      c: 0,
+      d: 0,
       promotion: {
         title: '双十一活动精选',
         goods: []
@@ -63,24 +67,7 @@ export default {
             timingFunc: 'easeIn'
           }
         })
-        Object.assign(this, data, {dash:[
-            {
-              title: '合作厂商',
-              data: a.about_company
-            },
-            {
-              title: '在售产品',
-              data: b.about_company
-            },
-            {
-              title: '全国案例',
-              data: c.about_company
-            },
-            {
-              title: '全球员工',
-              data: d.about_company
-            }
-          ]})
+        Object.assign(this, data, {a: a.about_company, b: b.about_company, c: c.about_company, d: d.about_company})
       },
       fail () {
         wx.showToast({
@@ -89,5 +76,20 @@ export default {
         })
       }
     })
+  },
+  methods: {
+    onAdd () {
+      const {a, b, c, d} = this
+      let i = 0
+      let m1 = setInterval(() => {
+
+        i +=  Math.floor(Math.random()*(1 - 100) + 100)
+        this.a = i > a ?
+        if(i === Number(a)){
+          clearInterval(m1)
+        }
+      }, 10)
+
+    }
   }
 }

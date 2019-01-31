@@ -1,11 +1,38 @@
 <template>
   <ul class="dash">
-    <li class="_item" v-for="item in dash" :key="item.title">
+    <li class="_item">
       <span class="__title">
-        {{item.title}}
+        合作厂商
       </span>
       <span class="__data">
-        {{item.data}}
+        {{a}}
+        <i>+</i>
+      </span>
+    </li>
+    <li class="_item">
+      <span class="__title">
+        在售产品
+      </span>
+      <span class="__data">
+        {{b}}
+        <i>+</i>
+      </span>
+    </li>
+    <li class="_item">
+      <span class="__title">
+        全国案例
+      </span>
+      <span class="__data">
+        {{c}}
+        <i>+</i>
+      </span>
+    </li>
+    <li class="_item">
+      <span class="__title">
+        全球员工
+      </span>
+      <span class="__data">
+        {{d}}
         <i>+</i>
       </span>
     </li>
@@ -14,7 +41,7 @@
 
 <script>
   export default {
-    props: ['dash']
+    props: ['a', 'b', 'c', 'd']
   }
 </script>
 
