@@ -1,5 +1,5 @@
 <template>
-  <div class="menu" :class="on ? 'on' : ''" @click="hideMenu">
+  <div class="menu" :class="{on: on}" @click="hideMenu">
     <div class="box">
       <search-input :go='1' type="menu"></search-input>
       <ul class="menu-list">
@@ -16,8 +16,10 @@
           </a>
         </li>
         <li>
-          <i class="iconfont icon-guanyuwomen"></i>
-          <span>关于我们</span>
+          <a href="/pages/others/about/main">
+            <i class="iconfont icon-guanyuwomen"></i>
+            <span>关于我们</span>
+          </a>
         </li>
         <li>
           <a href="/pages/others/inspiration/main">

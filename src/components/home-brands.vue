@@ -26,7 +26,6 @@
     width: 100vw;
     box-sizing: border-box;
     .brandsBox{
-      padding-top: 15px;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;

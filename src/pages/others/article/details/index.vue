@@ -1,6 +1,6 @@
 <template>
   <div class="details">
-    <image mode="widthFix" :src="art_banner" class="banner_img"></image>
+    <img :src="art_banner" class="banner_img" />
     <div class="_header">{{detail.article_name}}</div>
     <div class="header_dis">
       <div class="tag">

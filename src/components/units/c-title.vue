@@ -18,6 +18,7 @@
     display: flex;
     justify-content:space-between;
     align-items:center;
+    margin-bottom: 10px;
     .title{
       color: #333;
       padding-left: 7px;
