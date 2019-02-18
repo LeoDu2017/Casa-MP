@@ -1,0 +1,38 @@
+{
+	"pages": [
+	    "pages/index/main",
+      "pages/web/main",
+      "pages/logs/main",
+      "pages/space/main",
+      "pages/brand/main",
+      "pages/search/main",
+      "pages/counter/main",
+      "pages/category/main",
+      "pages/brand/detail/main",
+      "pages/others/about/main",
+      "pages/product/list/main",
+      "pages/ucenter/sign/main",
+      "pages/ucenter/login/main",
+      "pages/ucenter/forget/main",
+      "pages/product/detail/main",
+      "pages/others/article/main",
+      "pages/ucenter/account/main",
+      "pages/others/inspiration/main",
+      "pages/ucenter/information/main",
+      "pages/ucenter/account/wish/main",
+      "pages/ucenter/account/orders/main",
+      "pages/others/article/details/main",
+      "pages/product/detail/deposit/main",
+      "pages/product/detail/seeTheReal/main",
+      "pages/product/detail/offerOrder/main",
+      "pages/ucenter/account/quoteOrder/main",
+      "pages/ucenter/account/collection/main",
+      "pages/ucenter/account/inspiration/main",
+      "pages/ucenter/account/changePassword/main"],
+    "window": {
+      "backgroundTextStyle": "dark",
+	  "navigationBarBackgroundColor": "#fff",
+	  "navigationBarTitleText": "有荣-意大利之家",
+	  "navigationBarTextStyle": "black"
+    }
+}
